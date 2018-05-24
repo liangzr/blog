@@ -10,7 +10,7 @@ TODO
 
 - 日常分享
 - 深入 React 系列
-- Node 系列
+- Node 系列
 
 关注
 ---
