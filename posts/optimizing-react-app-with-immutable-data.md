@@ -120,7 +120,7 @@ legacyState === newState // true
 
 #### JSON 之 stringify + parse
 
-这个原理比较简单，序列化之后，对象变成了一个字符串，`JSON.parse` 会从字符串重新生成对象，很明显这已经不是之前那个对象了，实现了完全的深拷贝。但是别忘了，JSON 只有 6 种基本数据类型，这样转换很显然不少对象会出现问题，比如 Function 对象，Date 对象等等，都无法正常转换。可见这种方案的适用场景也是比较少的。
+这个原理比较简单，序列化之后，对象变成了一个字符串，`JSON.parse` 会从字符串重新生成对象，很明显这已经不是之前那个对象了，实现了完全的深拷贝。但是别忘了，JSON 只有 6 种基本数据类型，这样转换很显示不少对象会出现问题，比如 Function 对象，Date 对象等等，都无法正常转换。可见这种方案的适用场景也是比较少的。
 
 ```javascript
 const o = {
@@ -204,3 +204,7 @@ const newData = update(myData, {
 
 1. [Optimizing Performance - reactjs.org](https://reactjs.org/docs/optimizing-performance.html)
 2. [React is Slow, React is Fast: Optimizing React Apps in Practice - Daily JS](https://medium.com/dailyjs/react-is-slow-react-is-fast-optimizing-react-apps-in-practice-394176a11fba)
+
+### 图形素材
+
+[optimizing-react-app-with-immutable-data.key](https://github.com/liangzr/blog/blob/master/assets/optimizing-react-app-with-immutable-data.key)
