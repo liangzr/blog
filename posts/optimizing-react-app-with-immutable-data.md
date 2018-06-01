@@ -1,11 +1,9 @@
-
-
-一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借此能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。
+一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。
 
 React 的更新机制
 ---
 
-我们不妨先简单了解下 React 的更新机制，如果能减小它的更新频率，自然能大大提高整体渲染速度。
+我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度。
 
 ### Props & State
 
@@ -21,7 +19,7 @@ props 和 state 的基本概念不再赘述，组件的 props 是只读的，只
 - getSnapshotBeforeUpdate
 - componentDidUpdate
 
-> `*` 号标注的生命周期方法将会在 React 17 移除
+> `*` 号标注的生命周期方法将会在 React 17 移除，一旦调用了新的生命周期方法，这些方法将不会被调用。
 
 ![Update lifecycle](https://ws3.sinaimg.cn/large/006tKfTcgy1frj8i1dy0jj30aq0g9dgp.jpg)
 
@@ -35,11 +33,9 @@ props 和 state 的基本概念不再赘述，组件的 props 是只读的，只
 
 ![](https://ws3.sinaimg.cn/large/006tNc79gy1frsifbmx0kj30tc0oitci.jpg)
 
-从图中可以看到，在这个简单的树形结构中，仅仅是 c7 的状态发生了改变，所有的组件都要进行一次 **render**，那如何我这个树下有 10 个组件呢，50 个呢？尤其当这个 c7 的状态变化与鼠标移动这种高频操作相关时，所有的组件不停的重新生成 Virtual DOM，这样能有多卡顿你能想象的到吗？不要问我是怎么知道的，某天 Leader 叫我写了个表单设计器……
+从图中可以看到，在这个简单的树形结构中，仅仅是 c7 的状态发生了改变，所有的组件都要进行一次 **render**，那如果我这个树下有 10 个组件呢，50 个呢？尤其当这个 c7 的状态变化与鼠标移动这种高频操作相关时，所有的组件不停的重新生成 Virtual DOM，这样能有多卡顿你能想象的到吗？不要问我是怎么知道的，某天 Leader 叫我写了个表单设计器……
 
 如果不用 **SCU** 对 React 的更新进行限制，你可能像我之前一样，对着 Chrome 的 Perfomance 工具里锯齿般的火焰图束手无策。那假如 **SCU** 可以正确的感知数据变化并返回你期待的结果，实际情况又会如何呢？
-
-
 
 ![](https://ws2.sinaimg.cn/large/006tNc79gy1frsixpjyzij30sv0oi0w9.jpg)
 
@@ -50,12 +46,11 @@ props 和 state 的基本概念不再赘述，组件的 props 是只读的，只
 解决思路
 ---
 
-虽然完全手写 **SCU** 不现实，但我们依然有一些组合方案可以助我们实现目标。
+虽然完全手写 **SCU** 不现实，但这里依然有一些组合方案可以助我们实现目标。
 
 ### PureComponent
 
-
-PureComponent 是 React 的另一个组件，它默认帮你实现了 **SCU** 方法，其实在它出现之前，它的前身是 React 的 addons 提供的 PureRenderMixin，它的源码如下：
+PureComponent 是 React 提供的另一个组件，它默认帮你实现了 **SCU** 方法，其实在它出现之前，它的前身是 React 的 addons 提供的 PureRenderMixin，它的源码如下：
 
 ```javascript
 var shallowEqual = require('fbjs/lib/shallowEqual');
@@ -70,7 +65,9 @@ module.exports = {
 };
 ```
 
- 我们可以看到它帮我们实现了 **SCU** 方法，实现的机制是浅比较（Shallow Compare），也就是说，它只简单的比较了 `this.props` 和 `nextProps` 两个变量引用的是否为同一个地址，如果是则返回 **false**，否则返回 **true**。
+ 我们可以看到它帮我们实现了 **SCU** 方法，实现的机制是浅比较（Shallow Compare），也就是说，它只简单的比较了 `this.props` 和 `nextProps` 两个变量（以及他们的第一层子属性）引用的是否为同一个地址，如果是则返回 **false**，否则返回 **true**。
+
+> `shallowEqual` 的具体实现请查阅[源码](https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/shallowEqual.js)
 
 同样的我们也来看下使用 PureComponent 时的具体实现：
 
@@ -107,9 +104,9 @@ function checkShouldComponentUpdate(
 ```javascript
 oldState = { expand: true };
 oldState.expand = false;
-newState = legacyState;
+newState = oldState;
 
-legacyState === newState // true
+shallowEqual(newState, oldState) // true
 ```
 
   如上我们更新了 state 的 expand 的值，但 PureComponent 在比较时会认为 state 并没有更新返回 **SCU** 返回 `false`，这样我们的组件就得不到正确的更新了。
@@ -120,7 +117,7 @@ legacyState === newState // true
 
 #### JSON 之 stringify + parse
 
-这个原理比较简单，序列化之后，对象变成了一个字符串，`JSON.parse` 会从字符串重新生成对象，很明显这已经不是之前那个对象了，实现了完全的深拷贝。但是别忘了，JSON 只有 6 种基本数据类型，这样转换很显示不少对象会出现问题，比如 Function 对象，Date 对象等等，都无法正常转换。可见这种方案的适用场景也是比较少的。
+这个原理比较简单，序列化之后，对象变成了一个字符串，`JSON.parse` 会从字符串重新生成对象，很明显这已经不是之前那个对象了，实现了完全的深拷贝。但是别忘了，JSON 只有 6 种基本数据类型，这样转换很显然不少对象会出现问题，比如 Function 对象，Date 对象等等，都无法正常转换。可见这种方案的适用场景也是比较少的。
 
 ```javascript
 const o = {
@@ -146,7 +143,7 @@ Output:
 
 相较于用 JSON 粗暴的转换，lodash 的处理更为细致，Primitive 数据直接返回，Object 数据则逐一处理。
 
-还是上面的例子，Lodash 的输出结果：
+还是上面的例子，lodash 的输出结果：
 
 ![](https://ws4.sinaimg.cn/large/006tKfTcgy1frt9wmakpgj30fh05zmxp.jpg)
 
@@ -154,13 +151,13 @@ Output:
 
 ### 优雅的 Immutable 数据
 
-Immutable 的意思即是不可变的，意思是对象创建后，无法通过简单的赋值更改值或引用。Facebook 推出了 ImmutableJS 来实现这套机制，它有自己的一套 API 来对已有的 Immutable 对象进行修改并返回一个全新的对象，但与深拷贝不同，这个对象只修改了变动的部分，示意如下：
+Immutable 即不可变的，意思是对象创建后，无法通过简单的赋值更改值或引用。Facebook 推出了 ImmutableJS 来实现这套机制，它有自己的一套 API 来对已有的 Immutable 对象进行修改并返回一个全新的对象，但与深拷贝不同，这个对象只修改了变动的部分，示意如下：
 
 ![](https://ws2.sinaimg.cn/large/006tKfTcgy1frt9vy605zj30lz0ctq47.jpg)
 
 #### ImmutableJS
 
-Facebook 推荐使用 ImmutableJS 来优化 React 应用，但是使用它的同时也意味需要重新学习大量的 API
+Facebook 推荐使用 ImmutableJS 来优化 React 应用，但使用它的同时也意味需要重新学习大量的 API
 
 #### Immutability-helper
 
@@ -192,12 +189,12 @@ const newData = update(myData, {
 
 ### 小结
 
-其实说到这里，本篇基本已经结束了，在 PureComponent 和 Immutable Data 的搭配使用下，使用 **SCU** 能很大程度提高 React 应用的性能，不过这也只是从组件更新的角度来优化 React，实际上我们能做的事还有很多。
+其实说到这里，本篇基本已经结束了，在 PureComponent 和 Immutable Data 的搭配使用下，**SCU** 能很大程度提高 React 应用的性能，不过这也只是从组件更新的角度来优化 React，实际上我们能做的事还有很多。
 
 问题与建议
 ---
 
-上方只是作者本人在 React 优化中的实践，翻阅网上的资料与源码总结而出的一篇分享，如有谬误欢迎指正！
+上文只是作者本人在 React 优化中的实践，翻阅网上的资料与源码总结而出的一篇分享，如有谬误欢迎指正！
 
 参考
 ---
