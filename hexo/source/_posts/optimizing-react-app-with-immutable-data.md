@@ -27,6 +27,8 @@ props 和 state 的基本概念不再赘述，组件的 props 是只读的，只
 - getSnapshotBeforeUpdate
 - componentDidUpdate
 
+<!-- more -->
+
 > `*` 号标注的生命周期方法将会在 React 17 移除，一旦调用了新的生命周期方法，这些方法将不会被调用。
 
 ![Update lifecycle](https://ws3.sinaimg.cn/large/006tKfTcgy1frj8i1dy0jj30aq0g9dgp.jpg)
