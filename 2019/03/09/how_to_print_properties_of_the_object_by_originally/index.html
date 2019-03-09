@@ -6,15 +6,15 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>Hello World | OVERLOADING</title>
+  <title>如何按原顺序打印出对象的属性？ | OVERLOADING</title>
   <meta name="author" content="Jory Liang">
   
-  <meta name="description" content="又一次开始？">
+  <meta name="description" content="从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World">
+  <meta property="og:title" content="如何按原顺序打印出对象的属性？">
   <meta property="og:site_name" content="OVERLOADING">
 
   
@@ -96,7 +96,7 @@
 
 	
 		<div class="page-header">
-			<h1> Hello World</h1>
+			<h1> 如何按原顺序打印出对象的属性？</h1>
 		</div>
 	
 
@@ -113,19 +113,28 @@
 	<div class="mypage">		
 	  
 		 <div class="alert alert-success description">
-			<i class="fa fa-info-circle"></i> 又一次开始？
+			<i class="fa fa-info-circle"></i> 从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别
 		 </div> <!-- alert -->
 	  		
 
-	  <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+	  <p>昨天在群里看到有人问:</p>
+<blockquote>
+<p>网友：“<strong>Object.keys会给值排序，那用哪个方法取对象属性能不排序的？</strong>”<br>我：“对象的属性有顺序吗？”<br>网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)<br>我：”for…in 应该不会”<br>……</p>
+</blockquote>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
+<p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
+<a id="more"></a>
+<p>假如你从接口中获取一段 JSON 数据如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"100"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"2"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"7"</span>: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面个数据可能是经过后端排序的，并且数据中并没有带有可供排序的信息，毫无疑问经过 JS 的重新排序后，它的排序信息就丢失了，假如我就是不想丢失呢？</p>
+<p>欲知其然，先知其所以然。在了解它如果遍历属性之前，首先我们需要知道的是，在 V8 中对象是如何存储属性的呢？</p>
+<h2 id="V8-中对象的属性"><a href="#V8-中对象的属性" class="headerlink" title="V8 中对象的属性"></a>V8 中对象的属性</h2><h2 id="有没有办法按原顺序打印？"><a href="#有没有办法按原顺序打印？" class="headerlink" title="有没有办法按原顺序打印？"></a>有没有办法按原顺序打印？</h2><h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL; DR;"></a>TL; DR;</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://v8.dev/blog/fast-properties" target="_blank" rel="noopener">Fast properties in V8</a></li>
+<li><a href="https://v8.dev/blog/fast-for-in" target="_blank" rel="noopener">Fast for-in in V8</a></li>
+<li><a href="https://bugs.chromium.org/p/v8/issues/detail?id=164" target="_blank" rel="noopener">Issue 164: Wrong order in Object properties interation</a></li>
+</ul>
 	  
 	</div>
 
@@ -135,12 +144,12 @@
 
     
     
-    <a href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    <a href="/2019/03/09/fork__why_do_we_write_super/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a type="button" class="btn btn-default disabled">Next<i class="fa fa-arrow-circle-o-right"></i></a>
+    <a href="/1970/01/01/hello-world/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>
     
 
     
@@ -193,7 +202,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	1970-01-01 
+	2019-03-09 
 	</div>
 	
 
@@ -206,7 +215,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/other/">other<span>1</span></a></li>
+  <li><a href="/tags/javascript/">javascript<span>1</span></a></li> <li><a href="/tags/v8/">v8<span>1</span></a></li>
     </ul>
 	</div>
 		
@@ -217,7 +226,7 @@
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Quick-Start"><span class="toc-article-text">Quick Start</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Create-a-new-post"><span class="toc-article-text">Create a new post</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Run-server"><span class="toc-article-text">Run server</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Generate-static-files"><span class="toc-article-text">Generate static files</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Deploy-to-remote-sites"><span class="toc-article-text">Deploy to remote sites</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#V8-中对象的属性"><span class="toc-article-text">V8 中对象的属性</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#有没有办法按原顺序打印？"><span class="toc-article-text">有没有办法按原顺序打印？</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#TL-DR"><span class="toc-article-text">TL; DR;</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Reference"><span class="toc-article-text">Reference</span></a></li></ol>
 		</div>
 	
 	</div>
