@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>如何按原顺序打印出对象的属性？ | OVERLOADING</title>
+  <meta name="author" content="Jory Liang">
+  
+  <meta name="description" content="本文从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别。并探讨了一种打印原序 JSON 数据键值的简单实现">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="如何按原顺序打印出对象的属性？">
+  <meta property="og:site_name" content="OVERLOADING">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+</head>
+</html>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">OVERLOADING</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 如何按原顺序打印出对象的属性？</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> 本文从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别。并探讨了一种打印原序 JSON 数据键值的简单实现
+		 </div> <!-- alert -->
+	  		
+
+	  <p>昨天在群里看到有人问:</p>
+<blockquote>
+<p>网友：“<strong>Object.keys会给值排序，那用哪个方法取对象属性能不排序的？</strong>”<br>我：“对象的属性有顺序吗？”<br>网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)<br>我：”for…in 应该不会”<br>……</p>
+</blockquote>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
+<p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
+<a id="more"></a>
+<p>假如你从接口中获取一段 JSON 数据如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"100"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"2"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"7"</span>: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面个数据可能是经过后端排序的，并且数据中并没有带有可供排序的信息，毫无疑问经过 JS 的重新排序后，它的排序信息就丢失了，假如我就是不想丢失呢？</p>
+<p>欲知其然，先知其所以然。在了解它如果遍历属性之前，首先我们需要知道的是，在 V8 中对象是如何存储属性的呢？</p>
+<h2 id="V8-中对象的属性"><a href="#V8-中对象的属性" class="headerlink" title="V8 中对象的属性"></a>V8 中对象的属性</h2><p>在 JavaScript 中，大部分时候对象的行为类似一个字典，它以字符串做为键名，以任意对象作为值。虽然在迭代的时候，规范约定了以不同的方式处理整数索引属性和其他属性。</p>
+<p>下面我们先来解释下整数索引属性和命名属性的区别。</p>
+<h3 id="Named-properties-vs-elements"><a href="#Named-properties-vs-elements" class="headerlink" title="Named properties vs. elements"></a>Named properties vs. elements</h3><p>先来假设一个简单的对象 <code>{a: &#39;foo&#39;, b: &#39;bar&#39;}</code>。该对象有两个命名属性,<code>a</code> 和 <code>b</code>，它没有整数索引。整数索引属性（通常叫做元素element）在数组中比较常见，如 <code>[&#39;foo&#39;, &#39;bar&#39;]</code> 有两个整数索引，分别为 0 和 1。这是 V8 处理属性的第一个主要区别。</p>
+<p><img src="https://v8.dev/_img/fast-properties/jsobject.png" alt></p>
+<p>元素和属性存储在两个独立的数据结构中，这使得添加和访问属性或元素，在不同的场景下都更有效率。</p>
+<p>元素主要用于 <code>Array.prototype</code> 的各种方法，鉴于这些函数访问的是连范围内的属性，V8 在内部也将他们表示为简单数组（在大多数情况下是这样的，有时会切换到基于稀疏字典的形式来节省内存）</p>
+<p>命名属性以类似的方式存储在单独的数组中。但是与元素不同的是，我们不能使用简单的键来推断他们在属性数组中的位置，我们需要一些额外的元数据。在 V8 中，每个 JavaScript 对象都有一个关联的 HiddenClass，它用来存储对象的结构信息，以及从属性名到属性数组的索引的一个映射关系。对于复杂的情况，通常会使用一个字典来存储属性信息，而不是一个简单的数组。</p>
+<blockquote>
+<p>更详细的内容请阅读 V8 博客的文章 <a href="https://v8.dev/blog/fast-properties" target="_blank" rel="noopener">Fast properties in V8</a></p>
+</blockquote>
+<h2 id="如何遍历对象的属性"><a href="#如何遍历对象的属性" class="headerlink" title="如何遍历对象的属性"></a>如何遍历对象的属性</h2><p>通过查询 ECMA 262 规范我们可以看到，第一节中我们使用的六种遍历属性的方法，在类似的情况下，最终都会返回 <code>Obj.[[OwnPropertyKeys]]</code> 的结果。</p>
+<p>按照 ECMA 262 中对 <code>[[OwnPropertyKeys]]</code> 的<a href="https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots-ownpropertykeys" target="_blank" rel="noopener">定义</a>：</p>
+<blockquote>
+<p>When the <code>[[OwnPropertyKeys]]</code> internal method of O is called, the following steps are taken:</p>
+<ol>
+<li>Return ! OrdinaryOwnPropertyKeys(O).</li>
+</ol>
+</blockquote>
+<p>它返回了一个 <code>OrdinaryOwnPropertyKeys(O)</code> 的处理结果，而 <code>OrdinaryOwnPropertyKeys(O)</code> 的执行过程则是：</p>
+<blockquote>
+<p>When the abstract operation OrdinaryOwnPropertyKeys is called with Object O, the following steps are taken:</p>
+<ol>
+<li>Let <code>keys</code> be a new empty List.</li>
+<li>For each own property key <code>P</code> of <code>O</code> that is an array index, in ascending numeric index order, do<br>a. Add <code>P</code> as the last element of <code>keys</code>.</li>
+<li>For each own property key <code>P</code> of <code>O</code> that is a String but is not an array index, in ascending chronological order of property creation, do<br>a. Add <code>P</code> as the last element of <code>keys</code>.</li>
+<li>For each own property key <code>P</code> of <code>O</code> that is a Symbol, in ascending chronological order of property creation, do<br>b. Add P as the last element of <code>keys</code>.</li>
+<li>Return <code>keys</code>.</li>
+</ol>
+</blockquote>
+<p>我们来简单描述下上述过程就是：首先创建一个名为 <code>keys</code> 的空数组，然后先遍历对象中的数组索引的属性，结果以升序排列，并逐个放入 <code>keys</code> 中；再遍历字符串属性（但不是数组索引），以属性创建时间升序排列，并逐个放入 <code>keys</code> 中去；然后再遍历 Symbol 类型的属性名，同样以属性创建时间升序排列，放入 <code>keys</code> 中，最后返回 <code>keys</code> 数组。</p>
+<p>下来我们来验证一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  b: <span class="number">1</span>,</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  c: <span class="number">3</span>,</span><br><span class="line">  <span class="number">7</span>: <span class="number">4</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="number">10</span>: <span class="number">6</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>(<span class="string">'a'</span>)]: <span class="number">7</span></span><br><span class="line">&#125;</span><br><span class="line">a.d = <span class="number">8</span></span><br><span class="line">a[<span class="built_in">Symbol</span>(<span class="string">'b'</span>)] = <span class="number">9</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(a)</span><br></pre></td></tr></table></figure>
+<p>output(devtools):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">9</span>) [<span class="string">"1"</span>, <span class="string">"7"</span>, <span class="string">"10"</span>, <span class="string">"b"</span>, <span class="string">"a"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="built_in">Symbol</span>(a), <span class="built_in">Symbol</span>(b)]</span><br><span class="line">  <span class="number">0</span>: <span class="string">"1"</span></span><br><span class="line">  <span class="number">1</span>: <span class="string">"7"</span></span><br><span class="line">  <span class="number">2</span>: <span class="string">"10"</span></span><br><span class="line">  <span class="number">3</span>: <span class="string">"b"</span></span><br><span class="line">  <span class="number">4</span>: <span class="string">"a"</span></span><br><span class="line">  <span class="number">5</span>: <span class="string">"c"</span></span><br><span class="line">  <span class="number">6</span>: <span class="string">"d"</span></span><br><span class="line">  <span class="number">7</span>: <span class="built_in">Symbol</span>(a)</span><br><span class="line">  <span class="number">8</span>: <span class="built_in">Symbol</span>(b)</span><br><span class="line">  length: <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>Chrome 的实现与规范的约定完全一致😕，所以至此我们知道它为什么打印出来是升序的了。</p>
+<p>另外引用 Chromium 社区上 <a href="https://bugs.chromium.org/p/v8/issues/detail?id=164" target="_blank" rel="noopener">Issue 164: Wrong order in Object properties interation</a> 的讨论所述：</p>
+<blockquote>
+<p>There seems to be a widespread feeling that this used to work the way people expected it, but then the V8 team broke it in order to be mean.</p>
+<p>What actually happened was that originally the order was completely arbitrary in V8.  At a later point it was changed so that non-numeric indices were in insertion order, and numeric indices were sometimes in insertion order.  Whether or not the numeric indices were in in insertion order was dependent on internal V8 heuristics that decide whether to use an array or a hash map implementation for the numeric indices.  Making heuristics in the V8 implementation visible in this way was felt to be undesirable so it was normalized so that numeric indices were always iterated in numeric order regardless of the internal representation.  Numeric iteration order was always a possibility, but with the last change it was made predictable.</p>
+<p>There has never been any difference between the internal representation or iteration order of arrays vs. other objects in V8.</p>
+<p>Here is an independent test of the way arrays and objects perform in various engines (a little out of date now): <a href="http://news.qooxdoo.org/javascript-array-performance-oddities-characteristics" target="_blank" rel="noopener">http://news.qooxdoo.org/javascript-array-performance-oddities-characteristics</a>  If this bug ever gets ‘fixed’ you can wave goodbye to some of the nice performance results in that graph.</p>
+</blockquote>
+<p>结合前面介绍的 V8 属性一节我们知道，数组属性总是存储在一个单独的空间（可能是数组，也可能是字典）。在这种情况下，始终以有序数组的状态输出键值，这样的结果是可预测的（始终一致）。并且在 V8 内部，数组的内部表示和迭代方式，和其它对象没有任何不同。</p>
+<p>综上所讲，这样的内部实现，有性能的因素，也有历史原因。</p>
+<h2 id="有没有办法按原顺序打印？"><a href="#有没有办法按原顺序打印？" class="headerlink" title="有没有办法按原顺序打印？"></a>有没有办法按原顺序打印？</h2><p>讲了那么多，我就是想按原顺序打印怎么办？</p>
+<p>首先如果目标结构已经是 JavaScript 对象，应该是没有办法了。我们回到最终的问题，如果我们有一串 JSON 数组，想把它按原序获得键值，可以怎么做？假如我们有串数据：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:<span class="string">"foo"</span>,<span class="attr">"2"</span>:<span class="string">"bar"</span>,<span class="attr">"7"</span>:<span class="string">"baz"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>首先能想到的一个简单的方法就是，自己写一个简单的 json-parser。</p>
+<p>下面是一个简单的实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jsonString = <span class="string">'&#123;"100":"foo","2":"bar","7":"baz"&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> parseKeys = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> out = []</span><br><span class="line">  <span class="keyword">const</span> tokens = str.slice(<span class="number">1</span>, <span class="number">-1</span>).split(<span class="string">','</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tokens.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    out.push(tokens[i].split(<span class="string">':'</span>)[<span class="number">0</span>].slice(<span class="number">1</span>, <span class="number">-1</span>))  </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> out</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try</span></span><br><span class="line"><span class="built_in">console</span>.log(parseKeys(jsonString))  <span class="comment">// ✅ ["100", "2", "7"]</span></span><br></pre></td></tr></table></figure>
+<p>看起来我们得到了想要的结果（yeah），但是如果 json 数组稍微复杂点儿呢？</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:&#123;<span class="attr">"b"</span>:<span class="string">"foo"</span>&#125;,<span class="attr">"2"</span>:[<span class="number">1</span>,<span class="number">2</span>],<span class="attr">"7"</span>:<span class="number">200</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>我们再来重构下这个解析器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parseKeys = <span class="function">(<span class="params">str, lvl = <span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> out = []</span><br><span class="line">  <span class="keyword">let</span> level = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> matching = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">let</span> pair = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.charAt(i) === <span class="string">'"'</span> &amp;&amp; level === lvl) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!matching) &#123;</span><br><span class="line">        pair[<span class="number">0</span>] = i </span><br><span class="line">      &#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">        pair[<span class="number">1</span>] = i</span><br><span class="line">        out.push([...pair])</span><br><span class="line">      &#125;</span><br><span class="line">      matching = ~matching</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#123;'</span>, <span class="string">'['</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level += <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#125;'</span>, <span class="string">']'</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level -= <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> out.map(<span class="function"><span class="params">pair</span> =&gt;</span> str.slice(pair[<span class="number">0</span>], pair[<span class="number">1</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>output(devtools):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"100"</span>, <span class="string">"2"</span>, <span class="string">"7"</span>]</span><br></pre></td></tr></table></figure>
+<p>上面这个方法执行效率并不高，只是提出一种思路，当然我们的目标还是解析出 key，而不是完整的引入一个 json 解释器，那样可能得不偿失。</p>
+<p>更高效的解决方法，我们之后再补充…</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL; DR;"></a>TL; DR;</h2><p>V8 在内部将命名属性和数组索引属性分开存储，并且数组和其它对象的内部实现和迭代机制是完全一致的。</p>
+<p>由规范定义，对象在迭代的时候，总是以升序输出数组索引的属性。如果要解决这个问题，目前可能自己去解析 JSON 字符串。</p>
+<p>更多问题的延伸讨论，请参考 Chromium 社区的 <strong>Issue: 164</strong> 讨论。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots-ownpropertykeys" target="_blank" rel="noopener">ECMA262 Specification - OwnPropertyKeys</a></li>
+<li><a href="https://v8.dev/blog/fast-properties" target="_blank" rel="noopener">Fast properties in V8</a></li>
+<li><a href="https://v8.dev/blog/fast-for-in" target="_blank" rel="noopener">Fast for-in in V8</a></li>
+<li><a href="https://bugs.chromium.org/p/v8/issues/detail?id=164" target="_blank" rel="noopener">Issue 164: Wrong order in Object properties interation</a></li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2018/12/30/fork__why_do_we_write_super/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+    <div id="disqus_thread" class="ds-thread">
+        <script type="text/javascript">
+            /**
+             * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+             */
+                /*
+                 var disqus_config = function () {
+                 this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                 };
+                 */
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//liangzr.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-03-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/javascript/">javascript<span>1</span></a></li> <li><a href="/tags/v8/">v8<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#V8-中对象的属性"><span class="toc-article-text">V8 中对象的属性</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Named-properties-vs-elements"><span class="toc-article-text">Named properties vs. elements</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#如何遍历对象的属性"><span class="toc-article-text">如何遍历对象的属性</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#有没有办法按原顺序打印？"><span class="toc-article-text">有没有办法按原顺序打印？</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#TL-DR"><span class="toc-article-text">TL; DR;</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Reference"><span class="toc-article-text">Reference</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+var disqus_shortname = 'liangzr';
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2019 Jory Liang
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
