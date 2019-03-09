@@ -1,3 +1,11 @@
+---
+title: Optiming React App with Immutable Data
+tags: react
+date: 2018-05-29 00:00:00
+toc: true
+---
+
+
 一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。
 
 React 的更新机制
