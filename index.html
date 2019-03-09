@@ -119,40 +119,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2019/03/09/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io">译 - Why Do We Write super(props)?</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2019-03-09  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
-<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
-<hr>
-<p>我写过不计其数的 <code>super(props)</code> :</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
-	
-	</div>
-  <a type="button" href="/2019/03/09/fork__why_do_we_write_super/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
 			<a href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/" title="从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别">如何按原顺序打印出对象的属性？</a>
 		</h3>
 		</div>
@@ -178,6 +144,40 @@
 	
 	</div>
   <a type="button" href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2018/12/30/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io">译 - Why Do We Write super(props)?</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2018-12-30  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
+<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
+<hr>
+<p>我写过不计其数的 <code>super(props)</code> :</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
+	
+	</div>
+  <a type="button" href="/2018/12/30/fork__why_do_we_write_super/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -256,15 +256,15 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/other/">other<span>1</span></a></li>
+		
+			<li><a href="/tags/react/">react<span>1</span></a></li>
+		
 			<li><a href="/tags/v8/">v8<span>1</span></a></li>
 		
 			<li><a href="/tags/javascript/">javascript<span>1</span></a></li>
 		
-			<li><a href="/tags/other/">other<span>1</span></a></li>
-		
 			<li><a href="/tags/reprinted/">reprinted<span>1</span></a></li>
-		
-			<li><a href="/tags/react/">react<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -278,11 +278,11 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2019/03/09/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io"><i class="fa fa-file-o"></i>译 - Why Do We Write super(p...</a>
+        <a href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/" title="从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别"><i class="fa fa-file-o"></i>如何按原顺序打印出对象的属性？</a>
       </li>
     
       <li>
-        <a href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/" title="从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别"><i class="fa fa-file-o"></i>如何按原顺序打印出对象的属性？</a>
+        <a href="/2018/12/30/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io"><i class="fa fa-file-o"></i>译 - Why Do We Write super(p...</a>
       </li>
     
       <li>
