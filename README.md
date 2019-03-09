@@ -1,8 +1,8 @@
 博客 & 北端
 ===
-个人博客经历了 WordPress、hexo、Ghost 的轮番替换，最后真正留下的东西却几乎没有，之后打算将精力集中在知识的沉淀上，不再过于追求形式上的东西。
-
 本博客主要分享前端相关知识体系，但不限于此。
+
+> 主要技术分享在 [issues](https://github.com/liangzr/blog/issues) 中更新方便讨论，其余内容在 [Pages](https://blog.liangzr.tech) 中更新
 
 TODO
 ---
