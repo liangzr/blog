@@ -119,41 +119,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/" title="从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别">如何按原顺序打印出对象的属性？</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2019-03-09  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>昨天在群里看到有人问:</p>
-<blockquote>
-<p>网友：“<strong>Object.keys会给值排序，那用哪个方法取对象属性能不排序的？</strong>”<br>我：“对象的属性有顺序吗？”<br>网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)<br>我：”for…in 应该不会”<br>……</p>
-</blockquote>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
-<p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
-<p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
-	
-	</div>
-  <a type="button" href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2018/12/30/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io">译 - Why Do We Write super(props)?</a>
+			<a href="/2018/12/30/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io">译-Why Do We Write super(props)?</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -178,6 +144,45 @@
 	
 	</div>
   <a type="button" href="/2018/12/30/fork__why_do_we_write_super/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2018/05/29/optimizing-react-app-with-immutable-data/">用 Immutable 数据来优化 React 应用</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2018-05-29  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。</p>
+<h2 id="React-的更新机制"><a href="#React-的更新机制" class="headerlink" title="React 的更新机制"></a>React 的更新机制</h2><p>我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度。</p>
+<h3 id="Props-amp-State"><a href="#Props-amp-State" class="headerlink" title="Props &amp; State"></a>Props &amp; State</h3><p>props 和 state 的基本概念不再赘述，组件的 props 是只读的，只能通过上层 JSX 声明时的属性传递进来，state 则完全受组件自身控制，并且只存在于 <code>class</code> 语法声明的组件。</p>
+<p>无论是 props 还是 state 发生变化都可以触发组件更新，下面这些生命周期方法会在组件重新渲染时被依次调用：</p>
+<ul>
+<li>componentWillReceiveProps*</li>
+<li>static getDerivedStateFromProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate*</li>
+<li>render</li>
+<li>getSnapshotBeforeUpdate</li>
+<li>componentDidUpdate</li>
+</ul>
+	
+	</div>
+  <a type="button" href="/2018/05/29/optimizing-react-app-with-immutable-data/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -256,15 +261,15 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/reprinted/">reprinted<span>1</span></a></li>
+		
+			<li><a href="/tags/javascript/">javascript<span>0</span></a></li>
+		
 			<li><a href="/tags/other/">other<span>1</span></a></li>
 		
-			<li><a href="/tags/react/">react<span>1</span></a></li>
+			<li><a href="/tags/v8/">v8<span>0</span></a></li>
 		
-			<li><a href="/tags/v8/">v8<span>1</span></a></li>
-		
-			<li><a href="/tags/javascript/">javascript<span>1</span></a></li>
-		
-			<li><a href="/tags/reprinted/">reprinted<span>1</span></a></li>
+			<li><a href="/tags/react/">react<span>2</span></a></li>
 		
 		 
 		</ul>
@@ -278,11 +283,11 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2019/03/09/how_to_print_properties_of_the_object_by_originally/" title="从一个问题出发，简单介绍了 V8 中存储对象属性的方式，以及命名属性和元素的区别"><i class="fa fa-file-o"></i>如何按原顺序打印出对象的属性？</a>
+        <a href="/2018/12/30/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io"><i class="fa fa-file-o"></i>译-Why Do We Write super(pro...</a>
       </li>
     
       <li>
-        <a href="/2018/12/30/fork__why_do_we_write_super/" title="本文转载于 Dan Abramov 的博客 overreacted.io"><i class="fa fa-file-o"></i>译 - Why Do We Write super(p...</a>
+        <a href="/2018/05/29/optimizing-react-app-with-immutable-data/"><i class="fa fa-file-o"></i>用 Immutable 数据来优化 React 应用</a>
       </li>
     
       <li>
