@@ -9,5 +9,3 @@ Contact me:
 email: [liangzr@outlook.com](mailto:liangzr@outlook.com)
 github: [liangzr](https://github.com/liangzr)
 instagram: [jory.liang](https://instagram.com/jory.liang)
-
-![](https://avatars2.githubusercontent.com/u/3992942)
