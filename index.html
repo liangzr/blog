@@ -144,6 +144,7 @@
 <p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1frj8i1dy0jj30aq0g9dgp.jpg" alt="Update lifecycle"></p>
 <p>从上面的生命周期中我们可以看到，<code>shouldComponentUpdate</code> 方法将在组件接收到新的 props 或者 state 时被调用。然而在默认情况下， 每次更新，React 都会去调用 <strong>render</strong> 方法重新生成 Virtual DOM 并通过 diff 算法计算出需要变动的部分，然后操作 DOM 完成这部分更新。</p>
 <p>对于一些简单的 React 应用来说，每次 <strong>render</strong> 带来的消耗不会特别大，不过一旦你的应用有了一定规模，尤其是复杂的树形结构时，每次更新都会消耗不少的系统资源。</p>
+<a id="more"></a>
 <h3 id="shouleComponentUpdate（SCU）"><a href="#shouleComponentUpdate（SCU）" class="headerlink" title="shouleComponentUpdate（SCU）"></a>shouleComponentUpdate（SCU）</h3><p>我们先来看下<a href="https://reactjs.org/docs/optimizing-performance.html#shouldcomponentupdate-in-action" target="_blank" rel="noopener">官方文档</a>里的示意图。</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1frsifbmx0kj30tc0oitci.jpg" alt></p>
 <p>从图中可以看到，在这个简单的树形结构中，仅仅是 c7 的状态发生了改变，所有的组件都要进行一次 <strong>render</strong>，那如果我这个树下有 10 个组件呢，50 个呢？尤其当这个 c7 的状态变化与鼠标移动这种高频操作相关时，所有的组件不停的重新生成 Virtual DOM，这样能有多卡顿你能想象的到吗？不要问我是怎么知道的，某天 Leader 叫我写了个表单设计器……</p>
