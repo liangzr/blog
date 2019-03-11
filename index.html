@@ -114,6 +114,59 @@ var _hmt = _hmt || [];
   <header>
     
       <div class="icon"></div>
+      <a href="/2018/12/02/fork__how_does_react_distinguish_class_and_function/">
+  <time datetime="2018-12-01T16:00:00.000Z">
+    2018-12-02
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2018/12/02/fork__how_does_react_distinguish_class_and_function/">「译」How Does React Tell a Class from a Function??</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <blockquote>
+<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/how-does-react-tell-a-class-from-a-function/" target="_blank" rel="noopener">overreacted.io</a></p>
+</blockquote>
+<p>看一下下面这个用函数定义的 <code>Greeting</code> 组件:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Greeting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &lt;p&gt;Hello&lt;/p&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>React 同样也支持使用 Class 来定义它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;p&gt;Hello&lt;/p&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(直到<a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">最近</a>，这都是使用 state 特性的唯一方式)</p>
+<p>当你去渲染一个 <code>&lt;Greeting /&gt;</code> 组件时，你并不关心它是如何定义的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Class or function — whatever.</span></span><br><span class="line">&lt;Greeting /&gt;</span><br></pre></td></tr></table></figure>
+<p>但这却是 React 自身需要关注的!</p>
+<p>如果 <code>Greeting</code> 是一个函数，React 需要调用它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Greeting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &lt;p&gt;Hello&lt;/p&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Inside React</span></span><br><span class="line"><span class="keyword">const</span> result = Greeting(props); <span class="comment">// &lt;p&gt;Hello&lt;/p&gt;</span></span><br></pre></td></tr></table></figure>
+<p>但如果 <code>Greeting</code> 是一个 Class，React 需要用 <code>new</code> 操作符去创建一个实例，然后再调用这个实例的 <code>render</code> 方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;p&gt;Hello&lt;/p&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Inside React</span></span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> Greeting(props); <span class="comment">// Greeting &#123;&#125;</span></span><br><span class="line"><span class="keyword">const</span> result = instance.render(); <span class="comment">// &lt;p&gt;Hello&lt;/p&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这两种情况下，React 的最终目标都是获取渲染后的节点（在这个例子中，就是 <code>&lt;p&gt;Hello&lt;/p&gt;</code>）。但具体的步骤却是根据 <code>Greeting</code> 是如何定义来的。</p>
+<p><strong>所以 React 是如何辨别 Class 和函数的？</strong></p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2018/12/02/fork__how_does_react_distinguish_class_and_function/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2018/11/30/fork__why_do_we_write_super/">
   <time datetime="2018-11-29T16:00:00.000Z">
     2018-11-30
@@ -130,7 +183,7 @@ var _hmt = _hmt || [];
   <div class="entry">
     
       <blockquote>
-<p>本文转载于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="overreacted.io">overreacted.io</a> ，翻译自 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">Why Do We Write super(props)?</a></p>
+<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">overreacted.io</a> </p>
 </blockquote>
 <p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
 <p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
