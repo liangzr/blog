@@ -1,0 +1,13 @@
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+archive_date_format: MMM DD
+fancybox: true
+
+favicon: /favicon.ico
+
+baidu_tongji:
+  enable: true
+  siteid: 822020422769969dec75820ad85d1b63

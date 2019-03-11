@@ -1,0 +1,49 @@
+html
+  background color-background
+  background color-background linear-gradient(#000000, #434b55) fixed
+  background-image url(image-background)
+
+body
+  padding 50px 0
+  margin 0
+  font 1em/1.5 font-title
+  color color-font
+  font-weight 300
+
+.wrapper
+  width page-width
+  margin 0 auto
+  background #DEDEDE
+  border-radius 8px
+  box-shadow rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.45) 0 3px 10px
+
+header, section, footer
+  display block
+
+a
+  color color-link
+  text-decoration none
+
+p
+  margin 0 0 20px
+  padding 0
+
+strong
+  color color-strong
+  font-weight 700
+
+.content
+  background #fafafa
+  border-radius 0 0 8px 8px
+  border-top 1px solid #fff
+
+.clearfix
+  zoom 1
+
+  &:before,
+  &:after
+    content ""
+    display table
+
+  &:after
+    clear both

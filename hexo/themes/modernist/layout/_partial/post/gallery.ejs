@@ -1,0 +1,15 @@
+<div class="gallery">
+  <div class="photoset">
+    <% if (post.photos.length){ %>
+      <% post.photos.forEach(function(photo){ %>
+        <img src="<%- photo %>">
+      <% }); %>
+    <% } else { %>
+      <img src="<%- post.photos %>">
+    <% } %>
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>

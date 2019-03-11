@@ -5,7 +5,7 @@ tags:
   - react
   - reprinted
 description: 本文转载于 Dan Abramov 的博客 overreacted.io
-date: 2018-12-30 00:00:00
+date: 2018-11-30 00:00:00
 ---
 
 [React Hooks](https://reactjs.org/docs/hooks-intro.html) 是当下社区的热门，但我却想从 *class* 组件的一些有趣实现讲起！
