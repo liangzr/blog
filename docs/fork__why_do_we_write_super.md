@@ -1,12 +1,13 @@
 ---
-title: 译 - Why Do We Write super(props)?
+title: 「译」Why Do We Write super(props)?
 toc: true
 tags: 
   - react
   - reprinted
-description: 本文转载于 Dan Abramov 的博客 overreacted.io
 date: 2018-11-30 00:00:00
 ---
+
+> 本文转载并翻译于 [Dan Abramov](https://twitter.com/dan_abramov) 的博客 [overreacted.io](https://overreacted.io/why-do-we-write-super-props/) 
 
 [React Hooks](https://reactjs.org/docs/hooks-intro.html) 是当下社区的热门，但我却想从 *class* 组件的一些有趣实现讲起！
 
