@@ -2,62 +2,43 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <meta http-equiv="pragma" content="no-cache">
-  <meta http-equiv="cache-control" content="no-cache">
-  <meta http-equiv="expires" content="0">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
-  <title>用 Immutable 数据来优化 React 应用 | OVERLOADING</title>
-  <meta name="author" content="Jory Liang">
+  <title>用 Immutable 数据来优化 React 应用 | OVERLOADING 🔥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <meta name="description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。
-React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度。
-Props &amp;amp; Stateprops 和 state 的基本概念不再赘述，组件的 props 是只读的，只能通过上层 JSX 声明时的属性传递进来，state 则完全受组件自身控制，并且只存在于 class 语法声明的组件。
-无论是 props 还是 state 发生变化都可以触发组件更新，下面这些生命周期方法会在组件重新渲染时被依次调用：
-
-componentWillReceiveProps*
-static getDerivedStateFromProps
-shouldComponentUpdate
-componentWillUpdate*
-render
-getSnapshotBeforeUpdate
-componentDidUpdate">
+    <meta name="author" content="Jory Liang">
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="用 Immutable 数据来优化 React 应用">
-  <meta property="og:site_name" content="OVERLOADING">
-
+    <meta name="description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。
+React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度">
   
-    <meta property="og:image" content>
+  <meta name="description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。 React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Immutable 数据来优化 React 应用">
+<meta property="og:url" content="https://blog.liangzr.tech/2018/05/29/optimizing-react-app-with-immutable-data/index.html">
+<meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。 React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1frj8i1dy0jj30aq0g9dgp.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1frsifbmx0kj30tc0oitci.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1frsixpjyzij30sv0oi0w9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1frt9x393n1j30gf054t94.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1frt9wmakpgj30fh05zmxp.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1frt9vy605zj30lz0ctq47.jpg">
+<meta property="og:updated_time" content="2019-03-09T11:24:17.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Immutable 数据来优化 React 应用">
+<meta name="twitter:description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。 React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1frj8i1dy0jj30aq0g9dgp.jpg">
   
-
   
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
-    <link href="/favicon.png" rel="icon">
-  
-  
-  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-
-  <!-- analytics -->
   
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', '', 'auto');
-  ga('send', 'pageview');
-</script>
-
 
 
 <script>
@@ -70,71 +51,50 @@ var _hmt = _hmt || [];
 })();
 </script>
 
-
 </head>
 </html>
- <body>  
-  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-	  <a class="navbar-brand" href="/">OVERLOADING</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">OVERLOADING 🔥</a></h1>
+    <p><a href="/">Keep and carry on</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2018/05/29/optimizing-react-app-with-immutable-data/">
+  <time datetime="2018-05-28T16:00:00.000Z">
+    2018-05-29
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">用 Immutable 数据来优化 React 应用</h1>
+  
 
-  <div class="container">
-  	<div class="content">
-    	 
-
-
-	
-		<div class="page-header">
-			<h1> 用 Immutable 数据来优化 React 应用</h1>
-		</div>
-	
-
-
-
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
-
-	<!-- content -->
-	<div class="mypage">		
-	  		
-
-	  <p>一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。</p>
+  </header>
+  
+  <div class="entry">
+    
+      <p>一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。</p>
 <h2 id="React-的更新机制"><a href="#React-的更新机制" class="headerlink" title="React 的更新机制"></a>React 的更新机制</h2><p>我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度。</p>
 <h3 id="Props-amp-State"><a href="#Props-amp-State" class="headerlink" title="Props &amp; State"></a>Props &amp; State</h3><p>props 和 state 的基本概念不再赘述，组件的 props 是只读的，只能通过上层 JSX 声明时的属性传递进来，state 则完全受组件自身控制，并且只存在于 <code>class</code> 语法声明的组件。</p>
 <p>无论是 props 还是 state 发生变化都可以触发组件更新，下面这些生命周期方法会在组件重新渲染时被依次调用：</p>
@@ -199,168 +159,70 @@ var _hmt = _hmt || [];
 <li><a href="https://medium.com/dailyjs/react-is-slow-react-is-fast-optimizing-react-apps-in-practice-394176a11fba" target="_blank" rel="noopener">React is Slow, React is Fast: Optimizing React Apps in Practice - Daily JS</a></li>
 </ol>
 <h3 id="图形素材"><a href="#图形素材" class="headerlink" title="图形素材"></a>图形素材</h3><p><a href="https://github.com/liangzr/blog/blob/master/assets/optimizing-react-app-with-immutable-data.key" target="_blank" rel="noopener">optimizing-react-app-with-immutable-data.key</a></p>
-	  
-	</div>
-
-	<div>
-  	<center>
-	<div class="pagination">
 
     
-    
-    <a href="/2018/12/30/fork__why_do_we_write_super/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
-    
-
-    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
-    
-    <a href="/1970/01/01/hello-world/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>
-    
-
-    
-</div>
-
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
-<section id="comment">
-    <h2 class="title">Comments</h2>
-
-    
-    <div id="disqus_thread" class="ds-thread">
-        <script type="text/javascript">
-            /**
-             * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-             * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-             */
-                /*
-                 var disqus_config = function () {
-                 this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                 };
-                 */
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-
-                s.src = '//liangzr.disqus.com/embed.js';
-
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by
-                Disqus.</a></noscript>
-    </div>
-    
-</section>
-
-
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
-
-	<!-- date -->
-	
-	<div class="meta-widget">
-	<i class="fa fa-clock-o"></i>
-	2018-05-29 
-	</div>
-	
-
-	<!-- categories -->
-    
-
-	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/react/">react<span>2</span></a></li>
-    </ul>
-	</div>
-		
-
-	<!-- toc -->
-	<div class="meta-widget">
-	
-	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
-	   <div id="toc" class="toc collapse in">
-		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#React-的更新机制"><span class="toc-article-text">React 的更新机制</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Props-amp-State"><span class="toc-article-text">Props &amp; State</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#shouleComponentUpdate（SCU）"><span class="toc-article-text">shouleComponentUpdate（SCU）</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#解决思路"><span class="toc-article-text">解决思路</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#PureComponent"><span class="toc-article-text">PureComponent</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#深拷贝就行了，是这样吗"><span class="toc-article-text">深拷贝就行了，是这样吗</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#JSON-之-stringify-parse"><span class="toc-article-text">JSON 之 stringify + parse</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#lodash-cloneDeep"><span class="toc-article-text">lodash.cloneDeep</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#优雅的-Immutable-数据"><span class="toc-article-text">优雅的 Immutable 数据</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#ImmutableJS"><span class="toc-article-text">ImmutableJS</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Immutability-helper"><span class="toc-article-text">Immutability-helper</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#小结"><span class="toc-article-text">小结</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#问题与建议"><span class="toc-article-text">问题与建议</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#参考"><span class="toc-article-text">参考</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#图形素材"><span class="toc-article-text">图形素材</span></a></li></ol></li></ol>
-		</div>
-	
-	</div>
-	
-    <hr>
-	
-</div><!-- col-md-3 -->
-
-	</div>
-		
-
-</div><!-- row -->
-
-<script type="text/javascript">
-var disqus_shortname = 'liangzr';
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-}());
-</script>
-
-
-
-	</div>
   </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2019 Jory Liang
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
-     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
-</p>
- </footer>
-</div> <!-- container-narrow -->
-  
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/react/">react</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
 
 
+<section id="comment">
+  <h1 class="title">Comments</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
   
-<a id="gotop" href="#">   
-  <span>⬆︎TOP</span>
-</a>
-
+  &copy; 2019 <a href="/">Jory Liang</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'liangzr';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
 </script>
 
-
-
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
-
 </body>
-   </html>
+</html>
