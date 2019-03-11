@@ -6,7 +6,7 @@ menu:
 archive_date_format: MMM DD
 fancybox: true
 
-favicon: /favicon.ico
+favicon: /favicon.png
 
 baidu_tongji:
   enable: true
