@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>简易shell script实现ssh登陆 | OVERLOADING 🔥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Jory Liang">
+  
+  
+    <meta name="description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是
+
+想写个脚本去
+找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理
+在2048KB创建个page来收录Github repository, 嫌">
+  
+  <meta name="description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
+<meta name="keywords" content="shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简易shell script实现ssh登陆">
+<meta property="og:url" content="https://blog.liangzr.tech/2016/01/07/easy-shell-script-ssh-login/index.html">
+<meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-12T06:00:18.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简易shell script实现ssh登陆">
+<meta name="twitter:description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?822020422769969dec75820ad85d1b63";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+</html>
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">OVERLOADING 🔥</a></h1>
+    <p><a href="/">Keep and carry on</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/07/easy-shell-script-ssh-login/">
+  <time datetime="2016-01-07T03:17:03.000Z">
+    2016-01-07
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">简易shell script实现ssh登陆</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>因为想每次管理服务器都要手动输入<code>ssh user@remotehost</code>然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是</p>
+<ul>
+<li>想写个脚本去</li>
+<li>找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理</li>
+<li>在2048KB创建个page来收录Github repository, 嫌网站字体太难看要更改字体</li>
+<li>在<code>.css</code>文件里更改font-family由于文件太多又去学了正则表达式</li>
+<li>修改完后发现没效果, 更改<code>.css</code>的font-face实现修改<br>好，还是说正事儿。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Option-1-仅实现登陆"><a href="#Option-1-仅实现登陆" class="headerlink" title="Option 1: 仅实现登陆"></a>Option 1: 仅实现登陆</h2><hr>
+<p>最简单的实现手动的登陆，可以用expect工具来实现，在Ubuntu下需要下载：<br><code>sudo apt-get install expect</code><br>Expect中最关键的四个命令是：</p>
+<ul>
+<li>send：用于向进程发送字符串</li>
+<li>xpect：从进程接收字符串</li>
+<li>spawn：启动新的进程</li>
+<li>interact：允许用户交互</li>
+</ul>
+<p>实现如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line">spawn ssh user@remotehost</span><br><span class="line">expect <span class="string">"*password:"</span></span><br><span class="line">send <span class="string">"userpwd\r"</span></span><br><span class="line">expect <span class="string">"*#"</span></span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<p>添加执行权限</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x ssh-script.sh</span><br></pre></td></tr></table></figure>
+<p>运行以上ssh-script.sh就可以登陆了，也可以把用户命令放入<code>～/bin</code>，在Linux的很多发行版本中默认PATH都加入了这个目录，在Ubuntu上只要在用户根目录下建立了bin文件夹，下次登陆时会自动添加进PATH，如果要手动修改则打开.bashrc文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>文件末添加</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH = ~/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p>生效改动</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>这样在teminal里输入ssh-script.sh就能一键登陆VPS了，如果嫌后缀麻烦，可以……删掉好了：P</p>
+<p>未完</p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/shell/">shell</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2019 <a href="/">Jory Liang</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'liangzr';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

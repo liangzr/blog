@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>一次折腾刷机的经历 | OVERLOADING 🔥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Jory Liang">
+  
+  
+    <meta name="description" content="这两天在折腾华为荣耀3C，型号是H30-T00/1G RAM，芯片是MediaTek6582，ROOT之后先是刷了个TWRP（Team Win Recovery Project）的recovery，之后又刷过CM12.1、MIUI7等第三方ROM，这些ROM大多基于华为官方的B268/Android4.4修改。哦这里话说回来，手机是我爸的:P .于是在强权逼迫下，我不得不寻找把它刷回去的办法（非官">
+  
+  <meta name="description" content="这两天在折腾华为荣耀3C，型号是H30-T00/1G RAM，芯片是MediaTek6582，ROOT之后先是刷了个TWRP（Team Win Recovery Project）的recovery，之后又刷过CM12.1、MIUI7等第三方ROM，这些ROM大多基于华为官方的B268/Android4.4修改。哦这里话说回来，手机是我爸的:P .于是在强权逼迫下，我不得不寻找把它刷回去的办法（非官">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次折腾刷机的经历">
+<meta property="og:url" content="https://blog.liangzr.tech/2016/02/06/adb-shell/index.html">
+<meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="这两天在折腾华为荣耀3C，型号是H30-T00/1G RAM，芯片是MediaTek6582，ROOT之后先是刷了个TWRP（Team Win Recovery Project）的recovery，之后又刷过CM12.1、MIUI7等第三方ROM，这些ROM大多基于华为官方的B268/Android4.4修改。哦这里话说回来，手机是我爸的:P .于是在强权逼迫下，我不得不寻找把它刷回去的办法（非官">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-12T06:03:57.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一次折腾刷机的经历">
+<meta name="twitter:description" content="这两天在折腾华为荣耀3C，型号是H30-T00/1G RAM，芯片是MediaTek6582，ROOT之后先是刷了个TWRP（Team Win Recovery Project）的recovery，之后又刷过CM12.1、MIUI7等第三方ROM，这些ROM大多基于华为官方的B268/Android4.4修改。哦这里话说回来，手机是我爸的:P .于是在强权逼迫下，我不得不寻找把它刷回去的办法（非官">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?822020422769969dec75820ad85d1b63";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+</html>
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">OVERLOADING 🔥</a></h1>
+    <p><a href="/">Keep and carry on</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/02/06/adb-shell/">
+  <time datetime="2016-02-06T09:48:40.000Z">
+    2016-02-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">一次折腾刷机的经历</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>这两天在折腾华为荣耀3C，型号是H30-T00/1G RAM，芯片是MediaTek6582，ROOT之后先是刷了个TWRP（Team Win Recovery Project）的recovery，之后又刷过CM12.1、MIUI7等第三方ROM，这些ROM大多基于华为官方的B268/Android4.4修改。<br>哦这里话说回来，手机是我爸的:P .于是在强权逼迫下，我不得不寻找把它刷回去的办法（非官方包在通话时均没有扬声器输入），官方的卡刷包各种不好找领导又催的紧，惹急了直接找了个据说是官方的线刷包，用MediaTek的Smart Phone Flash Tools直接把整个包刷进去，果不其然出问题了，各种系统刷之后都无法开机，卡在系统启动的动画里。<br>之后又找了个据说是官方的线刷包刷了进去，直接连recovery都被替换了，官方的各种救砖工具都能成功使用，却没有任何效果，真正的官方升级包无法输入，说是分区有问题。</p>
+<a id="more"></a>
+<h2 id="前言有点儿长，正篇开始。"><a href="#前言有点儿长，正篇开始。" class="headerlink" title="前言有点儿长，正篇开始。"></a>前言有点儿长，正篇开始。</h2><p>首先用SPflash工具把TWRP的Recovery又重新刷了进去，在里面擦除分区时发现，data分区和cust分区（华为自己的分区）都无法挂载，使用Recovery自己的工具把data分区重新格式化，正常挂载了，但是cust还是不行。</p>
+<p>查看当前已有的分区</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">~ # cat /proc/partitions </span><br><span class="line">major minor  #blocks  name</span><br><span class="line"></span><br><span class="line"> 179        0    3830784 mmcblk0</span><br><span class="line"> 179        1          1 mmcblk0p1</span><br><span class="line"> 179        2      10240 mmcblk0p2</span><br><span class="line"> 179        3      10240 mmcblk0p3</span><br><span class="line"> 179        4       6144 mmcblk0p4</span><br><span class="line"> 179        5    1048576 mmcblk0p5</span><br><span class="line"> 179        6     196608 mmcblk0p6</span><br><span class="line"> 179        7     129024 mmcblk0p7</span><br><span class="line"> 179        8    2375168 mmcblk0p8</span><br><span class="line"> 179       64       2048 mmcblk0boot1</span><br><span class="line"> 179       32       2048 mmcblk0boot0</span><br><span class="line"> 179       96    3872768 mmcblk1</span><br><span class="line"> 179       97    3870720 mmcblk1p1</span><br></pre></td></tr></table></figure>
+<p>这里能看到，共有两个disk，分别是mmcblk0和mmcblk1，其中前者被分为10个小分区。后者就是SD card</p>
+<p>查看系统挂载的分区</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">~ # df -am</span><br><span class="line">Filesystem           1M-blocks      Used Available Use% Mounted on</span><br><span class="line">tmpfs                      483         0       483   0% /dev</span><br><span class="line">devpts                       0         0         0   0% /dev/pts</span><br><span class="line">proc                         0         0         0   0% /proc</span><br><span class="line">sysfs                        0         0         0   0% /sys</span><br><span class="line">/dev/block/mmcblk0p8      2287      1157      1130  51% /data</span><br><span class="line">/dev/block/mmcblk0p8      2287      1157      1130  51% /sdcard</span><br><span class="line">/dev/block/mmcblk0p7       124         4       120   3% /cache</span><br><span class="line">/dev/block/mmcblk1p1      3772      2751      1021  73% /external_sd</span><br></pre></td></tr></table></figure>
+<p>上面能看到已经挂载分区的大小和对应的文件系统分区，但是华为的cust无法挂载，查看/etc/fstab文件系统分区表</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/dev/block/mmcblk0p5 /system ext4 rw</span><br><span class="line">/dev/block/mmcblk0p8 /data ext4 rw</span><br><span class="line">/dev/block/mmcblk0p6 /cust ext4 rw</span><br><span class="line">/dev/block/mmcblk0p7 /cache ext4 rw</span><br><span class="line">/dev/block/mmcblk1p1 /external_sd vfat rw</span><br></pre></td></tr></table></figure>
+<p>手动挂载cust分区</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/block/mmcblk0p6 /cust</span><br><span class="line">或</span><br><span class="line">mount /cust</span><br></pre></td></tr></table></figure>
+<p>提示无效参数，怀疑是mmcblk0p6分区损坏，于是把cache卸载，把cust挂载到mmcblk0p7上，果然成功挂载，于是执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make_ext4fs /dev/block/mmcblk0p6</span><br></pre></td></tr></table></figure>
+<p>重新挂载/cust分区，果然成功挂载，至此Recovery已经没有任何报错，重新把/system、/data等等分区全部重新格式化，重新安装lollipop，然而结果没变，还是卡在开机画面。当时和某个QQ群里的“大神”交流了下，“大神”呵呵一笑：不用想了，字库坏了。（一般情况下，字库坏了=主板坏了，不能修）</p>
+<p>说到字库这个词我也想呵呵，手机字库什么的就是Flash，叫的这么不近人情，然而我可以肯定的是，我的“字库肯定没坏啊”，因为我刚刚还在对它进行格式化的操作。</p>
+<p>于是我用ADB进入手机的shell，用刚刚的格式化操作，对前面几个小分区全部格式化了一遍</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make_ext4fs /dev/block/mmcblk0p2</span><br><span class="line">make_ext4fs /dev/block/mmcblk0p3</span><br><span class="line">make_ext4fs /dev/block/mmcblk0p4</span><br></pre></td></tr></table></figure>
+<p>重新开机，一切正常～～</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>这次事情是在刷机的过程中，用一些简单的ADB Shell命令解决了手机系统无法开机的一些问题，Android                      Shell还有更多强大的功能还没用过，并且本文只是记载了自己遇到的问题，仅能做为参考，切勿照搬。</p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/android/">android</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2019 <a href="/">Jory Liang</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'liangzr';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
