@@ -4,27 +4,6 @@
   
     
     <entry>
-      <title>《跟着规范学 JavaScript》之对象</title>
-      <link href="/2019/03/13/overview-js-object/"/>
-      <url>/2019/03/13/overview-js-object/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>《跟着规范学 JavaScript》系列将结合 <a href="https://tc39.github.io/ecma262/" target="_blank" rel="noopener">ECMA 262 规范</a>等，深挖常见的前端疑点，解决日常工作中遇到的原理性疑虑。文章之中如有谬误之处，欢迎指正！</p></blockquote><p>对象是我们从接触 JavaScript 起就在用的东西，但你真的了解对象吗，本文将从以下几个方面来进入 JavaScript 万物皆对象的世界：</p><ul><li><code>[[Prototype]]</code></li><li><code>new</code></li><li><code>this</code></li><li>Object Descriptor</li><li>Reflection</li></ul><a id="more"></a><h2 id="Prototype"><a href="#Prototype" class="headerlink" title="[[Prototype]]"></a><code>[[Prototype]]</code></h2>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> series </tag>
-            
-            <tag> javascript </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>如何按原顺序打印出对象的属性？</title>
       <link href="/2019/03/09/how-to-print-properties-of-the-object-by-originally/"/>
       <url>/2019/03/09/how-to-print-properties-of-the-object-by-originally/</url>
