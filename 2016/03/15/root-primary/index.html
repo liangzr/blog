@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="偶然在慕课网上看到了有关Root原理的视频，一直也挺感兴趣的，学习了下。玩儿过Linux的应该都明白Root代表了什么，获取Root权限你就能控制系统的一切，甚至还可以执行 rm -rf / ，反正我没试过，不如你试试？ 那么一般情况下如何切换到Root用户呢，在大多数的Linux发行版中，在终端输入 su 就可以进入Root用户，当然如果Root用户有密码，你必须输入密码才能切换过去。 Andr">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Root原理学习（初级）">
+<meta property="og:url" content="https://blog.liangzr.tech/2016/03/15/root-primary/index.html">
+<meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="偶然在慕课网上看到了有关Root原理的视频，一直也挺感兴趣的，学习了下。玩儿过Linux的应该都明白Root代表了什么，获取Root权限你就能控制系统的一切，甚至还可以执行 rm -rf / ，反正我没试过，不如你试试？ 那么一般情况下如何切换到Root用户呢，在大多数的Linux发行版中，在终端输入 su 就可以进入Root用户，当然如果Root用户有密码，你必须输入密码才能切换过去。 Andr">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-12T05:59:05.454Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Root原理学习（初级）">
+<meta name="twitter:description" content="偶然在慕课网上看到了有关Root原理的视频，一直也挺感兴趣的，学习了下。玩儿过Linux的应该都明白Root代表了什么，获取Root权限你就能控制系统的一切，甚至还可以执行 rm -rf / ，反正我没试过，不如你试试？ 那么一般情况下如何切换到Root用户呢，在大多数的Linux发行版中，在终端输入 su 就可以进入Root用户，当然如果Root用户有密码，你必须输入密码才能切换过去。 Andr">
+
+
+
+
+
+
+  <link rel="canonical" href="https://blog.liangzr.tech/2016/03/15/root-primary/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android Root原理学习（初级） | OVERLOADING 🔥</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?822020422769969dec75820ad85d1b63";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OVERLOADING 🔥</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Keep and carry on</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2016/03/15/root-primary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jory Liang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OVERLOADING 🔥">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android Root原理学习（初级）
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-03-15 11:05:04" itemprop="dateCreated datePublished" datetime="2016-03-15T11:05:04+08:00">2016-03-15</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>偶然在慕课网上看到了有关Root原理的视频，一直也挺感兴趣的，学习了下。<br>玩儿过Linux的应该都明白Root代表了什么，获取Root权限你就能控制系统的一切，甚至还可以执行 <code>rm -rf /</code> ，反正我没试过，不如你试试？</p>
+<p>那么一般情况下如何切换到Root用户呢，在大多数的Linux发行版中，在终端输入 <code>su</code> 就可以进入Root用户，当然如果Root用户有密码，你必须输入密码才能切换过去。</p>
+<p>Android系统本质上还是属于Linux，它有着Linux和内核和文件系统，它同样可以输入su来切换到Root用户，但为了安全起见，Google一开始就规定Android系统只有两个用户能获取Root权限，一个是Root用户本身，另一个是Shell用户。Shell用户是通过ADB（Android Debug Bridge）登录的，但如果你其他的App想获取Root权限，就没办法通过Shell用户（这里倒是没试过在Shell用户里，用am命令启动App是否能获取Root权限，没办法测试，我的设备已经Root了）。</p>
+<p>所以如果我们想让我们登录手机的用户启动的App，来获取到Root权限，我们就要修改su（SuperUser）文件。</p>
+<a id="more"></a>
+<h4 id="Root所需条件"><a href="#Root所需条件" class="headerlink" title="Root所需条件"></a>Root所需条件</h4><ul>
+<li>Android手机（最好是Nexus系列） × 1</li>
+<li>修改后的su文件 × 1</li>
+<li>强大的Recovery × 1</li>
+</ul>
+<h4 id="提取Root权限步骤"><a href="#提取Root权限步骤" class="headerlink" title="提取Root权限步骤"></a>提取Root权限步骤</h4><ul>
+<li>刷入一个合适的Recovery</li>
+<li>修改su命令</li>
+<li>Recovery刷机文件</li>
+<li>执行su命令提取Root权限</li>
+<li>让ROM本身拥有Root权限</li>
+</ul>
+<h2 id="刷入一个强大的Recovery"><a href="#刷入一个强大的Recovery" class="headerlink" title="刷入一个强大的Recovery"></a>刷入一个强大的Recovery</h2><p>对于一个没有Root权限的手机，如果想修改/替换手机系统内部文件，有两种办法</p>
+<ul>
+<li>通过Bootloader模式复制整个文件系统（也就是我们常说的刷机）</li>
+<li>在Recovery模式下通过Recovery升级包的方式将文件复制到指定的目录中</li>
+</ul>
+<p>很明显一般我们理解的获取Root权限 !=  重新刷机，所以我们选择第二种方式，但Android手机默认的Recovery不够强大，我们需要寻找一个好用的Recovery来替换它。</p>
+<h3 id="下载Recovery"><a href="#下载Recovery" class="headerlink" title="下载Recovery"></a>下载Recovery</h3><p>目前比较流行的强大的Recovery有：</p>
+<ul>
+<li><a href="https://www.clockworkmod.com/rommanager" target="_blank" rel="noopener">ClockWorkMod</a> （CWM）</li>
+<li><a href="https://twrp.me/Devices/" target="_blank" rel="noopener">Team Win Recovery Project</a> （TWRP）</li>
+</ul>
+<p>先去找下有没有自己的设备，如果没有，只能到国内的各大手机论坛，找下自己的手机版块，看有没有民间大神把这些强大的Recovery移植到你的手机上，这里另外提一个，国内低端手机用的比较多的MTK芯片的机子，可以到移动叔叔论坛，移动叔叔自产的Recovery也不错，推荐下国产～</p>
+<h3 id="刷入Recovery"><a href="#刷入Recovery" class="headerlink" title="刷入Recovery"></a>刷入Recovery</h3><p>下载好Recovery之后，我们就可以想办法用它来替换我们手机里的原装Recovery。</p>
+<h4 id="Option1：通过fastboot命令刷入Recovery"><a href="#Option1：通过fastboot命令刷入Recovery" class="headerlink" title="Option1：通过fastboot命令刷入Recovery"></a>Option1：通过fastboot命令刷入Recovery</h4><p>先将手机切换到Bootloader模式，用USB连接手机到电脑，并且确认它已经处于待调试的状态，比如输入 <code>adb devices</code> ，显示出你的设备，并且状态是device，输入命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb reboot bootloader</span><br></pre></td></tr></table></figure>
+<p>等待手机重启到bootloader模式，大概在你准备看的时候，它已经准备好了。</p>
+<blockquote>
+<p>这里需要提醒的是，bootloader模式下的操作非常危险，bootloader程序是手机在装载系统时运行的程序，同时它也承担着通过软件方式自我更新系统的任务，比较类似我们常见的BIOS，但BIOS好在一般是固件程序。总之，弄坏了bootloader，要么换主板，要么让厂家通过JTAG之类的硬件的方式重新刷入bootloader，简而言之，就是废了。不过也没有那么可怕，只要不执行fastboot命令中有关bootloader的命令，一般也不会有事儿。</p>
+</blockquote>
+<p>用fastboot命令，刷入你已经准备好的recovery</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash recovery [你的recovery路径]</span><br></pre></td></tr></table></figure>
+<p>随后就等待Recovery刷入完成吧！</p>
+<h3 id="Option2：Recovery下通过命令直接刷入（需要Root）"><a href="#Option2：Recovery下通过命令直接刷入（需要Root）" class="headerlink" title="Option2：Recovery下通过命令直接刷入（需要Root）"></a>Option2：Recovery下通过命令直接刷入（需要Root）</h3><p>这种方法适合已经Root过，但想更换Recovery的朋友，这里也顺便说下，就一个命令，在 adb shell 下或者手机本地终端su进入Root用户后使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/sdcard/recovery.img of=/dev/recovery</span><br></pre></td></tr></table></figure>
+<p>下面还是来解释下这个命令吧，dd是Linux自带的一个复制文件的命令，并在复制的同时可以进行指定的转换，<code>if</code> 后跟的是源路径， <code>of</code> 后跟的是目标路径，这个命令即是把/sdcard/目录下的recovery.img文件复制到 /dev/recovery .</p>
+<p>到这里，相信Recovery这里没啥疑问啦。</p>
+<h2 id="制作Recovery升级包"><a href="#制作Recovery升级包" class="headerlink" title="制作Recovery升级包"></a>制作Recovery升级包</h2><p>有了强大的Recovery之后，我们就需要制作一个Recovery的升级包，来直接替换掉系统自带的su文件，这里Recovery升级包主要是靠一个脚本语言——updater-script，来实现替换系统文件的自动化操作。</p>
+<h3 id="updater-script"><a href="#updater-script" class="headerlink" title="updater-script"></a>updater-script</h3><p>updater-script目前的格式是Edify语言，它几乎每一条语句都是一个函数，我们主要看看Edify语言的语法格式。</p>
+<h4 id="Edify语法"><a href="#Edify语法" class="headerlink" title="Edify语法"></a>Edify语法</h4><p>我们主要看看这次制作升级包所用到的函数，更详细语法有兴趣的可以查看<a href="http://blog.csdn.net/tody_guo/article/details/7948083" target="_blank" rel="noopener">tody_guo的专栏 - Android updater-scripts(Edify Script)各函数详细说明</a></p>
+<p><strong><em>1. ui_print</em></strong>  </p>
+<ul>
+<li>原型：uiprint(msg1, …, msgN);</li>
+<li>功能：该函数用于在Recovery界面输出字符串， 其中msg1 - msgN表示N个字符串参数，它至少要指定一个参数，如果指定多个，会将这些参数值连接起来输出。</li>
+<li>用法：ui_print(“ hello world “);</li>
+</ul>
+<p><strong><em>2. run_program</em></strong> </p>
+<ul>
+<li>原型：run_program(prog, arg1, …, argN);</li>
+<li>功能：该函数用于执行程序，其中prog参数表示要执行的程序文件（完整路径）， arg1 - argN 表示要执行程序的参数发。prog参数是必须的，其他参数可选</li>
+<li>用法：run_program(“/sbin/busybox”, “mount”, “/system”);</li>
+</ul>
+<p><strong><em>3. delete</em></strong></p>
+<ul>
+<li>原型：delete(file1, file2, …, fileN);</li>
+<li>功能：该函数用于删除一个或多个文件。其中file、file2、…、fileN表示要删除文件的路径，至少需要指定一个文件。</li>
+<li>用法：delete(“/system/xbin/su”);</li>
+</ul>
+<p><strong><em>4. package_extract_dir</em></strong></p>
+<ul>
+<li>原型：package_extract_dir(package_path, destination_path);</li>
+<li>功能：用于提取刷机包中package_path指定目录的所有文件到destination_path指定的目录。其中package_path参数表示刷机包中的目录，destination_path参数表示目标目录。</li>
+<li>用法：package_extract_dir(“system”, “/system”);</li>
+</ul>
+<p><strong><em>5. set_perm</em></strong></p>
+<ul>
+<li>原型：set_perm(uid, gid, mode, file1, file2, …, fileN);</li>
+<li>功能：用于设置一个或多个文件的权限。其中uid参数表示用户ID，gid参数表示用户组ID。如果想让文件的用户和用户组都是Root，uid和gid需要为0。mode参数表示设置的权限。与chmod命令相似。</li>
+<li>用法：set_perm(0, 0, 0777, “/system/xbin/su”);</li>
+</ul>
+<p><strong><em>6. mount</em></strong></p>
+<ul>
+<li>原型：mount(fs_type, partition_type, location, mount_point);</li>
+<li>功能：挂载分区</li>
+<li>用法：mount(“ext4”, “EMMC”, “/dev/block/platform/s3c-sdhci.0/by-name/system”, “/system”);</li>
+</ul>
+<p><strong><em>7. unmount</em></strong></p>
+<ul>
+<li>原型：unmount(mount_point);</li>
+<li>功能：用于解除文件系统的挂载。其中mount_point参数表示文件系统。</li>
+<li>用法：unmount(“/system”);</li>
+</ul>
+<h4 id="编写脚本文件"><a href="#编写脚本文件" class="headerlink" title="编写脚本文件"></a>编写脚本文件</h4><p>了解了基本的语法后，就可以来编写个简单的替换系统文件的脚本了，我们主要进行的操作如下</p>
+<ul>
+<li>以读写模式挂载/system</li>
+<li>删除旧的su文件</li>
+<li>复制新的su文件</li>
+<li>修改su文件的权限</li>
+<li>卸载/system</li>
+</ul>
+<p>根据以上步骤，这里直接给上脚本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">ui_print(<span class="string">"----------------------"</span>);</span><br><span class="line">ui_print(<span class="string">"Recovery Upgrade Package"</span>);</span><br><span class="line">ui_print(<span class="string">"----------------------"</span>);</span><br><span class="line"></span><br><span class="line">ui_print(<span class="string">"--- Mounting /system ---"</span>);</span><br><span class="line"><span class="comment">#以读写模式挂载/system</span></span><br><span class="line">run_program(<span class="string">"/sbin/busybox"</span>, <span class="string">"mount"</span>, <span class="string">"-o"</span>, <span class="string">"rw"</span>, <span class="string">"/system"</span>);</span><br><span class="line"></span><br><span class="line">ui_print(--- Delete /system/xbin/su ---);</span><br><span class="line"><span class="comment">#删除旧的su文件</span></span><br><span class="line">delete(<span class="string">"/system/xbin/su"</span>);</span><br><span class="line"></span><br><span class="line">ui_pirnt(<span class="string">"--- Extracting system to /system ---"</span>);</span><br><span class="line"><span class="comment">#将刷机包中的system目录的所有文件复制到/system目录中的相应位置</span></span><br><span class="line">package_extract_dir(<span class="string">"system"</span>, <span class="string">"/system"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#给su命令添加可执行权限</span></span><br><span class="line">set_perm(0, 0, 0777, <span class="string">"/system/xbin/su"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#卸载/system</span></span><br><span class="line">unmount(/system);</span><br><span class="line"></span><br><span class="line">ui_print(<span class="string">"--- finished ---"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="升级包制作"><a href="#升级包制作" class="headerlink" title="升级包制作"></a>升级包制作</h3><p>制作Recovery升级包需要两个目录</p>
+<ul>
+<li>META-INF/com/google/android</li>
+<li>system/xbin</li>
+</ul>
+<p>前者用来放我们制作的updater-script文件，在 <code>META-INF/com/google/android</code> 目录下还有一个 <code>update-binary</code> 的文件，它是用来解析我们制作的updater-script文件，把su放在 <code>system/xbin</code> 目录下。</p>
+<blockquote>
+<p>目录中的其他东西，可以找一个现成任意的Recovery升级包，把内容复制过来就行了</p>
+</blockquote>
+<p>最后，把这两个目录压缩成 <code>.zip</code> 文件， 升级包就制作完成了。</p>
+<h1 id="替换su文件"><a href="#替换su文件" class="headerlink" title="替换su文件"></a>替换su文件</h1><p>有了升级包之后，我们要做的就是在Recovery里面安装这个升级包，通过adb shell进入recovery模式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb reboot recovery</span><br></pre></td></tr></table></figure>
+<p>在Recovery模式下，我们可以直接用 adb 操作这个升级包，比如先push到sdcard里面，然后在Recovery里面手动的选择在sdcard里面找到并安装这个升级包，另外我们也可以通过一个adb命令直接push并安装这个升级包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb sideload update.zip</span><br></pre></td></tr></table></figure>
+<p>它会首先将updata.zip下载到手机中，并且执行安装，这里的updata.zip是升级包的路径，而非单单名字。</p>
+<h2 id="使用su命令提取Root权限"><a href="#使用su命令提取Root权限" class="headerlink" title="使用su命令提取Root权限"></a>使用su命令提取Root权限</h2><p>su文件替换完之后，我们就可以通过各种方法获取到Root权限</p>
+<h3 id="在终端中执行su命令提取Root权限"><a href="#在终端中执行su命令提取Root权限" class="headerlink" title="在终端中执行su命令提取Root权限"></a>在终端中执行su命令提取Root权限</h3><p>无论在pc上的adb shell命令还是手机的本地终端，正如我们开篇所说的，直接输入su，即可获取Root权限。</p>
+<h3 id="在App中使用Root权限"><a href="#在App中使用Root权限" class="headerlink" title="在App中使用Root权限"></a>在App中使用Root权限</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().<span class="built_in">exec</span>(<span class="string">"su"</span>);</span><br><span class="line">OutputStream os = process.getOutputStream();</span><br><span class="line">os.write(<span class="string">"ls /system/app"</span>.getBytes());</span><br><span class="line">os.flush();</span><br><span class="line">os.close();</span><br></pre></td></tr></table></figure>
+<p>这段代码还没有进行尝试，之后会写个删除系统自带软件的程序来验证下。</p>
+<h2 id="su命令源代码解析"><a href="#su命令源代码解析" class="headerlink" title="su命令源代码解析"></a>su命令源代码解析</h2><p>Android源代码上su.c文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">** </span></span><br><span class="line"><span class="comment">** Copyright 2008, The Android Open Source Project </span></span><br><span class="line"><span class="comment">** </span></span><br><span class="line"><span class="comment">** Licensed under the Apache License, Version 2.0 (the "License");  </span></span><br><span class="line"><span class="comment">** you may not use this file except in compliance with the License.  </span></span><br><span class="line"><span class="comment">** You may obtain a copy of the License at  </span></span><br><span class="line"><span class="comment">** </span></span><br><span class="line"><span class="comment">**     http://www.apache.org/licenses/LICENSE-2.0  </span></span><br><span class="line"><span class="comment">** </span></span><br><span class="line"><span class="comment">** Unless required by applicable law or agreed to in writing, software  </span></span><br><span class="line"><span class="comment">** distributed under the License is distributed on an "AS IS" BASIS,  </span></span><br><span class="line"><span class="comment">** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  </span></span><br><span class="line"><span class="comment">** See the License for the specific language governing permissions and  </span></span><br><span class="line"><span class="comment">** limitations under the License. </span></span><br><span class="line"><span class="comment">*/</span>  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_TAG <span class="meta-string">"su"</span>  </span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirent.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pwd.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;private/android_filesystem_config.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * SU can be given a specific command to exec. UID _must_ be </span></span><br><span class="line"><span class="comment"> * specified for this (ie argc =&gt; 3). </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * Usage: </span></span><br><span class="line"><span class="comment"> * su 1000 </span></span><br><span class="line"><span class="comment"> * su 1000 ls -l </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">passwd</span> *<span class="title">pw</span>;</span>  </span><br><span class="line">    <span class="keyword">int</span> uid, gid, myuid;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span>(argc &lt; <span class="number">2</span>) &#123;  </span><br><span class="line">        uid = gid = <span class="number">0</span>;  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        pw = getpwnam(argv[<span class="number">1</span>]);  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span>(pw == <span class="number">0</span>) &#123;  </span><br><span class="line">            uid = gid = atoi(argv[<span class="number">1</span>]);  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            uid = pw-&gt;pw_uid;  </span><br><span class="line">            gid = pw-&gt;pw_gid;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Until we have something better, only root and the shell can use su. */</span>  </span><br><span class="line">    myuid = getuid();  </span><br><span class="line">    <span class="keyword">if</span> (myuid != AID_ROOT &amp;&amp; myuid != AID_SHELL) &#123;  </span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"su: uid %d not allowed to su\n"</span>, myuid);  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">if</span>(setgid(gid) || setuid(uid)) &#123;  </span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"su: permission denied\n"</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* User specified command for exec. */</span>  </span><br><span class="line">    <span class="keyword">if</span> (argc == <span class="number">3</span> ) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (execlp(argv[<span class="number">2</span>], argv[<span class="number">2</span>], <span class="literal">NULL</span>) &lt; <span class="number">0</span>) &#123;  </span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"su: exec failed for %s Error:%s\n"</span>, argv[<span class="number">2</span>],  </span><br><span class="line">                    strerror(errno));  </span><br><span class="line">            <span class="keyword">return</span> -errno;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (argc &gt; <span class="number">3</span>) &#123;  </span><br><span class="line">        <span class="comment">/* Copy the rest of the args from main. */</span>  </span><br><span class="line">        <span class="keyword">char</span> *exec_args[argc - <span class="number">1</span>];  </span><br><span class="line">        <span class="built_in">memset</span>(exec_args, <span class="number">0</span>, <span class="keyword">sizeof</span>(exec_args));  </span><br><span class="line">        <span class="built_in">memcpy</span>(exec_args, &amp;argv[<span class="number">2</span>], <span class="keyword">sizeof</span>(exec_args));  </span><br><span class="line">        <span class="keyword">if</span> (execvp(argv[<span class="number">2</span>], exec_args) &lt; <span class="number">0</span>) &#123;  </span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"su: exec failed for %s Error:%s\n"</span>, argv[<span class="number">2</span>],  </span><br><span class="line">                    strerror(errno));  </span><br><span class="line">            <span class="keyword">return</span> -errno;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Default exec shell. */</span>  </span><br><span class="line">    execlp(<span class="string">"/system/bin/sh"</span>, <span class="string">"sh"</span>, <span class="literal">NULL</span>);  </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"su: exec failed\n"</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从main函数的源代码中可以看到</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Until we have something better, only root and the shell can use su. */</span>  </span><br><span class="line">myuid = getuid();  </span><br><span class="line"><span class="keyword">if</span> (myuid != AID_ROOT &amp;&amp; myuid != AID_SHELL) &#123;  </span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"su: uid %d not allowed to su\n"</span>, myuid);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数可以看出，su文件检测当前用户如果不是Root用户或者Shell用户，将会直接退出su命令。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(argc &lt; <span class="number">2</span>) &#123;  </span><br><span class="line">    uid = gid = <span class="number">0</span>;  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">    pw = getpwnam(argv[<span class="number">1</span>]);  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pw == <span class="number">0</span>) &#123;  </span><br><span class="line">        uid = gid = atoi(argv[<span class="number">1</span>]);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        uid = pw-&gt;pw_uid;  </span><br><span class="line">        gid = pw-&gt;pw_gid;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果参数小于2，uid（将要切换的用户id）和gid（将要切换的用户组id）都会切换到Root用户和Root用户组，C语言中如果一个命令不加任何参数，argc值就等于1，也就是说，如果你只输入了su命令，将自动切换到Root用户和Root用户组。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(setgid(gid) || setuid(uid)) &#123;  </span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"su: permission denied\n"</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>setgid和setuid函数是最关键的获取Root权限的函数，如果设置成功则返回0，所以只有当两个函数返回都为0的时候，才算成功获取Root权限。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Default exec shell. */</span>  </span><br><span class="line">execlp(<span class="string">"/system/bin/sh"</span>, <span class="string">"sh"</span>, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<p>这段代码将当前进程替换成一个新进程，也就是以Root用户登录的一个新的Shell。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>有关Android设备提取Root权限最基本的原理就是这些了，但一般情况下往往没这么简单，我们也知道不同的机型Root的方式也不一样，因为厂商对待Root设备的态度不一样，有的坚决反对，有的不鼓励不支持，有的想方设法阻止你Root，或者只有Nexus系列的原生系统才会如此的简单吧，但万变不离其宗，原理上不会差太多，对以后的学习也是一个基础。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/11/design-logo/" rel="next" title="设计没那么简单">
+                <i class="fa fa-chevron-left"></i> 设计没那么简单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/25/android-studio-install/" rel="prev" title="Android Studio 安装 ( Linux )">
+                Android Studio 安装 ( Linux ) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4" alt="Jory Liang">
+            
+              <p class="site-author-name" itemprop="name">Jory Liang</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/liangzr" title="GitHub &rarr; https://github.com/liangzr" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:liangzr@outlook.com" title="E-Mail &rarr; mailto:liangzr@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://instagram.com/jory.liang" title="Instagram &rarr; https://instagram.com/jory.liang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/liangzr" title="Telegram &rarr; https://t.me/liangzr" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Root所需条件"><span class="nav-number">1.</span> <span class="nav-text">Root所需条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提取Root权限步骤"><span class="nav-number">2.</span> <span class="nav-text">提取Root权限步骤</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#刷入一个强大的Recovery"><span class="nav-number"></span> <span class="nav-text">刷入一个强大的Recovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Recovery"><span class="nav-number"></span> <span class="nav-text">下载Recovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷入Recovery"><span class="nav-number"></span> <span class="nav-text">刷入Recovery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Option1：通过fastboot命令刷入Recovery"><span class="nav-number">1.</span> <span class="nav-text">Option1：通过fastboot命令刷入Recovery</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Option2：Recovery下通过命令直接刷入（需要Root）"><span class="nav-number"></span> <span class="nav-text">Option2：Recovery下通过命令直接刷入（需要Root）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作Recovery升级包"><span class="nav-number"></span> <span class="nav-text">制作Recovery升级包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#updater-script"><span class="nav-number"></span> <span class="nav-text">updater-script</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Edify语法"><span class="nav-number">1.</span> <span class="nav-text">Edify语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写脚本文件"><span class="nav-number">2.</span> <span class="nav-text">编写脚本文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级包制作"><span class="nav-number"></span> <span class="nav-text">升级包制作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#替换su文件"><span class="nav-number"></span> <span class="nav-text">替换su文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用su命令提取Root权限"><span class="nav-number"></span> <span class="nav-text">使用su命令提取Root权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在终端中执行su命令提取Root权限"><span class="nav-number"></span> <span class="nav-text">在终端中执行su命令提取Root权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在App中使用Root权限"><span class="nav-number"></span> <span class="nav-text">在App中使用Root权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令源代码解析"><span class="nav-number"></span> <span class="nav-text">su命令源代码解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number"></span> <span class="nav-text">后记</span></a></li></ol></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jory Liang</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.liangzr.tech/2016/03/15/root-primary/";
+    this.page.identifier = "2016/03/15/root-primary/";
+    this.page.title = 'Android Root原理学习（初级）';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://liangzr.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
