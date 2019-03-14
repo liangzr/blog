@@ -2,8 +2,9 @@
 title: 如何按原顺序打印出对象的属性？
 toc: true
 tags: 
-  - javascript
   - v8
+categories:
+  - javascript
 date: 2019-03-09 00:00:00
 ---
 

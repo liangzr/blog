@@ -1,6 +1,9 @@
 ---
 title: 简易shell script实现ssh登陆
 tags:
+  - ssh
+categories:
+  - linux
   - shell
 date: 2016-01-07 11:17:03
 ---

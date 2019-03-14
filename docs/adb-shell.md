@@ -1,6 +1,9 @@
 ---
 title: 一次折腾刷机的经历
 tags:
+  - adb
+  - rom
+categories:
   - android
 date: 2016-02-06 17:48:40
 ---

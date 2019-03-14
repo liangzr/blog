@@ -1,7 +1,6 @@
 ---
 title: Hello World 
-tags:
-  - fun
+categories:
   - writing
 date: 2016-08-21 00:45:11
 ---

@@ -1,6 +1,8 @@
 ---
 title: Android Root原理学习（初级）
-tags:
+tags: 
+  - root
+categories:
   - android
 date: 2016-03-15 11:05:04
 ---

@@ -1,7 +1,10 @@
 ---
 title: Android Studio 安装 ( Linux )
 tags:
+  - android studio
+categories:
   - android
+  - guide
 date: 2016-03-25 15:25:22
 ---
 

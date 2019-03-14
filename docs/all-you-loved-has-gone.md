@@ -1,7 +1,7 @@
 ---
 title: 你看得见吗
-tags:
-  - impression
+categories:
+  - writing
 date: 2016-07-30 09:29:11
 ---
 

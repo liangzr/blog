@@ -2,6 +2,8 @@
 title: 设计没那么简单
 tags:
   - design
+categories: 
+  - writing
 date: 2016-03-11 17:00:04
 ---
 

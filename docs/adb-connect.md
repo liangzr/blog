@@ -1,7 +1,9 @@
 ---
 title: 尝试ADB连接
 tags:
-  - android
+  - adb
+categories: 
+ -  android
 date: 2016-02-06 16:54:04
 ---
 

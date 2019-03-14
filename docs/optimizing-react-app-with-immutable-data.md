@@ -1,6 +1,11 @@
 ---
 title: 用 Immutable 数据来优化 React 应用
-tags: react
+tags: 
+  - immutable
+  - optimizing
+categories:
+  - javascript
+  - react
 date: 2018-05-29 00:00:00
 toc: true
 ---

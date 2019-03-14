@@ -3,7 +3,9 @@ title: 「译」Why Do We Write super(props)?
 toc: true
 tags: 
   - react
-  - reprinted
+categories:
+  - translated
+  - react
 date: 2018-11-30 00:00:00
 ---
 

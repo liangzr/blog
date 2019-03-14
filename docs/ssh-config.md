@@ -1,6 +1,9 @@
 ---
 title: SSH-Key 配置
 tags:
+  - ssh-key
+categories:
+  - linux
   - ssh
 date: 2016-08-20 10:45:11
 ---
