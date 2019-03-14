@@ -101,7 +101,7 @@
 
 
   <meta name="description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。 React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度">
-<meta name="keywords" content="react">
+<meta name="keywords" content="immutable,optimizing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 Immutable 数据来优化 React 应用">
 <meta property="og:url" content="https://blog.liangzr.tech/2018/05/29/optimizing-react-app-with-immutable-data/index.html">
@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1frt9x393n1j30gf054t94.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1frt9wmakpgj30fh05zmxp.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1frt9vy605zj30lz0ctq47.jpg">
-<meta property="og:updated_time" content="2019-03-09T11:24:17.357Z">
+<meta property="og:updated_time" content="2019-03-14T05:01:28.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用 Immutable 数据来优化 React 应用">
 <meta name="twitter:description" content="一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。 React 的更新机制我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度">
@@ -235,7 +235,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-technologies">
 
     
     
@@ -245,14 +245,14 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br>Technologies</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-categories">
+          <li class="menu-item menu-item-writings">
 
     
     
@@ -262,14 +262,14 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/writings/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Writings</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-translateds">
 
     
     
@@ -279,7 +279,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/translated/" rel="section"><i class="menu-item-icon fa fa-fw fa-language"></i> <br>Translateds</a>
 
   </li>
 
@@ -408,6 +408,29 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -465,20 +488,20 @@
 <p>那么问题又来了，<strong>SCU</strong> 是一定要实现的，但在每个组件中都手写 <strong>SCU</strong>，手动地比较复杂的对象中每个键的值，难度非同一般，那么如何轻松地让 <strong>SCU</strong> 返回你期待的结果？</p>
 <h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>虽然完全手写 <strong>SCU</strong> 不现实，但这里依然有一些组合方案可以助我们实现目标。</p>
 <h3 id="PureComponent"><a href="#PureComponent" class="headerlink" title="PureComponent"></a>PureComponent</h3><p>PureComponent 是 React 提供的另一个组件，它默认帮你实现了 <strong>SCU</strong> 方法，其实在它出现之前，它的前身是 React 的 addons 提供的 PureRenderMixin，它的源码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shallowEqual = <span class="built_in">require</span>(<span class="string">'fbjs/lib/shallowEqual'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  shouldComponentUpdate: <span class="function"><span class="keyword">function</span>(<span class="params">nextProps, nextState</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      !shallowEqual(<span class="keyword">this</span>.props, nextProps) ||</span><br><span class="line">      !shallowEqual(<span class="keyword">this</span>.state, nextState)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> shallowEqual = <span class="built_in">require</span>(<span class="string">'fbjs/lib/shallowEqual'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  shouldComponentUpdate: <span class="function"><span class="keyword">function</span>(<span class="params">nextProps, nextState</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      !shallowEqual(<span class="keyword">this</span>.props, nextProps) ||</span><br><span class="line">      !shallowEqual(<span class="keyword">this</span>.state, nextState)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p> 我们可以看到它帮我们实现了 <strong>SCU</strong> 方法，实现的机制是浅比较（Shallow Compare），也就是说，它只简单的比较了 <code>this.props</code> 和 <code>nextProps</code> 两个变量（以及他们的第一层子属性）引用的是否为同一个地址，如果是则返回 <strong>false</strong>，否则返回 <strong>true</strong>。</p>
 <blockquote>
 <p><code>shallowEqual</code> 的具体实现请查阅<a href="https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/shallowEqual.js" target="_blank" rel="noopener">源码</a></p>
 </blockquote>
 <p>同样的我们也来看下使用 PureComponent 时的具体实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkShouldComponentUpdate</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  ...</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> instance = workInProgress.stateNode;</span><br><span class="line">  <span class="keyword">const</span> ctor = workInProgress.type;</span><br><span class="line">  <span class="comment">// 用户自己实现</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> instance.shouldComponentUpdate === <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> shouldUpdate = instance.shouldComponentUpdate(</span><br><span class="line">      newProps,</span><br><span class="line">      newState,</span><br><span class="line">      newContext,</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> shouldUpdate;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (ctor.prototype &amp;&amp; ctor.prototype.isPureReactComponent) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkShouldComponentUpdate</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  ...</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> instance = workInProgress.stateNode;</span><br><span class="line">  <span class="keyword">const</span> ctor = workInProgress.type;</span><br><span class="line">  <span class="comment">// 用户自己实现</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> instance.shouldComponentUpdate === <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> shouldUpdate = instance.shouldComponentUpdate(</span><br><span class="line">      newProps,</span><br><span class="line">      newState,</span><br><span class="line">      newContext,</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> shouldUpdate;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (ctor.prototype &amp;&amp; ctor.prototype.isPureReactComponent) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看到，如果用户不定义 <strong>SCU</strong> 方法，并且当前组件为 PureComponent 时，最终依然会对新旧 Props 和 State 进行一个浅比较。</p>
 <p>虽然 PureComponent 帮我们实现了 <strong>SCU</strong> 方法，但这并不意味着我们已经达到目标了，别忘了它只是实现了浅比较，在 JavaScript 中，Primitive 数据能直接的用 <code>=</code> 号简单的浅比较，而 Object 数据仅仅表示两个变量引用的堆地址相同，但这块儿内存中的数据有没有改动过，就无从得知了，看个简单的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">oldState = &#123; <span class="attr">expand</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">oldState.expand = <span class="literal">false</span>;</span><br><span class="line">newState = oldState;</span><br><span class="line"></span><br><span class="line">shallowEqual(newState, oldState) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">oldState = &#123; <span class="attr">expand</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">oldState.expand = <span class="literal">false</span>;</span><br><span class="line">newState = oldState;</span><br><span class="line"></span><br><span class="line">shallowEqual(newState, oldState) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>  如上我们更新了 state 的 expand 的值，但 PureComponent 在比较时会认为 state 并没有更新返回 <strong>SCU</strong> 返回 <code>false</code>，这样我们的组件就得不到正确的更新了。</p>
 <h3 id="深拷贝就行了，是这样吗"><a href="#深拷贝就行了，是这样吗" class="headerlink" title="深拷贝就行了，是这样吗"></a>深拷贝就行了，是这样吗</h3><p>可能比较有经验的童鞋会说，只要用深拷贝就行了，那我们来看下几种常见的深拷贝实现</p>
 <h4 id="JSON-之-stringify-parse"><a href="#JSON-之-stringify-parse" class="headerlink" title="JSON 之 stringify + parse"></a>JSON 之 stringify + parse</h4><p>这个原理比较简单，序列化之后，对象变成了一个字符串，<code>JSON.parse</code> 会从字符串重新生成对象，很明显这已经不是之前那个对象了，实现了完全的深拷贝。但是别忘了，JSON 只有 6 种基本数据类型，这样转换很显然不少对象会出现问题，比如 Function 对象，Date 对象等等，都无法正常转换。可见这种方案的适用场景也是比较少的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="literal">false</span>,</span><br><span class="line">  c: <span class="string">'react'</span>,</span><br><span class="line">  d: <span class="literal">null</span>,</span><br><span class="line">  e: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  f: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Forget me!'</span>) &#125;,</span><br><span class="line">  g: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">  h: <span class="regexp">/forget me/g</span>,</span><br><span class="line">  i: [<span class="number">1</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()],</span><br><span class="line">  j: <span class="built_in">Symbol</span>(<span class="string">'Forget me'</span>),</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(<span class="built_in">JSON</span>.parse(o)));</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="literal">false</span>,</span><br><span class="line">  c: <span class="string">'react'</span>,</span><br><span class="line">  d: <span class="literal">null</span>,</span><br><span class="line">  e: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  f: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Forget me!'</span>) &#125;,</span><br><span class="line">  g: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">  h: <span class="regexp">/forget me/g</span>,</span><br><span class="line">  i: [<span class="number">1</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()],</span><br><span class="line">  j: <span class="built_in">Symbol</span>(<span class="string">'Forget me'</span>),</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(<span class="built_in">JSON</span>.parse(o)));</span><br></pre></td></tr></table></figure>
 <p>Output:</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1frt9x393n1j30gf054t94.jpg" alt></p>
 <h4 id="lodash-cloneDeep"><a href="#lodash-cloneDeep" class="headerlink" title="lodash.cloneDeep"></a>lodash.cloneDeep</h4><p>相较于用 JSON 粗暴的转换，lodash 的处理更为细致，Primitive 数据直接返回，Object 数据则逐一处理。</p>
@@ -490,9 +513,9 @@
 <h4 id="ImmutableJS"><a href="#ImmutableJS" class="headerlink" title="ImmutableJS"></a>ImmutableJS</h4><p>Facebook 推荐使用 ImmutableJS 来优化 React 应用，但使用它的同时也意味需要重新学习大量的 API</p>
 <h4 id="Immutability-helper"><a href="#Immutability-helper" class="headerlink" title="Immutability-helper"></a>Immutability-helper</h4><p>Immutability-helper 原来是 React 的 addons 里面的 update 模块，独立出来后又新增了拓展模块，它提供了一种语法糖，你可以直接描述需要修改的对象，并且用预置命令对这部分进行修改，最后返回一个修改后的对象，以此来模拟 Immutable 数据的行为</p>
 <p>extend 的行为与 Object.assign 一致：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> newData = extend(myData, &#123;</span><br><span class="line">  x: extend(myData.x, &#123;</span><br><span class="line">    y: extend(myData.x.y, &#123;<span class="attr">z</span>: <span class="number">7</span>&#125;),</span><br><span class="line">  &#125;),</span><br><span class="line">  a: extend(myData.a, &#123;<span class="attr">b</span>: myData.a.b.concat(<span class="number">9</span>)&#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> newData = extend(myData, &#123;</span><br><span class="line">  x: extend(myData.x, &#123;</span><br><span class="line">    y: extend(myData.x.y, &#123;<span class="attr">z</span>: <span class="number">7</span>&#125;),</span><br><span class="line">  &#125;),</span><br><span class="line">  a: extend(myData.a, &#123;<span class="attr">b</span>: myData.a.b.concat(<span class="number">9</span>)&#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>使用 immutability-helper:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> update <span class="keyword">from</span> <span class="string">'immutability-helper'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> newData = update(myData, &#123;</span><br><span class="line">  x: &#123;<span class="attr">y</span>: &#123;<span class="attr">z</span>: &#123;<span class="attr">$set</span>: <span class="number">7</span>&#125;&#125;&#125;,</span><br><span class="line">  a: &#123;<span class="attr">b</span>: &#123;<span class="attr">$push</span>: [<span class="number">9</span>]&#125;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> update <span class="keyword">from</span> <span class="string">'immutability-helper'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> newData = update(myData, &#123;</span><br><span class="line">  x: &#123;<span class="attr">y</span>: &#123;<span class="attr">z</span>: &#123;<span class="attr">$set</span>: <span class="number">7</span>&#125;&#125;&#125;,</span><br><span class="line">  a: &#123;<span class="attr">b</span>: &#123;<span class="attr">$push</span>: [<span class="number">9</span>]&#125;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>可以看到通过这个库提供的语法糖，我们可以更快速清晰便捷的修改对象，而不用一层一层地用 Object.assign 之类的包起来。这种方式相较于 ImmutableJS 比较没有侵入性，性能也不比 Immutable 差多少（有待测试），没有学习成本，比较<strong>推荐</strong>！</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>其实说到这里，本篇基本已经结束了，在 PureComponent 和 Immutable Data 的搭配使用下，<strong>SCU</strong> 能很大程度提高 React 应用的性能，不过这也只是从组件更新的角度来优化 React，实际上我们能做的事还有很多。</p>
 <h2 id="问题与建议"><a href="#问题与建议" class="headerlink" title="问题与建议"></a>问题与建议</h2><p>上文只是作者本人在 React 优化中的实践，翻阅网上的资料与源码总结而出的一篇分享，如有谬误欢迎指正！</p>
@@ -519,12 +542,38 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2018/05/29/optimizing-react-app-with-immutable-data/" title="用 Immutable 数据来优化 React 应用">https://blog.liangzr.tech/2018/05/29/optimizing-react-app-with-immutable-data/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/react/" rel="tag"># react</a>
+            <a href="/tags/immutable/" rel="tag"># immutable</a>
+          
+            <a href="/tags/optimizing/" rel="tag"># optimizing</a>
           
         </div>
       
@@ -625,7 +674,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
@@ -633,6 +682,43 @@
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
               
 
               
@@ -733,23 +819,13 @@
           
 
           
-             <div class="cc-license motion-element" itemprop="license">
-              
-              
-                
-              
-              
-              
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-             </div>
-          
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
-                Recommendation
+                Recommendations
               </div>
               <ul class="links-of-blogroll-list">
                 

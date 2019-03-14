@@ -100,20 +100,20 @@
 
 
 
-  <meta name="description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： 12345678const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c">
-<meta name="keywords" content="javascript,v8">
+  <meta name="description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &amp;#125;">
+<meta name="keywords" content="v8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何按原顺序打印出对象的属性？">
 <meta property="og:url" content="https://blog.liangzr.tech/2019/03/09/how-to-print-properties-of-the-object-by-originally/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
-<meta property="og:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： 12345678const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c">
+<meta property="og:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &amp;#125;">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg">
 <meta property="og:image" content="https://v8.dev/_img/fast-properties/jsobject.png">
-<meta property="og:updated_time" content="2019-03-13T18:53:30.545Z">
+<meta property="og:updated_time" content="2019-03-14T05:00:51.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何按原顺序打印出对象的属性？">
-<meta name="twitter:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： 12345678const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c">
+<meta name="twitter:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &amp;#125;">
 <meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg">
 
 
@@ -231,7 +231,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-technologies">
 
     
     
@@ -241,14 +241,14 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br>Technologies</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-categories">
+          <li class="menu-item menu-item-writings">
 
     
     
@@ -258,14 +258,14 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/writings/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Writings</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-translateds">
 
     
     
@@ -275,7 +275,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/translated/" rel="section"><i class="menu-item-icon fa fa-fw fa-language"></i> <br>Translateds</a>
 
   </li>
 
@@ -404,6 +404,22 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -438,11 +454,11 @@
 </blockquote>
 <p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
 <p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
 <p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
 <a id="more"></a>
 <p>假如你从接口中获取一段 JSON 数据如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"100"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"2"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"7"</span>: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"100"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"2"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"7"</span>: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面个数据可能是经过后端排序的，并且数据中并没有带有可供排序的信息，毫无疑问经过 JS 的重新排序后，它的排序信息就丢失了，假如我就是不想丢失呢？</p>
 <p>欲知其然，先知其所以然。在了解它如果遍历属性之前，首先我们需要知道的是，在 V8 中对象是如何存储属性的呢？</p>
 <h2 id="V8-中对象的属性"><a href="#V8-中对象的属性" class="headerlink" title="V8 中对象的属性"></a>V8 中对象的属性</h2><p>在 JavaScript 中，大部分时候对象的行为类似一个字典，它以字符串做为键名，以任意对象作为值。虽然在迭代的时候，规范约定了以不同的方式处理整数索引属性和其他属性。</p>
@@ -476,9 +492,9 @@
 </blockquote>
 <p>我们来简单描述下上述过程就是：首先创建一个名为 <code>keys</code> 的空数组，然后先遍历对象中的数组索引的属性，结果以升序排列，并逐个放入 <code>keys</code> 中；再遍历字符串属性（但不是数组索引），以属性创建时间升序排列，并逐个放入 <code>keys</code> 中去；然后再遍历 Symbol 类型的属性名，同样以属性创建时间升序排列，放入 <code>keys</code> 中，最后返回 <code>keys</code> 数组。</p>
 <p>下来我们来验证一下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  b: <span class="number">1</span>,</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  c: <span class="number">3</span>,</span><br><span class="line">  <span class="number">7</span>: <span class="number">4</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="number">10</span>: <span class="number">6</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>(<span class="string">'a'</span>)]: <span class="number">7</span></span><br><span class="line">&#125;</span><br><span class="line">a.d = <span class="number">8</span></span><br><span class="line">a[<span class="built_in">Symbol</span>(<span class="string">'b'</span>)] = <span class="number">9</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(a)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  b: <span class="number">1</span>,</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  c: <span class="number">3</span>,</span><br><span class="line">  <span class="number">7</span>: <span class="number">4</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="number">10</span>: <span class="number">6</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>(<span class="string">'a'</span>)]: <span class="number">7</span></span><br><span class="line">&#125;</span><br><span class="line">a.d = <span class="number">8</span></span><br><span class="line">a[<span class="built_in">Symbol</span>(<span class="string">'b'</span>)] = <span class="number">9</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(a)</span><br></pre></td></tr></table></figure>
 <p>output(devtools):</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">9</span>) [<span class="string">"1"</span>, <span class="string">"7"</span>, <span class="string">"10"</span>, <span class="string">"b"</span>, <span class="string">"a"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="built_in">Symbol</span>(a), <span class="built_in">Symbol</span>(b)]</span><br><span class="line">  <span class="number">0</span>: <span class="string">"1"</span></span><br><span class="line">  <span class="number">1</span>: <span class="string">"7"</span></span><br><span class="line">  <span class="number">2</span>: <span class="string">"10"</span></span><br><span class="line">  <span class="number">3</span>: <span class="string">"b"</span></span><br><span class="line">  <span class="number">4</span>: <span class="string">"a"</span></span><br><span class="line">  <span class="number">5</span>: <span class="string">"c"</span></span><br><span class="line">  <span class="number">6</span>: <span class="string">"d"</span></span><br><span class="line">  <span class="number">7</span>: <span class="built_in">Symbol</span>(a)</span><br><span class="line">  <span class="number">8</span>: <span class="built_in">Symbol</span>(b)</span><br><span class="line">  length: <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="number">9</span>) [<span class="string">"1"</span>, <span class="string">"7"</span>, <span class="string">"10"</span>, <span class="string">"b"</span>, <span class="string">"a"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="built_in">Symbol</span>(a), <span class="built_in">Symbol</span>(b)]</span><br><span class="line">  <span class="number">0</span>: <span class="string">"1"</span></span><br><span class="line">  <span class="number">1</span>: <span class="string">"7"</span></span><br><span class="line">  <span class="number">2</span>: <span class="string">"10"</span></span><br><span class="line">  <span class="number">3</span>: <span class="string">"b"</span></span><br><span class="line">  <span class="number">4</span>: <span class="string">"a"</span></span><br><span class="line">  <span class="number">5</span>: <span class="string">"c"</span></span><br><span class="line">  <span class="number">6</span>: <span class="string">"d"</span></span><br><span class="line">  <span class="number">7</span>: <span class="built_in">Symbol</span>(a)</span><br><span class="line">  <span class="number">8</span>: <span class="built_in">Symbol</span>(b)</span><br><span class="line">  length: <span class="number">9</span></span><br></pre></td></tr></table></figure>
 <p>Chrome 的实现与规范的约定完全一致😕，所以至此我们知道它为什么打印出来是升序的了。</p>
 <p>另外引用 Chromium 社区上 <a href="https://bugs.chromium.org/p/v8/issues/detail?id=164" target="_blank" rel="noopener">Issue 164: Wrong order in Object properties interation</a> 的讨论所述：</p>
 <blockquote>
@@ -491,16 +507,16 @@
 <p>综上所讲，这样的内部实现，有性能的因素，也有历史原因。</p>
 <h2 id="有没有办法按原顺序打印？"><a href="#有没有办法按原顺序打印？" class="headerlink" title="有没有办法按原顺序打印？"></a>有没有办法按原顺序打印？</h2><p>讲了那么多，我就是想按原顺序打印怎么办？</p>
 <p>首先如果目标结构已经是 JavaScript 对象，应该是没有办法了。我们回到最终的问题，如果我们有一串 JSON 数组，想把它按原序获得键值，可以怎么做？假如我们有串数据：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:<span class="string">"foo"</span>,<span class="attr">"2"</span>:<span class="string">"bar"</span>,<span class="attr">"7"</span>:<span class="string">"baz"</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:<span class="string">"foo"</span>,<span class="attr">"2"</span>:<span class="string">"bar"</span>,<span class="attr">"7"</span>:<span class="string">"baz"</span>&#125;</span><br></pre></td></tr></table></figure>
 <p>首先能想到的一个简单的方法就是，自己写一个简单的 json-parser。</p>
 <p>下面是一个简单的实现：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jsonString = <span class="string">'&#123;"100":"foo","2":"bar","7":"baz"&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> parseKeys = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> out = []</span><br><span class="line">  <span class="keyword">const</span> tokens = str.slice(<span class="number">1</span>, <span class="number">-1</span>).split(<span class="string">','</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tokens.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    out.push(tokens[i].split(<span class="string">':'</span>)[<span class="number">0</span>].slice(<span class="number">1</span>, <span class="number">-1</span>))  </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> out</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try</span></span><br><span class="line"><span class="built_in">console</span>.log(parseKeys(jsonString))  <span class="comment">// ✅ ["100", "2", "7"]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> jsonString = <span class="string">'&#123;"100":"foo","2":"bar","7":"baz"&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> parseKeys = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> out = []</span><br><span class="line">  <span class="keyword">const</span> tokens = str.slice(<span class="number">1</span>, <span class="number">-1</span>).split(<span class="string">','</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tokens.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    out.push(tokens[i].split(<span class="string">':'</span>)[<span class="number">0</span>].slice(<span class="number">1</span>, <span class="number">-1</span>))  </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> out</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try</span></span><br><span class="line"><span class="built_in">console</span>.log(parseKeys(jsonString))  <span class="comment">// ✅ ["100", "2", "7"]</span></span><br></pre></td></tr></table></figure>
 <p>看起来我们得到了想要的结果（yeah），但是如果 json 数组稍微复杂点儿呢？</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:&#123;<span class="attr">"b"</span>:<span class="string">"foo"</span>&#125;,<span class="attr">"2"</span>:[<span class="number">1</span>,<span class="number">2</span>],<span class="attr">"7"</span>:<span class="number">200</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:&#123;<span class="attr">"b"</span>:<span class="string">"foo"</span>&#125;,<span class="attr">"2"</span>:[<span class="number">1</span>,<span class="number">2</span>],<span class="attr">"7"</span>:<span class="number">200</span>&#125;</span><br></pre></td></tr></table></figure>
 <p>我们再来重构下这个解析器：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parseKeys = <span class="function">(<span class="params">str, lvl = <span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> out = []</span><br><span class="line">  <span class="keyword">let</span> level = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> matching = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">let</span> pair = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.charAt(i) === <span class="string">'"'</span> &amp;&amp; level === lvl) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!matching) &#123;</span><br><span class="line">        pair[<span class="number">0</span>] = i </span><br><span class="line">      &#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">        pair[<span class="number">1</span>] = i</span><br><span class="line">        out.push([...pair])</span><br><span class="line">      &#125;</span><br><span class="line">      matching = ~matching</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#123;'</span>, <span class="string">'['</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level += <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#125;'</span>, <span class="string">']'</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level -= <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> out.map(<span class="function"><span class="params">pair</span> =&gt;</span> str.slice(pair[<span class="number">0</span>], pair[<span class="number">1</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> parseKeys = <span class="function">(<span class="params">str, lvl = <span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> out = []</span><br><span class="line">  <span class="keyword">let</span> level = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> matching = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">let</span> pair = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.charAt(i) === <span class="string">'"'</span> &amp;&amp; level === lvl) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!matching) &#123;</span><br><span class="line">        pair[<span class="number">0</span>] = i </span><br><span class="line">      &#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">        pair[<span class="number">1</span>] = i</span><br><span class="line">        out.push([...pair])</span><br><span class="line">      &#125;</span><br><span class="line">      matching = ~matching</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#123;'</span>, <span class="string">'['</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level += <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#125;'</span>, <span class="string">']'</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level -= <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> out.map(<span class="function"><span class="params">pair</span> =&gt;</span> str.slice(pair[<span class="number">0</span>], pair[<span class="number">1</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output(devtools):</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"100"</span>, <span class="string">"2"</span>, <span class="string">"7"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[<span class="string">"100"</span>, <span class="string">"2"</span>, <span class="string">"7"</span>]</span><br></pre></td></tr></table></figure>
 <p>上面这个方法执行效率并不高，只是提出一种思路，当然我们的目标还是解析出 key，而不是完整的引入一个 json 解释器，那样可能得不偿失。</p>
 <p>更高效的解决方法，我们之后再补充…</p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL; DR;"></a>TL; DR;</h2><p>V8 在内部将命名属性和数组索引属性分开存储，并且数组和其它对象的内部实现和迭代机制是完全一致的。</p>
@@ -530,12 +546,34 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2019/03/09/how-to-print-properties-of-the-object-by-originally/" title="如何按原顺序打印出对象的属性？">https://blog.liangzr.tech/2019/03/09/how-to-print-properties-of-the-object-by-originally/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
           
             <a href="/tags/v8/" rel="tag"># v8</a>
           
@@ -634,7 +672,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
@@ -642,6 +680,43 @@
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
               
 
               
@@ -742,23 +817,13 @@
           
 
           
-             <div class="cc-license motion-element" itemprop="license">
-              
-              
-                
-              
-              
-              
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-             </div>
-          
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
-                Recommendation
+                Recommendations
               </div>
               <ul class="links-of-blogroll-list">
                 

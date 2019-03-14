@@ -101,14 +101,14 @@
 
 
   <meta name="description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
-<meta name="keywords" content="shell">
+<meta name="keywords" content="ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简易shell script实现ssh登陆">
 <meta property="og:url" content="https://blog.liangzr.tech/2016/01/07/easy-shell-script-ssh-login/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
 <meta property="og:description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T06:00:18.400Z">
+<meta property="og:updated_time" content="2019-03-14T04:59:19.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简易shell script实现ssh登陆">
 <meta name="twitter:description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
@@ -228,7 +228,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-technologies">
 
     
     
@@ -238,14 +238,14 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br>Technologies</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-categories">
+          <li class="menu-item menu-item-writings">
 
     
     
@@ -255,14 +255,14 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/writings/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Writings</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-translateds">
 
     
     
@@ -272,7 +272,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/translated/" rel="section"><i class="menu-item-icon fa fa-fw fa-language"></i> <br>Translateds</a>
 
   </li>
 
@@ -401,6 +401,29 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -447,15 +470,15 @@
 <li>interact：允许用户交互</li>
 </ul>
 <p>实现如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line">spawn ssh user@remotehost</span><br><span class="line">expect <span class="string">"*password:"</span></span><br><span class="line">send <span class="string">"userpwd\r"</span></span><br><span class="line">expect <span class="string">"*#"</span></span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line">spawn ssh user@remotehost</span><br><span class="line">expect <span class="string">"*password:"</span></span><br><span class="line">send <span class="string">"userpwd\r"</span></span><br><span class="line">expect <span class="string">"*#"</span></span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
 <p>添加执行权限</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x ssh-script.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo chmod +x ssh-script.sh</span><br></pre></td></tr></table></figure>
 <p>运行以上ssh-script.sh就可以登陆了，也可以把用户命令放入<code>～/bin</code>，在Linux的很多发行版本中默认PATH都加入了这个目录，在Ubuntu上只要在用户根目录下建立了bin文件夹，下次登陆时会自动添加进PATH，如果要手动修改则打开.bashrc文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vi ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>文件末添加</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH = ~/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH = ~/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
 <p>生效改动</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>这样在teminal里输入ssh-script.sh就能一键登陆VPS了，如果嫌后缀麻烦，可以……删掉好了：P</p>
 <p>未完</p>
 
@@ -476,12 +499,36 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2016/01/07/easy-shell-script-ssh-login/" title="简易shell script实现ssh登陆">https://blog.liangzr.tech/2016/01/07/easy-shell-script-ssh-login/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/shell/" rel="tag"># shell</a>
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
           
         </div>
       
@@ -582,7 +629,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
@@ -590,6 +637,43 @@
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
               
 
               
@@ -690,23 +774,13 @@
           
 
           
-             <div class="cc-license motion-element" itemprop="license">
-              
-              
-                
-              
-              
-              
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-             </div>
-          
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
-                Recommendation
+                Recommendations
               </div>
               <ul class="links-of-blogroll-list">
                 

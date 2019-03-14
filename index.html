@@ -224,7 +224,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-technologies menu-item-active">
 
     
     
@@ -234,14 +234,14 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br>Technologies</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-categories">
+          <li class="menu-item menu-item-writings">
 
     
     
@@ -251,14 +251,14 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/writings/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Writings</a>
 
   </li>
         
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-translateds">
 
     
     
@@ -268,7 +268,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/translated/" rel="section"><i class="menu-item-icon fa fa-fw fa-language"></i> <br>Translateds</a>
 
   </li>
 
@@ -399,6 +399,22 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -434,7 +450,7 @@
 </blockquote>
 <p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
 <p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
 <p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
           <!--noindex-->
           
@@ -548,6 +564,22 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -695,6 +727,29 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/reprinted/" itemprop="url" rel="index"><span itemprop="name">reprinted</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/reprinted/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -731,9 +786,9 @@
 <p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
 <hr>
 <p>我写过不计其数的 <code>super(props)</code> :</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
           <!--noindex-->
           
@@ -847,6 +902,29 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1003,6 +1081,22 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1148,6 +1242,29 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/ssh/" itemprop="url" rel="index"><span itemprop="name">ssh</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1295,6 +1412,22 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1444,6 +1577,22 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1592,6 +1741,29 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/guide/" itemprop="url" rel="index"><span itemprop="name">guide</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1747,6 +1919,22 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1874,7 +2062,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
@@ -1882,6 +2070,43 @@
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
               
 
               
@@ -1982,23 +2207,13 @@
           
 
           
-             <div class="cc-license motion-element" itemprop="license">
-              
-              
-                
-              
-              
-              
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-             </div>
-          
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
-                Recommendation
+                Recommendations
               </div>
               <ul class="links-of-blogroll-list">
                 
