@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>JS 的类型</title>
+      <link href="/2019/03/30/js-type/"/>
+      <url>/2019/03/30/js-type/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><h2 id="判断类型"><a href="#判断类型" class="headerlink" title="判断类型"></a>判断类型</h2><h2 id="判断相等"><a href="#判断相等" class="headerlink" title="判断相等"></a>判断相等</h2><h3 id="判断对象相等"><a href="#判断对象相等" class="headerlink" title="判断对象相等"></a>判断对象相等</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> JavaScript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> type </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>如何按原顺序打印出对象的属性？</title>
       <link href="/2019/03/09/how-to-print-properties-of-the-object-by-originally/"/>
       <url>/2019/03/09/how-to-print-properties-of-the-object-by-originally/</url>
