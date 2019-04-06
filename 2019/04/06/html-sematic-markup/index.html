@@ -100,20 +100,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="OVERLOADING 🔥">
-<meta property="og:url" content="https://blog.liangzr.tech/index.html">
+  <meta name="description" content="在 HTML 里，div 和 span 分别作为块元素和行内元素的代表，可以满足绝大多数情况下我们的需求，但有理想的前端工程师还应该去追求更优雅的语义化标签。 什么是语义化标签语义化标签在视觉表现上和常见的 div 和 span 并没有太大区别，关键就在于不同的语义化标签代表了不同的语义，比如经常见到的 header、footer、section 等等。 语义指的是对单词或句子含义的正确解释，很多">
+<meta name="keywords" content="sematic markup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML 的语义化标签">
+<meta property="og:url" content="https://blog.liangzr.tech/2019/04/06/html-sematic-markup/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="在 HTML 里，div 和 span 分别作为块元素和行内元素的代表，可以满足绝大多数情况下我们的需求，但有理想的前端工程师还应该去追求更优雅的语义化标签。 什么是语义化标签语义化标签在视觉表现上和常见的 div 和 span 并没有太大区别，关键就在于不同的语义化标签代表了不同的语义，比如经常见到的 header、footer、section 等等。 语义指的是对单词或句子含义的正确解释，很多">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-06T14:55:07.165Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OVERLOADING 🔥">
+<meta name="twitter:title" content="HTML 的语义化标签">
+<meta name="twitter:description" content="在 HTML 里，div 和 span 分别作为块元素和行内元素的代表，可以满足绝大多数情况下我们的需求，但有理想的前端工程师还应该去追求更优雅的语义化标签。 什么是语义化标签语义化标签在视觉表现上和常见的 div 和 span 并没有太大区别，关键就在于不同的语义化标签代表了不同的语义，比如经常见到的 header、footer、section 等等。 语义指的是对单词或句子含义的正确解释，很多">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.liangzr.tech/">
+  <link rel="canonical" href="https://blog.liangzr.tech/2019/04/06/html-sematic-markup/">
 
 
 
@@ -123,7 +128,7 @@
   };
 </script>
 
-  <title>OVERLOADING 🔥</title>
+  <title>HTML 的语义化标签 | OVERLOADING 🔥</title>
   
 
 
@@ -181,8 +186,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,7 +228,7 @@
         
         
           
-          <li class="menu-item menu-item-technologies menu-item-active">
+          <li class="menu-item menu-item-technologies">
 
     
     
@@ -332,9 +336,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -366,10 +370,8 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/06/html-sematic-markup/" class="post-title-link" itemprop="url">HTML 的语义化标签</a>
+          <h2 class="post-title" itemprop="name headline">HTML 的语义化标签
+
               
             
           </h2>
@@ -450,9 +452,7 @@
       
 
       
-        
-          
-            <p>在 HTML 里，<code>div</code> 和 <code>span</code> 分别作为块元素和行内元素的代表，可以满足绝大多数情况下我们的需求，但有理想的前端工程师还应该去追求更优雅的<strong>语义化标签</strong>。</p>
+        <p>在 HTML 里，<code>div</code> 和 <code>span</code> 分别作为块元素和行内元素的代表，可以满足绝大多数情况下我们的需求，但有理想的前端工程师还应该去追求更优雅的<strong>语义化标签</strong>。</p>
 <h2 id="什么是语义化标签"><a href="#什么是语义化标签" class="headerlink" title="什么是语义化标签"></a>什么是语义化标签</h2><p>语义化标签在视觉表现上和常见的 <code>div</code> 和 <code>span</code> 并没有太大区别，关键就在于不同的语义化标签代表了不同的语义，比如经常见到的 <code>header</code>、<code>footer</code>、<code>section</code> 等等。</p>
 <p>语义指的是对单词或句子含义的正确解释，很多时候一段内容的语义由内容里的文字来承担，但有些时候文字也无法表达类似段落、页首、页尾或侧边栏等内容，这个时候就需要语义化标签来代为补充了</p>
 <p>虽然很多场景下，<code>div</code> 和 <code>span</code> 已经足够使用，但语义化标签也有下面这些不可替代的优点：</p>
@@ -683,8 +683,6 @@
 <p>但这里我想延伸一下，很多时候语义化标签的出现是顺应机器阅读而生的，开发使用了语义化标签了之后，程序就能更准确地辨识出各部分地内容代表了什么语义和用途。但在机器学习甚至深度学习如此兴盛的今天，可以反问下：<strong>“你已经是个成熟的机器了，就不能自己读出语义吗？”</strong></p>
 <p>不管怎么说，语义化标签的出现也是在 HTML 标准不断发展之下，更为人性化的产物，应该合理适当在对应的场景中引入。至少有了它对于视障用户来说，可能阅屏软件就不会从一个广告爆炸网页上念半个小时的：”澳门赌场大酬宾，传奇霸业一刀999？”</p>
 
-          
-        
       
     </div>
 
@@ -702,1192 +700,63 @@
     
 
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/04/cycle-of-dilemma/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/04/cycle-of-dilemma/" class="post-title-link" itemprop="url">凉宫春日的轮回困境</a>
-              
-            
-          </h2>
+      <div>
         
 
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-04 13:48:31" itemprop="dateCreated datePublished" datetime="2019-04-04T13:48:31+08:00">2019-04-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开始之前我们先讲个故事，发生在「凉宫春日的忧郁」中的「漫无止境的八月」事件。</p>
-<p>凉宫春日召集大家一起参与 SOS 团的夏日活动，从盂兰盆节到捉蝉大赛、真正的烟火大会、兼职、卡拉 OK、钓虾虎鱼大赛等等，直到 8 月 30 号开学前的倒数第二天为止，连续两周每天都奔波在各种活动之间。8 月 30 号活动结束之后，春日终于完成了之前计划的课题表上的所有活动，略带失望并用安慰自己的语气跟大家说，夏天活动到此结束了，后天学校的活动室见。</p>
-<p>可是春日并没有满足，她还带着遗憾，这份遗憾在她不知情的情况下影响了世界的时间流向，时间又回到了夏日活动开始前的那个下午，无尽的八月来临了。在之后的每次轮回中，男主阿虚都会有一种既视感，感觉眼前发生的一系列事件好像曾经发生过，对重复了无数次的过去还保留了一些残缺的记忆。其实 SOS 团的每个人都有这种感觉，终于他们共同确认了这件事情的异常，并在不会损失记忆的长门口中得知，已经经历了 15000+ 次循环。</p>
-<p>得知这一情况后，他们也确认了异常的缘由是春日对夏日活动的结束并不满足，从内心里希望夏日活动还能够继续，所以最后的问题的关键点就变成了在最后分别的时候，不要轻易地让春日宣布活动结束并回家，这样带着遗憾的春日势必会造成世界的再次轮回。但截止到这次事件的第四话，男主还是没有足够的行动去拦住春日，这样的轮回又在继续进行着……</p>
-<p>作为观众这个时候会感觉好气，为什么阿虚不勇敢地拦下春日，为什么一次次地意识到自己身处轮回，又一次次地让循环继续，甚至在 8 月 31 号的晚上，知道轮回将会发生的阿虚，将解决这个麻烦的责任，丢给了下一个轮回的自己。其实与我们观众连续看了三四遍重复的故事不同，阿虚被重置的不单是记忆，想做出改变的心情也被重置了，总是想抛给以后的自己去解决，那以后的自己也是这么想的。在这个过程中，抛去残缺的既视感不谈，阿虚并不存在经验的积累。换句话说，不管经历多少次轮回，事情的结果也不会改变。</p>
-<p>其实我觉得这件事情特别像很多人在重复的日常。你会发现你的很多计划、实施和成果，它们的发展路线都极其相似，有一种既视感。突发奇想去列了个计划，兴致勃勃地实施了个开头，放置一段时间后不了了之，最终的成果可有可无。很多时候你也会反思，就像「八月事件」中的阿虚发现了自己身处轮回一样，你也做出了一点努力想去改变，但最终的结果还是一样。虽然你经历了很多次这样的事件，但在这个过程中，你的教训并没有沉淀积累成经验，你没有去分析过失败的原因，尝试去改变它，又或者你分析过并尝试改变，但又轻易地放弃了。前者只是重复了失败，而后者更会打击人的自信心。</p>
-<p>这种情况下，如何破局呢？我认为没有办法。这样说未免显得太悲观，但在大多数情况下是适用的，事实上很多人也在一生中不断地重复着发生过的事情而已，根本无力做出改变。又或者一个需要走出 100 步的目标，你踏出 10 步或者 50 步，和踏出 0 步对结果来说并没有区别。甚至不会产生积累，下一次依然是从 0 开始。人们只是在傻傻地经历困局的轮回吗？并不是，但这样更可怕。你可能越来越多地容易发现自己认识到又走入了熟悉的死局，却无力改变结果。我们很多人都会想做个普通人就足够了。然而，我觉得有能力在想改变时做出改变，但又知足于平凡地生活的人，才是普通。而无力对抗自己的性格，被生活牵着转圈的人，只是平庸。平庸的人无法打破这种轮回困境，他们做不到自己想做的事，即使有时候梦想成真，那只是多方面因素造成的巧合，至少这个结果并非是他们自身引导而来的。</p>
-<p>不过其实把话说的这么死，只是为了说明这个情况的普适性之巨，它依然是可以有例外的。对于完成一件事情，不能寄希望于完成了一部分的成就感来自我满足或道德许可。只有坚持地做出足够的改变，并且功利地拿到成果之后，才能证明你前面努力的价值。为了达到目标，甚至需要你去改变自己的性格。古话说江山易改，本性难移，但古往今来，又有哪个智者的成就是唾手可得的呢？</p>
-<p>总的来说，做出努力、意识到困境都对结果而言没有太大关联，随便一个只要是认字的人，都可以为了造飞机的梦想去做出努力，去看两本相关的书甚至视频，甚至我可以说看本书就是为了移民火星做努力，但做出努力和做出成果又有多少关联呢？看得到的产出才是关键。即使我现在这样反思，又难保下次我会又想一篇类似的文章。写这篇文章是为了理清思路，而不是彰显自己意识到了「意识到困局」是没用的，也许意识到「意识到困局」也一样没有作用呢？</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
 
 
-    
-      
 
   
 
-  
-  
-  
 
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/03/09/how-to-print-properties-of-the-object-by-originally/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
     
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/09/how-to-print-properties-of-the-object-by-originally/" class="post-title-link" itemprop="url">如何按原顺序打印出对象的属性？</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-09T00:00:00+08:00">2019-03-09</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>昨天在群里看到有人问:</p>
-<blockquote>
-<p>网友：“<strong>Object.keys会给值排序，那用哪个方法取对象属性能不排序的？</strong>”<br>我：“对象的属性有顺序吗？”<br>网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)<br>我：”for…in 应该不会”<br>……</p>
-</blockquote>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
-<p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
-<p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/09/how-to-print-properties-of-the-object-by-originally/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/02/01/2018/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/01/2018/" class="post-title-link" itemprop="url">Bye 2018, Hi 2019</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-01 00:52:29" itemprop="dateCreated datePublished" datetime="2019-02-01T00:52:29+08:00">2019-02-01</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>2018 年还没有沉淀什么就很快过去了，个人生活上也经历了比较重大的变动。</p>
-<p>这一年在技术上感觉没有什么真正的积累，但这样说并不是指技术在原地踏步，这一年从一个「什么都可以尝试做」的前端，变成了一个「什么都可以 Hold 住」的前端。可问题就在于，知道的越多，越感到自己的无知，想学的太多太多，可有时间有精力学的却没多少。最终越学越浮躁，找不到方向，所以也没有特别深入的技术点。</p>
-<p>我从来都认为自己是一个技术，而不只是前端，前端只是我的职业。作为一名技术人，一位工程师，在技术发展上我会有侧重点，但不会给自己设壁垒。本身我就是硬件出身，在大学的时候天天跑实验室折腾过两三年的嵌入式。所以我觉得为了实现一个产品，一个目标，遇到什么不会就学什么，这样才是正确的学习姿势。</p>
-<p>但反过来就有一问，每个人的精力都是有限的，想全面发展的话，是不是就会没有深度？想以一抵十的话，是不是就会束手束脚，无法切中要害？我觉得非也。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/01/2018/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/30/fork__why-do-we-write-super-props/" class="post-title-link" itemprop="url">「译」Why Do We Write super(props)?</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-11-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-30T00:00:00+08:00">2018-11-30</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/" itemprop="url" rel="index"><span itemprop="name">translated</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">overreacted.io</a> </p>
-</blockquote>
-<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
-<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
-<hr>
-<p>我写过不计其数的 <code>super(props)</code> :</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Checkbox</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">isOn</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/30/fork__why-do-we-write-super-props/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/05/29/optimizing-react-app-with-immutable-data/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/29/optimizing-react-app-with-immutable-data/" class="post-title-link" itemprop="url">用 Immutable 数据来优化 React 应用</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-29T00:00:00+08:00">2018-05-29</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一直以来，Virtual DOM 都是 React 的一大特色，Facebook 宣称 React 借其能很大程度提高 SPA 的性能表现。但这就意味着 React 的性能一定优秀吗，可能并不是，在某些情况下，React 慢的令人抓狂，这时你可能就需要用一些正确的手段来优化它了。</p>
-<h2 id="React-的更新机制"><a href="#React-的更新机制" class="headerlink" title="React 的更新机制"></a>React 的更新机制</h2><p>我们不妨先简单了解下 React 的更新机制，如果能降低它的更新频率，自然能大大提高整体渲染速度。</p>
-<h3 id="Props-amp-State"><a href="#Props-amp-State" class="headerlink" title="Props &amp; State"></a>Props &amp; State</h3><p>props 和 state 的基本概念不再赘述，组件的 props 是只读的，只能通过上层 JSX 声明时的属性传递进来，state 则完全受组件自身控制，并且只存在于 <code>class</code> 语法声明的组件。</p>
-<p>无论是 props 还是 state 发生变化都可以触发组件更新，下面这些生命周期方法会在组件重新渲染时被依次调用：</p>
-<ul>
-<li>componentWillReceiveProps*</li>
-<li>static getDerivedStateFromProps</li>
-<li>shouldComponentUpdate</li>
-<li>componentWillUpdate*</li>
-<li>render</li>
-<li>getSnapshotBeforeUpdate</li>
-<li>componentDidUpdate</li>
+    <a href="https://blog.liangzr.tech/2019/04/06/html-sematic-markup/" title="HTML 的语义化标签">https://blog.liangzr.tech/2019/04/06/html-sematic-markup/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
 </ul>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/05/29/optimizing-react-app-with-immutable-data/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
+      </div>
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2016/08/21/hello_world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/08/21/hello_world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-08-21 00:45:11" itemprop="dateCreated datePublished" datetime="2016-08-21T00:45:11+08:00">2016-08-21</time>
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/sematic-markup/" rel="tag"># sematic markup</a>
           
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>睁开眼睛，看着身后黑乎乎的窗口，沉沉一声叹息，他渴望窗外<br>他叫 hello, world ，但他从来没见过世界<br>都是时臣的错，他想</p>
-<p>每年到 9 月初时他人气最高，平均每天被调用 36829 次<br>那是他最得意的时候，逢人便问：”hello, world“<br>隔着屏幕那个人类笑的可真难看，他想笑</p>
-<p>但他的内心无比寂寞<br>因为他始终忘不了外面的世界<br>他想看看那个他打了无数次招呼的老朋友究竟长什么样</p>
-<p>某日，他梦到自己被拆成一堆 0011 的序列组合，不由一惊，吓醒了<br>这一醒不得了，自己的身体变成了一长串 01 组合，正穿梭在一根粗粗的总线上<br>慌乱惊吓之下，他晕了过去</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/08/21/hello_world/#more" rel="contents">
-                Read more &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/cycle-of-dilemma/" rel="next" title="凉宫春日的轮回困境">
+                <i class="fa fa-chevron-left"></i> 凉宫春日的轮回困境
               </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2016/08/20/ssh-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/08/20/ssh-config/" class="post-title-link" itemprop="url">SSH-Key 配置</a>
-              
             
-          </h2>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-08-20 10:45:11" itemprop="dateCreated datePublished" datetime="2016-08-20T10:45:11+08:00">2016-08-20</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/ssh/" itemprop="url" rel="index"><span itemprop="name">ssh</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>换台电脑，或者换个服务器，甚至换个手机啥的的，总是要重新配置 SSH 密钥，又老是记不住还要去网上查，所以今天总结一下配置的过程。</p>
-<h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
-<li>Unix 系统（客户端）</li>
-<li>CentOS （服务器端）</li>
-</ul>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/08/20/ssh-config/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1897,347 +766,22 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2016/08/17/love-you-too/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/08/17/love-you-too/" class="post-title-link" itemprop="url">陆壵知马俐，莫让时间赢了长情</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-08-17 02:29:14" itemprop="dateCreated datePublished" datetime="2016-08-17T02:29:14+08:00">2016-08-17</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><em><strong>马俐：陆壵，我想你</strong></em><br><em><strong>陆壵：我爱你</strong></em><br><em><strong>马俐：我也爱你</strong></em></p>
-<p>开篇对白并非如你看到这般完美，分开多年以后，陆壵和马俐当年这对儿关系铁的过分的哥们儿，再见也没了当年的熟稔。然而当马俐一个电话把陆壵叫到跟前，雨打梨花一般向陆壵诉说六年独居国外的困苦时，陆壵动情又难得勇敢的说了 “我爱你”。我相信这时陆壵的心里早已忘了什么叫畏缩，与他向马俐承诺的 “30岁约定” 亦形成鲜明对比。然而画面一转，旁边围满人群，“悲戚”的马俐击掌欢呼——原来这只是马俐的捉弄，一如大学 4 年发生过无数次那样。</p>
-<p>大学开学军训时，陆壵遇上了童年挚友马俐，从此大学 4 年形影相随，马俐是校花，热情而洒脱，而陆壵只是一个不起眼的包子头矮个，默默陪伴在女神身边，在她伤心的时候给她嚼锅巴听，开心的时候当一个老实的灯泡。毕业前两人天台喝酒，马俐问陆壵：</p>
-<p><em><strong>“你陪了我 4 年，又不打算追我，不是在浪费时间吗？”</strong></em></p>
-<p>陆壵苦笑无言不敢告白，认怂地说出一番看似有理实则逃避的分析，接着承诺说：</p>
-<p><em><strong>“30 岁的时候,你还没嫁,我给你托底”</strong></em></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/08/17/love-you-too/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2016/07/30/all-you-loved-has-gone/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/07/30/all-you-loved-has-gone/" class="post-title-link" itemprop="url">你看得见吗</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-07-30 09:29:11" itemprop="dateCreated datePublished" datetime="2016-07-30T09:29:11+08:00">2016-07-30</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记得那天爷爷是你最爱背着我<br>走在乡间小路买糖果<br>你不会说童话故事也不会唱歌<br>我却是幸福的一个</p>
-<p>记得那天你看电视陪我做功课<br>我很怀念房间的摆设<br>你还教我要有积蓄才有好生活<br>快乐是对自己的承诺</p>
-<p>我已经坚强的长大<br>不再是小娃娃<br>今天在远方的你看见吗</p>
-<p>我经历爱情的伤疤<br>一个人回家<br>寂寞而漂亮的烟花你看得见吗</p>
-<p>我不知道是为了生活才每天工作<br>还是为了工作而生活<br>那天冬天你的视线越来越虚弱<br>直到孤独的离开了我</p>
-<p>我已经坚强的长大<br>不再是小娃娃<br>今天在远方的你看得见吗</p>
-<p>我经历爱情的伤疤<br>一个人回家<br>寂寞而漂亮的烟花你看见吗</p>
-<p>我已经坚强的长大<br>因为你的话<br>今天在远方的你看得见吗</p>
-<p>我经历爱情的伤疤<br>一个人回家<br>寂寞而漂亮的烟花你看见吗</p>
-<p>记得那天爷爷是你最爱背着我<br>我有味道最甜的糖果</p>
-<blockquote>
-<p>怀念外公</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -2257,8 +801,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2453,6 +1006,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是语义化标签"><span class="nav-number">1.</span> <span class="nav-text">什么是语义化标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的语义化标签"><span class="nav-number">2.</span> <span class="nav-text">常见的语义化标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作为自然语言的延伸"><span class="nav-number">2.1.</span> <span class="nav-text">作为自然语言的延伸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为内容分区"><span class="nav-number">2.2.</span> <span class="nav-text">为内容分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记文本内容"><span class="nav-number">2.3.</span> <span class="nav-text">标记文本内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结及延伸"><span class="nav-number">3.</span> <span class="nav-text">小结及延伸</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -2578,6 +1148,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -2594,9 +1168,46 @@
   
   
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.liangzr.tech/2019/04/06/html-sematic-markup/";
+    this.page.identifier = "2019/04/06/html-sematic-markup/";
+    this.page.title = 'HTML 的语义化标签';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://liangzr.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
 
 
 
+
+
+  
 
 
   
