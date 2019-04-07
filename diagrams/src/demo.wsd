@@ -1,0 +1,8 @@
+@startuml built-in
+class Object {
+  + string toString()
+}
+class Array {
+  + number slice()
+}
+@enduml

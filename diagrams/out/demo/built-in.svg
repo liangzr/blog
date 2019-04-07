@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="79px" preserveAspectRatio="none" style="width:276px;height:79px;" version="1.1" viewBox="0 0 276 79" width="276px" zoomAndPan="magnify"><defs><filter height="300%" id="f3xjogj567gwk" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--class Object--><rect fill="#FEFECE" filter="url(#f3xjogj567gwk)" height="60.8047" id="Object" style="stroke: #A80036; stroke-width: 1.5;" width="116" x="6" y="8"/><ellipse cx="40.8" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M43.7688,29.6406 Q43.1906,29.9375 42.55,30.0859 Q41.9094,30.2344 41.2063,30.2344 Q38.7063,30.2344 37.3859,28.5859 Q36.0656,26.9375 36.0656,23.8125 Q36.0656,20.6875 37.3859,19.0313 Q38.7063,17.375 41.2063,17.375 Q41.9094,17.375 42.5578,17.5313 Q43.2063,17.6875 43.7688,17.9844 L43.7688,20.7031 Q43.1438,20.125 42.55,19.8516 Q41.9563,19.5781 41.3313,19.5781 Q39.9875,19.5781 39.3,20.6484 Q38.6125,21.7188 38.6125,23.8125 Q38.6125,25.9063 39.3,26.9766 Q39.9875,28.0469 41.3313,28.0469 Q41.9563,28.0469 42.55,27.7734 Q43.1438,27.5 43.7688,26.9219 L43.7688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="40" x="59.2" y="28.1543">Object</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="121" y1="40" y2="40"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="121" y1="48" y2="48"/><ellipse cx="17" cy="59.9023" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="26" y="62.2104">string toString()</text><!--class Array--><rect fill="#FEFECE" filter="url(#f3xjogj567gwk)" height="60.8047" id="Array" style="stroke: #A80036; stroke-width: 1.5;" width="108" x="157" y="8"/><ellipse cx="191.8" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M194.7688,29.6406 Q194.1906,29.9375 193.55,30.0859 Q192.9094,30.2344 192.2063,30.2344 Q189.7063,30.2344 188.3859,28.5859 Q187.0656,26.9375 187.0656,23.8125 Q187.0656,20.6875 188.3859,19.0313 Q189.7063,17.375 192.2063,17.375 Q192.9094,17.375 193.5578,17.5313 Q194.2063,17.6875 194.7688,17.9844 L194.7688,20.7031 Q194.1438,20.125 193.55,19.8516 Q192.9563,19.5781 192.3313,19.5781 Q190.9875,19.5781 190.3,20.6484 Q189.6125,21.7188 189.6125,23.8125 Q189.6125,25.9063 190.3,26.9766 Q190.9875,28.0469 192.3313,28.0469 Q192.9563,28.0469 193.55,27.7734 Q194.1438,27.5 194.7688,26.9219 L194.7688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="32" x="210.2" y="28.1543">Array</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="158" x2="264" y1="40" y2="40"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="158" x2="264" y1="48" y2="48"/><ellipse cx="168" cy="59.9023" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="177" y="62.2104">number slice()</text><!--
+@startuml
+class Object {
+  + string toString()
+}
+class Array {
+  + number slice()
+}
+@enduml
+
+PlantUML version 1.2019.04(Fri Mar 29 15:44:36 UTC 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 1.8.0_212-8u212-b01-1~deb9u1-b01
+Operating System: Linux
+OS Version: 3.10.0-514.21.1.el7.x86_64
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

@@ -1,0 +1,5 @@
+{
+  "plantuml.includeSearch": "DiagramsRoot",
+  "plantuml.diagramsRoot": "diagrams/src",
+  "plantuml.exportOutDir": "diagrams/out"
+}
