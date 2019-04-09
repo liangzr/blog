@@ -517,11 +517,21 @@ code {
   border-radius: 3px;
   font-size: 14px;
 }
+strong::after {
+  content: '🌶';
+  top: -1em;
+  font-size: 50%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
 pre {
   padding: 10px;
+  border-radius: 5px;
 }
 pre code {
   padding: 0;
+  font-size: 0.8em !important;
   color: #c5c8c6;
   background: none;
   text-shadow: none;
@@ -1280,6 +1290,12 @@ pre .javascript .function {
   .posts-expand {
     margin: 0 20px;
   }
+  .post-body pre {
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    padding: 0;
+    padding-left: 20px !important;
+  }
   .post-body pre .gutter pre {
     padding-right: 10px;
   }
@@ -1878,7 +1894,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #554b29;
+  background: #11bf7f;
 }
 .links-of-blogroll {
   font-size: 13px;
