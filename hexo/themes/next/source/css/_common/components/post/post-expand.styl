@@ -1,0 +1,91 @@
+// TODO: Refactor.
+
+.posts-expand {
+  padding-top: 40px;
+}
+
+@media (max-width: 767px) {
+  
+  .posts-expand {
+    margin: 0 20px;
+  }
+
+  .post-body {
+    pre {
+      .gutter pre {
+        padding-right: 10px;
+      }
+    }
+
+    .highlight {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding: 0;
+      padding-left: 20px;
+      border-radius: 0
+      .gutter pre {
+        padding-right: 10px;
+      }
+      .code pre {
+        padding-left: 0
+      }
+    }
+  }
+}
+
+.posts-expand .post-body {
+  +desktop() {
+    text-align: justify;
+  }
+
+  h2, h3, h4, h5, h6 {
+    padding-top: 10px;
+
+    .header-anchor {
+      float: right;
+      margin-left: 10px;
+      color: $grey-light;
+      border-bottom-style: none;
+      visibility: hidden;
+
+      &:hover {
+        color: inherit;
+      }
+    }
+
+    &:hover .header-anchor {
+      visibility: visible;
+    }
+  }
+  h2>a:before, h3>a:before, h4>a:before, h5>a:before, h6>a:before {
+    content: "#";
+    color: #42b983;
+    position: absolute;
+    left: -0.7em;
+    margin-top: -0.05em;
+    padding-right: 0.5em;
+    font-size: 1em;
+    font-weight: 400;
+  }
+  
+  h2 {
+    padding-top: 3em !important;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.7em;
+    font-weight: bold;
+    font-size: 1.7em;
+  }
+
+  ul > li {
+    list-style: circle;
+  }
+
+  img {
+    box-sizing: border-box;
+    margin: 0 auto 25px;
+    padding: 3px;
+    border: 1px solid $gray-lighter;
+  }
+}
