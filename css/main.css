@@ -512,18 +512,10 @@ code {
   overflow-wrap: break-word;
   word-wrap: break-word;
   padding: 2px 4px;
-  color: #555;
+  color: #d20d00;
   background: #eee;
   border-radius: 3px;
   font-size: 14px;
-}
-strong::after {
-  content: '🌶';
-  top: -1em;
-  font-size: 50%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
 }
 pre {
   padding: 10px;
@@ -1319,6 +1311,14 @@ pre .javascript .function {
     text-align: justify;
   }
 }
+.posts-expand .post-body p a::after {
+  content: '🌀';
+  top: -0.8em;
+  font-size: 70%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
 .posts-expand .post-body h2,
 .posts-expand .post-body h3,
 .posts-expand .post-body h4,
@@ -1366,13 +1366,13 @@ pre .javascript .function {
   font-weight: 400;
 }
 .posts-expand .post-body h2 {
-  padding-top: 3em !important;
+  padding-top: 2em !important;
   text-decoration: none;
   outline: none;
   border-bottom: 1px solid #ddd;
   padding-bottom: 0.7em;
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 1.4em;
 }
 .posts-expand .post-body ul > li {
   list-style: circle;
@@ -1895,7 +1895,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #74a420;
+  background: #ff8b41;
 }
 .links-of-blogroll {
   font-size: 13px;
