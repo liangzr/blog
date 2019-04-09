@@ -1295,6 +1295,7 @@ pre .javascript .function {
     margin-right: -20px !important;
     padding: 0;
     padding-left: 20px !important;
+    border-radius: unset;
   }
   .post-body pre .gutter pre {
     padding-right: 10px;
@@ -1894,7 +1895,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #11bf7f;
+  background: #59a20e;
 }
 .links-of-blogroll {
   font-size: 13px;
