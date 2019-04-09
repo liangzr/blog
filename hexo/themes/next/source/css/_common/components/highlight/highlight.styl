@@ -25,12 +25,22 @@ code {
   font-size: $code-font-size;
 }
 
+strong::after {
+  content: '🌶';
+  top: -1em;
+  font-size: 50%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
 pre {
   @extend $code-block;
   padding: 10px;
   border-radius: 5px;
   code {
     padding: 0;
+    font-size: 0.8em !important;
     color: $highlight-foreground;
     background: none;
     text-shadow: none;
