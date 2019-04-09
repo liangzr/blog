@@ -60,3 +60,5 @@
   #}{{ theme.footer.custom_text }}{#
 #}</div>
 {% endif %}
+
+{% include '../_custom/footer.swig' %}
