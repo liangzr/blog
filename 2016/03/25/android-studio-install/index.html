@@ -100,6 +100,9 @@
 
 
 
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
   <meta name="description" content="本文撰写时的系统环境： 系统：Ubuntu 15.10 JDK版本：1.8.0_65（64位） Android Studio 版本：2.0 开发机：Nexus 6 - 6.0.1  JDK（Java Development Kit）安装JDK or JRE ？首先要说清一点，JDK 是 Java 工具包，包含了很多编译所要用到的命令工具和运行环境（JRE - Java Runtime Enviro">
 <meta name="keywords" content="android studio">
 <meta property="og:type" content="article">
@@ -478,23 +481,29 @@
 <a id="more"></a>
 <h3 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><p>JDK安装成功后，如果不在环境变量中声明 Java 工具包的地址，仍无法从命令行直接调用 Java 命令，如果是 OpenJDK 可跳过这一步。</p>
 <h4 id="1-更改当前用户环境变量"><a href="#1-更改当前用户环境变量" class="headerlink" title="1, 更改当前用户环境变量"></a>1, 更改当前用户环境变量</h4><p>首先确保当前用户非 Root 用户，因为我们一般在调用它的时候是以非 Root 用户，如果需要对 Root 用户也添加 JDK 的支持，切换到 Root 用户重复步骤即可。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~ &amp;&amp; vi .bashrc</span><br></pre></td></tr></table></figure>
-<p>在用户配置文件中的最后面添加 Java 的配置，按键盘 <code>i</code> 切换到输入模式。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_65</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>复制上面的代码并 <code>CTRL + SHIFT + V</code> 粘贴在 <code>.bashrc</code> 文件的末尾，<code>ESC</code> 退出编辑模式并输入 <code>:wq</code> 保存文件。</p>
+<pre><code>cd ~ &amp;&amp; vi .bashrc
+</code></pre><p>在用户配置文件中的最后面添加 Java 的配置，按键盘 <code>i</code> 切换到输入模式。</p>
+<pre><code>export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_65
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+</code></pre><p>复制上面的代码并 <code>CTRL + SHIFT + V</code> 粘贴在 <code>.bashrc</code> 文件的末尾，<code>ESC</code> 退出编辑模式并输入 <code>:wq</code> 保存文件。</p>
 <h4 id="2-生效配置"><a href="#2-生效配置" class="headerlink" title="2, 生效配置"></a>2, 生效配置</h4><p>只是更改了用户配置文件，系统并不知道它的变化，重启或者手动更新以让系统识别到。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<h4 id="3-检查是否添加成功"><a href="#3-检查是否添加成功" class="headerlink" title="3, 检查是否添加成功"></a>3, 检查是否添加成功</h4><p>打开 Teminal 输入 <code>java -version</code> 如果显示如下，则表示环境变量配置成功，否则重新试一下或者 Google it！。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java version &quot;1.8.0_65&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_65-b17)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.65-b01, mixed mode)</span><br></pre></td></tr></table></figure>
-<h2 id="Android-Studio-安装"><a href="#Android-Studio-安装" class="headerlink" title="Android Studio 安装"></a>Android Studio 安装</h2><p>Android Studio 是编写 Android 应用的最佳 IDE (Integrated Drive Electronics - 集成开发环境)，和臃肿的 Eclipse 甚至简陋的文本编辑器说再见吧！</p>
+<pre><code>source ~/.bashrc
+</code></pre><h4 id="3-检查是否添加成功"><a href="#3-检查是否添加成功" class="headerlink" title="3, 检查是否添加成功"></a>3, 检查是否添加成功</h4><p>打开 Teminal 输入 <code>java -version</code> 如果显示如下，则表示环境变量配置成功，否则重新试一下或者 Google it！。</p>
+<pre><code>java version &quot;1.8.0_65&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_65-b17)
+Java HotSpot(TM) 64-Bit Server VM (build 25.65-b01, mixed mode)
+</code></pre><h2 id="Android-Studio-安装"><a href="#Android-Studio-安装" class="headerlink" title="Android Studio 安装"></a>Android Studio 安装</h2><p>Android Studio 是编写 Android 应用的最佳 IDE (Integrated Drive Electronics - 集成开发环境)，和臃肿的 Eclipse 甚至简陋的文本编辑器说再见吧！</p>
 <h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
 <li><a href="http://developer.android.com/intl/zh-cn/sdk/index.html" target="_blank" rel="noopener">Google 官方下载</a></li>
 <li><a href="http://www.androiddevtools.cn/" target="_blank" rel="noopener">AndroidDevTools</a></li>
 </ul>
 <p>前者就不用介绍了，因为一些你懂的原因，我们访问不到，推荐大家到第二个地址下载 Android Studio，除了 SDK 这个站点还有许多你想都想不到的工具，简直无所不有。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>下载下来后，把压缩包解压到用户目录你放软件的地方，打开 Teminal，切换到 Android Studio 目录下的 <code>bin</code> 文件夹，给 <code>studio.sh</code> 添加可执行权限，并且执行它。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo chmod +x studio.sh</span><br><span class="line">./studio.sh</span><br></pre></td></tr></table></figure>
-<p>第一次执行这个文件，脚本会自动检测你是否安装过 Android Studio ，如果没有就会进行初始化安装。</p>
+<pre><code>sudo chmod +x studio.sh
+./studio.sh
+</code></pre><p>第一次执行这个文件，脚本会自动检测你是否安装过 Android Studio ，如果没有就会进行初始化安装。</p>
 <p>在安装过程中，可能需要你设置代理，或者提示你无法下载 SDK platform tool 的报错，这还是因为在国内 <code>dl.google.com</code> 被墙的原因，最简单直接的办法是用论坛里的 “<a href="http://www.studyjamscn.com/thread-172-1-1.html" target="_blank" rel="noopener">黑科技</a>”，这里不再重复。</p>
 <h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><h4 id="没有桌面图标"><a href="#没有桌面图标" class="headerlink" title="没有桌面图标"></a>没有桌面图标</h4><p>在 Android Studio 的欢迎界面，最下面的配置，可以生成图标，选择为所有用户生成</p>
 <p><img src="http://7xq464.com1.z0.glb.clouddn.com/icon.png" alt></p>
@@ -909,6 +918,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 

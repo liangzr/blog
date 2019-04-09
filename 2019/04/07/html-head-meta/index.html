@@ -100,6 +100,9 @@
 
 
 
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
   <meta name="description" content="一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead">
 <meta name="keywords" content="head meta">
 <meta property="og:type" content="article">
@@ -111,7 +114,7 @@
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1g1u47z6xjwj30w407gq5c.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1g1u48pgncgj30y006eac4.jpg">
-<meta property="og:updated_time" content="2019-04-07T08:11:18.588Z">
+<meta property="og:updated_time" content="2019-04-09T00:54:07.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML 的元信息标签">
 <meta name="twitter:description" content="一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead">
@@ -479,7 +482,23 @@
 <p>如果有多个 base 标签被指定，只有第一个出现的 href 和 target 会生效</p>
 </blockquote>
 <p>例如有下面一个页面结构:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">base</span> <span class="attr">href</span>=<span class="string">"http://baidu.com"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"/favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/favicon.ico"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/favicon.ico"</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;title&gt;test&lt;/title&gt;
+  &lt;base href=&quot;http://baidu.com&quot; target=&quot;_blank&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a href=&quot;/favicon.ico&quot;&gt;
+    &lt;img src=&quot;/favicon.ico&quot;&gt; 
+  &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <p><img style="max-width: 500px; " src="https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg"></p>
 <p>可以看到，网站的图标和 img 标签内的图片，都变成了百度的图标，a 链接复制出来也是 <code>http://baidu.com/favicon.ico</code></p>
 <p>🛑<strong>在实际使用中，并不建议使用 base 标签，它改变了全局相对链接的地址，容易在跟 JavaScript 配合时出现问题</strong></p>
@@ -530,7 +549,8 @@
 </tbody>
 </table>
 <h3 id="charset-属性"><a href="#charset-属性" class="headerlink" title="charset 属性"></a>charset 属性</h3><p>从 HTML5 开始，为了简化写法 meta 新增了 charset 属性，可以指定 HTML 文档的编码格式，<strong>建议将其放在整个 head 标签内的第一位</strong>。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-html">&lt;meta charset=&quot;UTF-8&quot;&gt;
+</code></pre>
 <p>一般情况下，http 服务端会通过 http 头来指定正确的编码方式，但是有些特殊的情况如使用 file 协议打开一个 HTML 文件，则没有 http 头，这种时候，charset meta 就非常重要了。</p>
 <h3 id="http-equiv-属性"><a href="#http-equiv-属性" class="headerlink" title="http-equiv 属性"></a>http-equiv 属性</h3><p>http-equiv 属性用来指定一个编译命令。之所以叫 http-equiv，是因为所有允许的值，都是特定的 HTTP 头的名字</p>
 <ul>
@@ -567,18 +587,35 @@
 </ul>
 <h2 id="应用场景示例"><a href="#应用场景示例" class="headerlink" title="应用场景示例"></a>应用场景示例</h2><h3 id="移动端设备缩放"><a href="#移动端设备缩放" class="headerlink" title="移动端设备缩放"></a>移动端设备缩放</h3><p>浏览器的 viewport 是可以看到Web内容的窗口区域，通常与渲染出的页面的大小不同，这种情况下，浏览器会提供滚动条以滚动访问所有内容。Apple 在 Safari iOS 中引入了“viewport meta 标签”，让Web开发人员控制视口的大小和比例。</p>
 <p>移动端常用 viewport 写法示例：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;&gt;
+</code></pre>
 <h3 id="SEO-优化"><a href="#SEO-优化" class="headerlink" title="SEO 优化"></a>SEO 优化</h3><p>SEO（Search Engine Optimization）:汉译为搜索引擎优化。搜索引擎优化是一种利用搜索引擎的搜索规则来提高目前网站在有关搜索引擎内的自然排名的方式。</p>
 <h4 id="keywords-和-description"><a href="#keywords-和-description" class="headerlink" title="keywords 和 description"></a>keywords 和 description</h4><p>keywords 和 decription 是最常见的两个 meta 标签，用来标识一个页面的基本信息与关键字，方便搜索引擎来检索，可以提高被搜索引擎收录的效果。</p>
 <p><a href="https://www.ithome.com" target="_blank" rel="noopener">IT 之家</a> 页面的 meta:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"IT之家，青岛软媒旗下，IT科技门户网站。快速精选IT新闻，实时报道科技周边，关注苹果iOS、谷歌Android、微软Windows Phone，紧盯iPhone/iPad、安卓智能设备、WP手机等数码潮流。技术资讯、攻略教程、资源下载 - IT人的生活，尽在IT之家，爱IT，爱这里。"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"IT新闻,互联网,Internet,数码,科技,科普,通信,智能手机,IT之家,ithome,软媒"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-html">&lt;meta name=&quot;description&quot; content=&quot;IT之家，青岛软媒旗下，IT科技门户网站。快速精选IT新闻，实时报道科技周边，关注苹果iOS、谷歌Android、微软Windows Phone，紧盯iPhone/iPad、安卓智能设备、WP手机等数码潮流。技术资讯、攻略教程、资源下载 - IT人的生活，尽在IT之家，爱IT，爱这里。&quot; /&gt;
+&lt;meta name=&quot;keywords&quot; content=&quot;IT新闻,互联网,Internet,数码,科技,科普,通信,智能手机,IT之家,ithome,软媒&quot; /&gt;
+</code></pre>
 <p>百度搜索 IT 之家：</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1g1u47z6xjwj30w407gq5c.jpg" alt></p>
 <p>Google 搜索 IT 之家：</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1g1u48pgncgj30y006eac4.jpg" alt></p>
 <p>可以看到搜索引擎对网站的描述信息都来自 meta 里的 description。（🐷百度还把中文逗号转换成了英文逗号）</p>
 <h4 id="社交媒体优化"><a href="#社交媒体优化" class="headerlink" title="社交媒体优化"></a>社交媒体优化</h4><p>我们先来看下 hexo 为这篇文章生成的 meta 信息</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"head meta"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:type"</span> <span class="attr">content</span>=<span class="string">"article"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:title"</span> <span class="attr">content</span>=<span class="string">"HTML 的元信息标签"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:url"</span> <span class="attr">content</span>=<span class="string">"https://blog.liangzr.tech/2019/04/07/html-head-meta/index.html"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:site_name"</span> <span class="attr">content</span>=<span class="string">"OVERLOADING 🔥"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:description"</span> <span class="attr">content</span>=<span class="string">"一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:locale"</span> <span class="attr">content</span>=<span class="string">"default"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:image"</span> <span class="attr">content</span>=<span class="string">"https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:updated_time"</span> <span class="attr">content</span>=<span class="string">"2019-04-07T07:15:56.797Z"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"twitter:card"</span> <span class="attr">content</span>=<span class="string">"summary"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"twitter:title"</span> <span class="attr">content</span>=<span class="string">"HTML 的元信息标签"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"twitter:description"</span> <span class="attr">content</span>=<span class="string">"一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"twitter:image"</span> <span class="attr">content</span>=<span class="string">"https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-html">&lt;meta name=&quot;description&quot; content=&quot;一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead&quot;&gt;
+&lt;meta name=&quot;keywords&quot; content=&quot;head meta&quot;&gt;
+&lt;meta property=&quot;og:type&quot; content=&quot;article&quot;&gt;
+&lt;meta property=&quot;og:title&quot; content=&quot;HTML 的元信息标签&quot;&gt;
+&lt;meta property=&quot;og:url&quot; content=&quot;https://blog.liangzr.tech/2019/04/07/html-head-meta/index.html&quot;&gt;
+&lt;meta property=&quot;og:site_name&quot; content=&quot;OVERLOADING 🔥&quot;&gt;
+&lt;meta property=&quot;og:description&quot; content=&quot;一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead&quot;&gt;
+&lt;meta property=&quot;og:locale&quot; content=&quot;default&quot;&gt;
+&lt;meta property=&quot;og:image&quot; content=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg&quot;&gt;
+&lt;meta property=&quot;og:updated_time&quot; content=&quot;2019-04-07T07:15:56.797Z&quot;&gt;
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary&quot;&gt;
+&lt;meta name=&quot;twitter:title&quot; content=&quot;HTML 的元信息标签&quot;&gt;
+&lt;meta name=&quot;twitter:description&quot; content=&quot;一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead&quot;&gt;
+&lt;meta name=&quot;twitter:image&quot; content=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg&quot;&gt;
+</code></pre>
 <p>可以看到有两种标签我们没有见过，分别是 <code>name=&quot;twitter:x&quot;</code> 和 <code>property=&quot;og:x&quot;</code>，下面就分别看下这两个是什么用途</p>
 <p>(<a href="ogp.me">Open Graph协议</a>是由 Facebook 推出的，使任何网页都成为社交图中的丰富对象。例如，这在Facebook上用于允许任何网页具有与Facebook上的任何其他对象相同的功能。</p>
 <p>可以理解为，当你分享一个网页到 Facebook 中时，即使它不是 Facebook 自己的网页，也可以有足够的信息像展示预览 Facebook 自己的网页具有更丰富的信息。</p>
@@ -978,6 +1015,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 

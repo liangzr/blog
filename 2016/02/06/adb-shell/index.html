@@ -100,6 +100,9 @@
 
 
 
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
   <meta name="description" content="这两天在折腾华为荣耀3C，型号是H30-T00/1G RAM，芯片是MediaTek6582，ROOT之后先是刷了个TWRP（Team Win Recovery Project）的recovery，之后又刷过CM12.1、MIUI7等第三方ROM，这些ROM大多基于华为官方的B268/Android4.4修改。哦这里话说回来，手机是我爸的:P .于是在强权逼迫下，我不得不寻找把它刷回去的办法（非官">
 <meta name="keywords" content="adb,rom">
 <meta property="og:type" content="article">
@@ -449,20 +452,58 @@
 <a id="more"></a>
 <h2 id="前言有点儿长，正篇开始。"><a href="#前言有点儿长，正篇开始。" class="headerlink" title="前言有点儿长，正篇开始。"></a>前言有点儿长，正篇开始。</h2><p>首先用SPflash工具把TWRP的Recovery又重新刷了进去，在里面擦除分区时发现，data分区和cust分区（华为自己的分区）都无法挂载，使用Recovery自己的工具把data分区重新格式化，正常挂载了，但是cust还是不行。</p>
 <p>查看当前已有的分区</p>
-<figure class="highlight console"><table><tr><td class="code"><pre><span class="line">~ # cat /proc/partitions </span><br><span class="line">major minor  #blocks  name</span><br><span class="line"></span><br><span class="line"> 179        0    3830784 mmcblk0</span><br><span class="line"> 179        1          1 mmcblk0p1</span><br><span class="line"> 179        2      10240 mmcblk0p2</span><br><span class="line"> 179        3      10240 mmcblk0p3</span><br><span class="line"> 179        4       6144 mmcblk0p4</span><br><span class="line"> 179        5    1048576 mmcblk0p5</span><br><span class="line"> 179        6     196608 mmcblk0p6</span><br><span class="line"> 179        7     129024 mmcblk0p7</span><br><span class="line"> 179        8    2375168 mmcblk0p8</span><br><span class="line"> 179       64       2048 mmcblk0boot1</span><br><span class="line"> 179       32       2048 mmcblk0boot0</span><br><span class="line"> 179       96    3872768 mmcblk1</span><br><span class="line"> 179       97    3870720 mmcblk1p1</span><br></pre></td></tr></table></figure>
+<pre><code class="language-console">~ # cat /proc/partitions 
+major minor  #blocks  name
+
+ 179        0    3830784 mmcblk0
+ 179        1          1 mmcblk0p1
+ 179        2      10240 mmcblk0p2
+ 179        3      10240 mmcblk0p3
+ 179        4       6144 mmcblk0p4
+ 179        5    1048576 mmcblk0p5
+ 179        6     196608 mmcblk0p6
+ 179        7     129024 mmcblk0p7
+ 179        8    2375168 mmcblk0p8
+ 179       64       2048 mmcblk0boot1
+ 179       32       2048 mmcblk0boot0
+ 179       96    3872768 mmcblk1
+ 179       97    3870720 mmcblk1p1
+</code></pre>
 <p>这里能看到，共有两个disk，分别是mmcblk0和mmcblk1，其中前者被分为10个小分区。后者就是SD card</p>
 <p>查看系统挂载的分区</p>
-<figure class="highlight console"><table><tr><td class="code"><pre><span class="line">~ # df -am</span><br><span class="line">Filesystem           1M-blocks      Used Available Use% Mounted on</span><br><span class="line">tmpfs                      483         0       483   0% /dev</span><br><span class="line">devpts                       0         0         0   0% /dev/pts</span><br><span class="line">proc                         0         0         0   0% /proc</span><br><span class="line">sysfs                        0         0         0   0% /sys</span><br><span class="line">/dev/block/mmcblk0p8      2287      1157      1130  51% /data</span><br><span class="line">/dev/block/mmcblk0p8      2287      1157      1130  51% /sdcard</span><br><span class="line">/dev/block/mmcblk0p7       124         4       120   3% /cache</span><br><span class="line">/dev/block/mmcblk1p1      3772      2751      1021  73% /external_sd</span><br></pre></td></tr></table></figure>
+<pre><code class="language-console">~ # df -am
+Filesystem           1M-blocks      Used Available Use% Mounted on
+tmpfs                      483         0       483   0% /dev
+devpts                       0         0         0   0% /dev/pts
+proc                         0         0         0   0% /proc
+sysfs                        0         0         0   0% /sys
+/dev/block/mmcblk0p8      2287      1157      1130  51% /data
+/dev/block/mmcblk0p8      2287      1157      1130  51% /sdcard
+/dev/block/mmcblk0p7       124         4       120   3% /cache
+/dev/block/mmcblk1p1      3772      2751      1021  73% /external_sd
+</code></pre>
 <p>上面能看到已经挂载分区的大小和对应的文件系统分区，但是华为的cust无法挂载，查看/etc/fstab文件系统分区表</p>
-<figure class="highlight console"><table><tr><td class="code"><pre><span class="line">/dev/block/mmcblk0p5 /system ext4 rw</span><br><span class="line">/dev/block/mmcblk0p8 /data ext4 rw</span><br><span class="line">/dev/block/mmcblk0p6 /cust ext4 rw</span><br><span class="line">/dev/block/mmcblk0p7 /cache ext4 rw</span><br><span class="line">/dev/block/mmcblk1p1 /external_sd vfat rw</span><br></pre></td></tr></table></figure>
+<pre><code class="language-console">/dev/block/mmcblk0p5 /system ext4 rw
+/dev/block/mmcblk0p8 /data ext4 rw
+/dev/block/mmcblk0p6 /cust ext4 rw
+/dev/block/mmcblk0p7 /cache ext4 rw
+/dev/block/mmcblk1p1 /external_sd vfat rw
+</code></pre>
 <p>手动挂载cust分区</p>
-<figure class="highlight console"><table><tr><td class="code"><pre><span class="line">mount /dev/block/mmcblk0p6 /cust</span><br><span class="line">或</span><br><span class="line">mount /cust</span><br></pre></td></tr></table></figure>
+<pre><code class="language-console">mount /dev/block/mmcblk0p6 /cust
+或
+mount /cust
+</code></pre>
 <p>提示无效参数，怀疑是mmcblk0p6分区损坏，于是把cache卸载，把cust挂载到mmcblk0p7上，果然成功挂载，于是执行</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">make_ext4fs /dev/block/mmcblk0p6</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">make_ext4fs /dev/block/mmcblk0p6
+</code></pre>
 <p>重新挂载/cust分区，果然成功挂载，至此Recovery已经没有任何报错，重新把/system、/data等等分区全部重新格式化，重新安装lollipop，然而结果没变，还是卡在开机画面。当时和某个QQ群里的“大神”交流了下，“大神”呵呵一笑：不用想了，字库坏了。（一般情况下，字库坏了=主板坏了，不能修）</p>
 <p>说到字库这个词我也想呵呵，手机字库什么的就是Flash，叫的这么不近人情，然而我可以肯定的是，我的“字库肯定没坏啊”，因为我刚刚还在对它进行格式化的操作。</p>
 <p>于是我用ADB进入手机的shell，用刚刚的格式化操作，对前面几个小分区全部格式化了一遍</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">make_ext4fs /dev/block/mmcblk0p2</span><br><span class="line">make_ext4fs /dev/block/mmcblk0p3</span><br><span class="line">make_ext4fs /dev/block/mmcblk0p4</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">make_ext4fs /dev/block/mmcblk0p2
+make_ext4fs /dev/block/mmcblk0p3
+make_ext4fs /dev/block/mmcblk0p4
+</code></pre>
 <p>重新开机，一切正常～～</p>
 <h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>这次事情是在刷机的过程中，用一些简单的ADB Shell命令解决了手机系统无法开机的一些问题，Android                      Shell还有更多强大的功能还没用过，并且本文只是记载了自己遇到的问题，仅能做为参考，切勿照搬。</p>
 
@@ -853,6 +894,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 

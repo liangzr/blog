@@ -100,6 +100,9 @@
 
 
 
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
   <meta property="og:type" content="website">
 <meta property="og:title" content="OVERLOADING 🔥">
 <meta property="og:url" content="https://blog.liangzr.tech/page/2/index.html">
@@ -1269,11 +1272,18 @@
         
           <p>很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi</p>
 <h3 id="USB连接"><a href="#USB连接" class="headerlink" title="USB连接"></a>USB连接</h3><p>首先是显示当前连接的设备</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">adb devices
+</code></pre>
 <p>如果有设备通过USB成功连接，会显示如下：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">List of devices attached</span><br><span class="line">0123456789ABCDEF	device</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">List of devices attached
+0123456789ABCDEF    device
+</code></pre>
 <p>左边的是设备的名字，右边的device代表设备的状态，目前见到过的状态</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">device            - 设备通过USB连接成功</span><br><span class="line">offline           - 设备的adb usb服务没有启动</span><br><span class="line">no permissions    - 需要通过root权限重启adb server</span><br><span class="line">unauthorized      - Android4.4之后，需要在设备上对计算机授权才可调试</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">device            - 设备通过USB连接成功
+offline           - 设备的adb usb服务没有启动
+no permissions    - 需要通过root权限重启adb server
+unauthorized      - Android4.4之后，需要在设备上对计算机授权才可调试
+</code></pre>
 <p>如果出现了上面的no permissions的状态，在teminal进入root用户，或者前面加sudo</p>
           <!--noindex-->
           
@@ -1608,13 +1618,17 @@
         
           
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="language-bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="language-bash">$ hexo server
+</code></pre>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="language-bash">$ hexo generate
+</code></pre>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="language-bash">$ hexo deploy
+</code></pre>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
@@ -1924,6 +1938,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 

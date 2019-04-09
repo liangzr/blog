@@ -100,20 +100,23 @@
 
 
 
-  <meta name="description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &amp;#125;">
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
+  <meta name="description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = { 100: &amp;#39;a&amp;#39;, 2: &amp;#39;b&amp;#39;, 7:">
 <meta name="keywords" content="v8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何按原顺序打印出对象的属性？">
 <meta property="og:url" content="https://blog.liangzr.tech/2019/03/09/how-to-print-properties-of-the-object-by-originally/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
-<meta property="og:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &amp;#125;">
+<meta property="og:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = { 100: &amp;#39;a&amp;#39;, 2: &amp;#39;b&amp;#39;, 7:">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg">
 <meta property="og:image" content="https://v8.dev/_img/fast-properties/jsobject.png">
 <meta property="og:updated_time" content="2019-03-14T05:00:51.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何按原顺序打印出对象的属性？">
-<meta name="twitter:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = &amp;#123; 100: &apos;a&apos;, 2: &apos;b&apos;, 7: &apos;c&apos; &amp;#125;">
+<meta name="twitter:description" content="昨天在群里看到有人问:  网友：“Object.keys会给值排序，那用哪个方法取对象属性能不排序的？”我：“对象的属性有顺序吗？”网友：“这个就会按照从小到大排序，我只是想保持原样~~” (如下)我：”for…in 应该不会”……   结果我试了下发现 for..in 也会，最终我试了六种方法： const obj = { 100: &amp;#39;a&amp;#39;, 2: &amp;#39;b&amp;#39;, 7:">
 <meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg">
 
 
@@ -454,11 +457,24 @@
 </blockquote>
 <p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0wixmegiij30gk02vglu.jpg" alt></p>
 <p>结果我试了下发现 <code>for..in</code> 也会，最终我试了六种方法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">Object</span>.keys(obj)                          <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)                        <span class="comment">// ["b", "c", "a"]</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)                       <span class="comment">// "2,b,7,c,100,a", toString() 之后</span></span><br><span class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123; <span class="built_in">console</span>.log(key) &#125;     <span class="comment">// 2, 7, 10</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)           <span class="comment">// ["2", "7", "100"]</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj)                      <span class="comment">// ["2", "7", "100"]</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">const obj = { 100: &#39;a&#39;, 2: &#39;b&#39;, 7: &#39;c&#39; }
+
+Object.keys(obj)                          // [&quot;2&quot;, &quot;7&quot;, &quot;100&quot;]
+Object.values(obj)                        // [&quot;b&quot;, &quot;c&quot;, &quot;a&quot;]
+Object.entries(obj)                       // &quot;2,b,7,c,100,a&quot;, toString() 之后
+for (key in obj) { console.log(key) }     // 2, 7, 10
+Object.getOwnPropertyNames(obj)           // [&quot;2&quot;, &quot;7&quot;, &quot;100&quot;]
+Reflect.ownKeys(obj)                      // [&quot;2&quot;, &quot;7&quot;, &quot;100&quot;]
+</code></pre>
 <p>可以看到，以上方法都无一例外地以 <code>{ 2: &#39;b&#39;, 7: &#39;c&#39;, 100: &#39;a&#39; }</code> 的方式打印出了相关值，那这个问题的影响在哪里呢？</p>
 <a id="more"></a>
 <p>假如你从接口中获取一段 JSON 数据如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"100"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"2"</span>: &#123; ... &#125;,</span><br><span class="line">  <span class="string">"7"</span>: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">{
+  &quot;100&quot;: { ... },
+  &quot;2&quot;: { ... },
+  &quot;7&quot;: { ... }
+}
+</code></pre>
 <p>上面个数据可能是经过后端排序的，并且数据中并没有带有可供排序的信息，毫无疑问经过 JS 的重新排序后，它的排序信息就丢失了，假如我就是不想丢失呢？</p>
 <p>欲知其然，先知其所以然。在了解它如果遍历属性之前，首先我们需要知道的是，在 V8 中对象是如何存储属性的呢？</p>
 <h2 id="V8-中对象的属性"><a href="#V8-中对象的属性" class="headerlink" title="V8 中对象的属性"></a>V8 中对象的属性</h2><p>在 JavaScript 中，大部分时候对象的行为类似一个字典，它以字符串做为键名，以任意对象作为值。虽然在迭代的时候，规范约定了以不同的方式处理整数索引属性和其他属性。</p>
@@ -492,9 +508,33 @@
 </blockquote>
 <p>我们来简单描述下上述过程就是：首先创建一个名为 <code>keys</code> 的空数组，然后先遍历对象中的数组索引的属性，结果以升序排列，并逐个放入 <code>keys</code> 中；再遍历字符串属性（但不是数组索引），以属性创建时间升序排列，并逐个放入 <code>keys</code> 中去；然后再遍历 Symbol 类型的属性名，同样以属性创建时间升序排列，放入 <code>keys</code> 中，最后返回 <code>keys</code> 数组。</p>
 <p>下来我们来验证一下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  b: <span class="number">1</span>,</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  c: <span class="number">3</span>,</span><br><span class="line">  <span class="number">7</span>: <span class="number">4</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="number">10</span>: <span class="number">6</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>(<span class="string">'a'</span>)]: <span class="number">7</span></span><br><span class="line">&#125;</span><br><span class="line">a.d = <span class="number">8</span></span><br><span class="line">a[<span class="built_in">Symbol</span>(<span class="string">'b'</span>)] = <span class="number">9</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(a)</span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">var a = {
+  b: 1,
+  a: 2,
+  c: 3,
+  7: 4,
+  1: 5,
+  10: 6,
+  [Symbol(&#39;a&#39;)]: 7
+}
+a.d = 8
+a[Symbol(&#39;b&#39;)] = 9
+
+Reflect.ownKeys(a)
+</code></pre>
 <p>output(devtools):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="number">9</span>) [<span class="string">"1"</span>, <span class="string">"7"</span>, <span class="string">"10"</span>, <span class="string">"b"</span>, <span class="string">"a"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="built_in">Symbol</span>(a), <span class="built_in">Symbol</span>(b)]</span><br><span class="line">  <span class="number">0</span>: <span class="string">"1"</span></span><br><span class="line">  <span class="number">1</span>: <span class="string">"7"</span></span><br><span class="line">  <span class="number">2</span>: <span class="string">"10"</span></span><br><span class="line">  <span class="number">3</span>: <span class="string">"b"</span></span><br><span class="line">  <span class="number">4</span>: <span class="string">"a"</span></span><br><span class="line">  <span class="number">5</span>: <span class="string">"c"</span></span><br><span class="line">  <span class="number">6</span>: <span class="string">"d"</span></span><br><span class="line">  <span class="number">7</span>: <span class="built_in">Symbol</span>(a)</span><br><span class="line">  <span class="number">8</span>: <span class="built_in">Symbol</span>(b)</span><br><span class="line">  length: <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">(9) [&quot;1&quot;, &quot;7&quot;, &quot;10&quot;, &quot;b&quot;, &quot;a&quot;, &quot;c&quot;, &quot;d&quot;, Symbol(a), Symbol(b)]
+  0: &quot;1&quot;
+  1: &quot;7&quot;
+  2: &quot;10&quot;
+  3: &quot;b&quot;
+  4: &quot;a&quot;
+  5: &quot;c&quot;
+  6: &quot;d&quot;
+  7: Symbol(a)
+  8: Symbol(b)
+  length: 9
+</code></pre>
 <p>Chrome 的实现与规范的约定完全一致😕，所以至此我们知道它为什么打印出来是升序的了。</p>
 <p>另外引用 Chromium 社区上 <a href="https://bugs.chromium.org/p/v8/issues/detail?id=164" target="_blank" rel="noopener">Issue 164: Wrong order in Object properties interation</a> 的讨论所述：</p>
 <blockquote>
@@ -507,16 +547,54 @@
 <p>综上所讲，这样的内部实现，有性能的因素，也有历史原因。</p>
 <h2 id="有没有办法按原顺序打印？"><a href="#有没有办法按原顺序打印？" class="headerlink" title="有没有办法按原顺序打印？"></a>有没有办法按原顺序打印？</h2><p>讲了那么多，我就是想按原顺序打印怎么办？</p>
 <p>首先如果目标结构已经是 JavaScript 对象，应该是没有办法了。我们回到最终的问题，如果我们有一串 JSON 数组，想把它按原序获得键值，可以怎么做？假如我们有串数据：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:<span class="string">"foo"</span>,<span class="attr">"2"</span>:<span class="string">"bar"</span>,<span class="attr">"7"</span>:<span class="string">"baz"</span>&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-json">{&quot;100&quot;:&quot;foo&quot;,&quot;2&quot;:&quot;bar&quot;,&quot;7&quot;:&quot;baz&quot;}
+</code></pre>
 <p>首先能想到的一个简单的方法就是，自己写一个简单的 json-parser。</p>
 <p>下面是一个简单的实现：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> jsonString = <span class="string">'&#123;"100":"foo","2":"bar","7":"baz"&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> parseKeys = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> out = []</span><br><span class="line">  <span class="keyword">const</span> tokens = str.slice(<span class="number">1</span>, <span class="number">-1</span>).split(<span class="string">','</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tokens.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    out.push(tokens[i].split(<span class="string">':'</span>)[<span class="number">0</span>].slice(<span class="number">1</span>, <span class="number">-1</span>))  </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> out</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try</span></span><br><span class="line"><span class="built_in">console</span>.log(parseKeys(jsonString))  <span class="comment">// ✅ ["100", "2", "7"]</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">const jsonString = &#39;{&quot;100&quot;:&quot;foo&quot;,&quot;2&quot;:&quot;bar&quot;,&quot;7&quot;:&quot;baz&quot;}&#39;
+
+const parseKeys = str =&gt; {
+  const out = []
+  const tokens = str.slice(1, -1).split(&#39;,&#39;)
+  for (let i = 0; i &lt; tokens.length; i += 1) {
+    out.push(tokens[i].split(&#39;:&#39;)[0].slice(1, -1))  
+  } 
+  return out
+}
+
+// try
+console.log(parseKeys(jsonString))  // ✅ [&quot;100&quot;, &quot;2&quot;, &quot;7&quot;]
+</code></pre>
 <p>看起来我们得到了想要的结果（yeah），但是如果 json 数组稍微复杂点儿呢？</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"100"</span>:&#123;<span class="attr">"b"</span>:<span class="string">"foo"</span>&#125;,<span class="attr">"2"</span>:[<span class="number">1</span>,<span class="number">2</span>],<span class="attr">"7"</span>:<span class="number">200</span>&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-json">{&quot;100&quot;:{&quot;b&quot;:&quot;foo&quot;},&quot;2&quot;:[1,2],&quot;7&quot;:200}
+</code></pre>
 <p>我们再来重构下这个解析器：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> parseKeys = <span class="function">(<span class="params">str, lvl = <span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> out = []</span><br><span class="line">  <span class="keyword">let</span> level = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> matching = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">let</span> pair = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.charAt(i) === <span class="string">'"'</span> &amp;&amp; level === lvl) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!matching) &#123;</span><br><span class="line">        pair[<span class="number">0</span>] = i </span><br><span class="line">      &#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">        pair[<span class="number">1</span>] = i</span><br><span class="line">        out.push([...pair])</span><br><span class="line">      &#125;</span><br><span class="line">      matching = ~matching</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#123;'</span>, <span class="string">'['</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level += <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="string">'&#125;'</span>, <span class="string">']'</span>].indexOf(str.charAt(i) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">      level -= <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> out.map(<span class="function"><span class="params">pair</span> =&gt;</span> str.slice(pair[<span class="number">0</span>], pair[<span class="number">1</span>]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">var parseKeys = (str, lvl = 1) =&gt; {
+  let out = []
+  let level = 0
+  let matching = false
+  let pair = []
+  for (let i = 0; i &lt; str.length; i += 1) {
+    if (str.charAt(i) === &#39;&quot;&#39; &amp;&amp; level === lvl) {
+      if (!matching) {
+        pair[0] = i 
+      }  else {
+        pair[1] = i
+        out.push([...pair])
+      }
+      matching = ~matching
+    } else if ([&#39;{&#39;, &#39;[&#39;].indexOf(str.charAt(i) &gt; 0)) {
+      level += 1
+    } else if ([&#39;}&#39;, &#39;]&#39;].indexOf(str.charAt(i) &gt; 0)) {
+      level -= 1
+    }
+  }
+  return out.map(pair =&gt; str.slice(pair[0], pair[1]))
+}
+</code></pre>
 <p>output(devtools):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[<span class="string">"100"</span>, <span class="string">"2"</span>, <span class="string">"7"</span>]</span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">[&quot;100&quot;, &quot;2&quot;, &quot;7&quot;]
+</code></pre>
 <p>上面这个方法执行效率并不高，只是提出一种思路，当然我们的目标还是解析出 key，而不是完整的引入一个 json 解释器，那样可能得不偿失。</p>
 <p>更高效的解决方法，我们之后再补充…</p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL; DR;"></a>TL; DR;</h2><p>V8 在内部将命名属性和数组索引属性分开存储，并且数组和其它对象的内部实现和迭代机制是完全一致的。</p>
@@ -914,6 +992,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 

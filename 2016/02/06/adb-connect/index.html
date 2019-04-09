@@ -100,18 +100,21 @@
 
 
 
-  <meta name="description" content="很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi USB连接首先是显示当前连接的设备 adb devices 如果有设备通过USB成功连接，会显示如下： List of devices attached0123456789ABCDEF	device 左边的是设备的名字，右边的device代表设">
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
+  <meta name="description" content="很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi USB连接首先是显示当前连接的设备 adb devices  如果有设备通过USB成功连接，会显示如下： List of devices attached 0123456789ABCDEF    device  左边的是设备的名字，右边的dev">
 <meta name="keywords" content="adb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="尝试ADB连接">
 <meta property="og:url" content="https://blog.liangzr.tech/2016/02/06/adb-connect/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
-<meta property="og:description" content="很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi USB连接首先是显示当前连接的设备 adb devices 如果有设备通过USB成功连接，会显示如下： List of devices attached0123456789ABCDEF	device 左边的是设备的名字，右边的device代表设">
+<meta property="og:description" content="很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi USB连接首先是显示当前连接的设备 adb devices  如果有设备通过USB成功连接，会显示如下： List of devices attached 0123456789ABCDEF    device  左边的是设备的名字，右边的dev">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-03-14T04:56:30.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="尝试ADB连接">
-<meta name="twitter:description" content="很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi USB连接首先是显示当前连接的设备 adb devices 如果有设备通过USB成功连接，会显示如下： List of devices attached0123456789ABCDEF	device 左边的是设备的名字，右边的device代表设">
+<meta name="twitter:description" content="很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi USB连接首先是显示当前连接的设备 adb devices  如果有设备通过USB成功连接，会显示如下： List of devices attached 0123456789ABCDEF    device  左边的是设备的名字，右边的dev">
 
 
 
@@ -447,28 +450,83 @@
       
         <p>很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi</p>
 <h3 id="USB连接"><a href="#USB连接" class="headerlink" title="USB连接"></a>USB连接</h3><p>首先是显示当前连接的设备</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">adb devices
+</code></pre>
 <p>如果有设备通过USB成功连接，会显示如下：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">List of devices attached</span><br><span class="line">0123456789ABCDEF	device</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">List of devices attached
+0123456789ABCDEF    device
+</code></pre>
 <p>左边的是设备的名字，右边的device代表设备的状态，目前见到过的状态</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">device            - 设备通过USB连接成功</span><br><span class="line">offline           - 设备的adb usb服务没有启动</span><br><span class="line">no permissions    - 需要通过root权限重启adb server</span><br><span class="line">unauthorized      - Android4.4之后，需要在设备上对计算机授权才可调试</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">device            - 设备通过USB连接成功
+offline           - 设备的adb usb服务没有启动
+no permissions    - 需要通过root权限重启adb server
+unauthorized      - Android4.4之后，需要在设备上对计算机授权才可调试
+</code></pre>
 <p>如果出现了上面的no permissions的状态，在teminal进入root用户，或者前面加sudo</p>
 <a id="more"></a>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">adb <span class="built_in">kill</span>-server</span><br><span class="line">adb devices</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">adb kill-server
+adb devices
+</code></pre>
 <p>其中，执行<code>adb devices</code>时，adb会首先默认执行<code>adb start-server</code>，之后可以<code>Ctrl+A+D</code>退出root用户，设备应该会是device状态。（调试OPPO U705T - Android4.1时遇到）</p>
 <p>接下来，只要设备是device状态，就可以对它执行各种push、pull、install、shell的命令了。</p>
 <h3 id="Wi-FI连接"><a href="#Wi-FI连接" class="headerlink" title="Wi-FI连接"></a>Wi-FI连接</h3><p>USB一直连着，当然可以保证手机电量是满的，但是如果像我这样笔记本拿来拿去，手机一直挂在上面挺不方便的，这时候就可以用到Wi-Fi连接了，在CM12.1上的开发者选项里直接有<strong>网络ADB调试</strong>的选项，在Android4.1上并没有。这时候就需要我们手动改变它的连接方式了。</p>
 <p>用USB把手机连接到电脑，前提是保证它是device状态，执行<br><code>adb tcpip 5555</code><br>5555是默认端口，可以自己修改，前提是没被其他的进程监听占用。这个命令，嗯我失败了，最保险的办法是在手机上的本地终端，输入su获取root权限，然后执行</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">stop adbd</span><br><span class="line">setprop service.adb.tcp.port 5555</span><br><span class="line">start adbd</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">stop adbd
+setprop service.adb.tcp.port 5555
+start adbd
+</code></pre>
 <p>然后就可以在电脑的teminal上</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">adb connect &amp;lt;remotehost&amp;gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">adb connect &amp;lt;remotehost&amp;gt;
+</code></pre>
 <p>其中<code>remotehost</code>是你手机在局域网中的ip地址，这里不需要特别标明端口，我这里是192.168.1.113，结果如下</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">liangzr@acer:~$ adb connect 192.168.1.113</span><br><span class="line">connected to 192.168.1.113:5555</span><br><span class="line">liangzr@acer:~$ adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">192.168.1.113:5555	device</span><br><span class="line">0123456789ABCDEF	device</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">liangzr@acer:~$ adb connect 192.168.1.113
+connected to 192.168.1.113:5555
+liangzr@acer:~$ adb devices
+List of devices attached
+192.168.1.113:5555    device
+0123456789ABCDEF    device
+</code></pre>
 <p>这个时候就可以断开USB来调试了，用Wi-Fi调试和用USB一样一样的，只是在下载速度上会有些慢。</p>
 <h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>其实上面的好多操作，都可以直接在手机的本地终端里完成，并且个别问题的原因并不是很清楚，只是在Google上找到了答案，另外，附送一个国外大神的Script切换USB和Wi-Fi方式。</p>
 <p><a href="https://gist.github.com/liangzr/3efa2aa4fec07fe60a83" target="_blank" rel="noopener">adbwifi.sh</a> - 脚本转自<a href="http://www.stormzhang.com/android/2014/08/27/adb-over-wifi/" target="_blank" rel="noopener">Android通过Wifi来调试你的应用 - stormzhang博客</a></p>
 <p>adbwifi.sh内容：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Modify this with your IP range</span></span><br><span class="line">MY_IP_RANGE=<span class="string">"192\.168\.1"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#You usually wouldn't have to modify this</span></span><br><span class="line">PORT_BASE=5555</span><br><span class="line"></span><br><span class="line"><span class="comment">#List the devices on the screen for your viewing pleasure</span></span><br><span class="line">adb devices</span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Find USB devices only (no emulators, genymotion or connected devices</span></span><br><span class="line"><span class="built_in">declare</span> -a deviceArray=(`adb devices -l | grep -v emulator | grep -v vbox | grep -v <span class="string">"<span class="variable">$&#123;MY_IP_RANGE&#125;</span>"</span> | grep <span class="string">" device "</span> | awk <span class="string">'&#123;print $1&#125;'</span>`)  </span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"found <span class="variable">$&#123;#deviceArray[@]&#125;</span> device(s)"</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="variable">$&#123;!deviceArray[*]&#125;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"finding IP address for device <span class="variable">$&#123;deviceArray[index]&#125;</span>"</span></span><br><span class="line">IP_ADDRESS=$(adb -s <span class="variable">$&#123;deviceArray[index]&#125;</span> shell ifconfig wlan0 | awk <span class="string">'&#123;print $3&#125;'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"IP address found : <span class="variable">$IP_ADDRESS</span> "</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Connecting..."</span></span><br><span class="line">adb -s <span class="variable">$&#123;deviceArray[index]&#125;</span> tcpip $((<span class="variable">$PORT_BASE</span> + <span class="variable">$index</span>))</span><br><span class="line">adb -s <span class="variable">$&#123;deviceArray[index]&#125;</span> connect <span class="string">"<span class="variable">$IP_ADDRESS</span>:<span class="variable">$(($PORT_BASE + $index)</span>)"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">adb devices -l</span><br><span class="line"><span class="comment">#exit&lt;/pre&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">#!/bin/bash
+
+#Modify this with your IP range
+MY_IP_RANGE=&quot;192\.168\.1&quot;
+
+#You usually wouldn&#39;t have to modify this
+PORT_BASE=5555
+
+#List the devices on the screen for your viewing pleasure
+adb devices
+echo
+
+#Find USB devices only (no emulators, genymotion or connected devices
+declare -a deviceArray=(`adb devices -l | grep -v emulator | grep -v vbox | grep -v &quot;${MY_IP_RANGE}&quot; | grep &quot; device &quot; | awk &#39;{print $1}&#39;`)  
+
+echo &quot;found ${#deviceArray[@]} device(s)&quot;
+echo
+
+for index in ${!deviceArray[*]}
+do
+echo &quot;finding IP address for device ${deviceArray[index]}&quot;
+IP_ADDRESS=$(adb -s ${deviceArray[index]} shell ifconfig wlan0 | awk &#39;{print $3}&#39;)
+
+echo &quot;IP address found : $IP_ADDRESS &quot;
+
+echo &quot;Connecting...&quot;
+adb -s ${deviceArray[index]} tcpip $(($PORT_BASE + $index))
+adb -s ${deviceArray[index]} connect &quot;$IP_ADDRESS:$(($PORT_BASE + $index))&quot;
+
+echo
+echo
+done
+
+adb devices -l
+#exit&lt;/pre&gt;
+</code></pre>
+
       
     </div>
 
@@ -854,6 +912,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 

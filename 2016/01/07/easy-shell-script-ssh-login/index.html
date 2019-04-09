@@ -100,6 +100,9 @@
 
 
 
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
   <meta name="description" content="因为想每次管理服务器都要手动输入ssh user@remotehost然后输入密码才能进去，并且经常隔2-3分钟不去管它，控制台就无响应了，所以我就想写个脚本实现自动登陆和无响应重连。于是  想写个脚本去 找到篇Advanced Bash-scripting Guide, 想创建一个Github repository来整理 在2048KB创建个page来收录Github repository, 嫌">
 <meta name="keywords" content="ssh">
 <meta property="og:type" content="article">
@@ -470,15 +473,25 @@
 <li>interact：允许用户交互</li>
 </ul>
 <p>实现如下：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line">spawn ssh user@remotehost</span><br><span class="line">expect <span class="string">"*password:"</span></span><br><span class="line">send <span class="string">"userpwd\r"</span></span><br><span class="line">expect <span class="string">"*#"</span></span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">#!/usr/bin/expect
+spawn ssh user@remotehost
+expect &quot;*password:&quot;
+send &quot;userpwd\r&quot;
+expect &quot;*#&quot;
+interact
+</code></pre>
 <p>添加执行权限</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo chmod +x ssh-script.sh</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">sudo chmod +x ssh-script.sh
+</code></pre>
 <p>运行以上ssh-script.sh就可以登陆了，也可以把用户命令放入<code>～/bin</code>，在Linux的很多发行版本中默认PATH都加入了这个目录，在Ubuntu上只要在用户根目录下建立了bin文件夹，下次登陆时会自动添加进PATH，如果要手动修改则打开.bashrc文件</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">sudo vi ~/.bashrc
+</code></pre>
 <p>文件末添加</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH = ~/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">export PATH = ~/bin:$PATH
+</code></pre>
 <p>生效改动</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<pre><code class="language-sh">source ~/.bashrc
+</code></pre>
 <p>这样在teminal里输入ssh-script.sh就能一键登陆VPS了，如果嫌后缀麻烦，可以……删掉好了：P</p>
 <p>未完</p>
 
@@ -867,6 +880,11 @@
 
 
 
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
 
         
 
