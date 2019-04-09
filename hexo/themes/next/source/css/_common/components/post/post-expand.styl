@@ -22,6 +22,7 @@
       }
     }
 
+
     .highlight {
       margin-left: -20px;
       margin-right: -20px;
@@ -42,7 +43,21 @@
   +desktop() {
     text-align: justify;
   }
+  
+  b, strong {
+    color: #111 !important;
+  }
+  
+  p a::after {
+    content: '🌀';
+    top: -0.8em;
+    font-size: 70%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
 
+  
   h2, h3, h4, h5, h6 {
     padding-top: 10px;
 
@@ -74,13 +89,13 @@
   }
   
   h2 {
-    padding-top: 3em !important;
+    padding-top: 2em !important;
     text-decoration: none;
     outline: none;
     border-bottom: 1px solid #ddd;
     padding-bottom: 0.7em;
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.4em;
   }
 
   ul > li {
