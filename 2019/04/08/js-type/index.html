@@ -111,7 +111,7 @@
 <meta property="og:description" content="在接触一门语言之前，首先要了解的就是这门语言的语法和数据类型，在 JavaScript 中，变量都是动态类型的，每个变量的值都属于一种语言类型。 类型JavaScript 规定了七种语言类型:  Undefined Null Boolean String Number Symbol Object  其中前六种为基本类型，Symbol 是 ES6 新加入的。可能你已经对这些基础的基础已经耳熟能详了，">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1g1xljiojnwj30vb0cftai.jpg">
-<meta property="og:updated_time" content="2019-04-10T08:50:11.579Z">
+<meta property="og:updated_time" content="2019-04-10T09:36:49.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 的类型">
 <meta name="twitter:description" content="在接触一门语言之前，首先要了解的就是这门语言的语法和数据类型，在 JavaScript 中，变量都是动态类型的，每个变量的值都属于一种语言类型。 类型JavaScript 规定了七种语言类型:  Undefined Null Boolean String Number Symbol Object  其中前六种为基本类型，Symbol 是 ES6 新加入的。可能你已经对这些基础的基础已经耳熟能详了，">
@@ -545,6 +545,23 @@ for(var v of o)
 <p>代码中我们定义了对象的 <code>Symbol.iterator</code> 属性后，就可以使用 for…of 迭代这个对象了</p>
 <h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>Object 是 JavaScript 中最复杂的类型，也是 JavaScript 的核心机制之一，它表示对象，是一切有形和无形物体的总称。</p>
 <p>在 JavaScript 中，对象的定义是<strong>属性的集合</strong>。属性分为数据属性和访问器属性，二者都是 key-value 结构，key 可以是字符串或者 Symbol 类型。</p>
+<p>上面提到的几个基本类型，都有个对应的内置对象，分别是：</p>
+<ul>
+<li>Number</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol</li>
+</ul>
+<p>所以，3 和 new Number(3) 是完全不同的两个值，一个是 Number 类型，一个是 Number 对象类型。</p>
+<p>Number、String 和 Boolean 三个函数，既可以跟 new 搭配当作构造器，初始化一个对象，也可以直接调用，表示强制类型转换。</p>
+<p>Symbol 函数则不能使用 new 初始化，直接调用 Symbol 函数会返回一个 Symbol 类型的值。</p>
+<p>JavaScript 在语言设计中弱化了对象和基本类型之间的关系，比如我们可以直接在基本类型上使用相应对象的方法：</p>
+<pre><code class="language-js">console.log(&#39;123&#39;.length) // 3
+</code></pre>
+<p>甚至我们在相应原型上添加方法，也可以直接应用到基本类型上。这是因为运算符提供了一个装箱操作，它会根据基本类型构造一个临时对象，让我们可以在基本类型上调用对应对象的方法。</p>
+<pre><code class="language-js">(123).toString() // &#39;123&#39;
+123.toString() // Uncaught SyntaxError: Invalid or unexpected token
+</code></pre>
 <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>因为 JavaScript 是弱类型的语言，所以在很多情况下都会进行类型转换，尤其是一些运算场景。</p>
 <p>虽然大部分的转换符合我们的直觉，但隐式转换带来的失误依然不可忽视，其实最著名的就是 <code>==</code> 运算符，它试图跨类型比较，规划复杂到没人记得住，甚至还有人专门总结了 JavaScript 真值表来辅助记忆。但这里我认为，在大多数场景下，我们应该尽量避免类型的隐式转换，隐式转换的过程较为隐匿，可读性也差。</p>
 <p>除此之外，如加减乘除和比较运算，也都会涉及类型转换，这种情况的类型转换还是相对简单的：</p>
