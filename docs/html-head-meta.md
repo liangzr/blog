@@ -61,7 +61,7 @@ base 标签有 `href` 和 `target` 两个属性：
 
 可以看到，网站的图标和 img 标签内的图片，都变成了百度的图标，a 链接复制出来也是 `http://baidu.com/favicon.ico`
 
-🛑**在实际使用中，并不建议使用 base 标签，它改变了全局相对链接的地址，容易在跟 JavaScript 配合时出现问题**
+**在实际使用中，并不建议使用 base 标签，它改变了全局相对链接的地址，容易在跟 JavaScript 配合时出现问题**
 
 ### title
 
@@ -185,7 +185,7 @@ Google 搜索 IT 之家：
 
 可以看到有两种标签我们没有见过，分别是 `name="twitter:x"` 和 `property="og:x"`，下面就分别看下这两个是什么用途
 
-([Open Graph协议](ogp.me)是由 Facebook 推出的，使任何网页都成为社交图中的丰富对象。例如，这在Facebook上用于允许任何网页具有与Facebook上的任何其他对象相同的功能。
+[Open Graph协议](ogp.me)是由 Facebook 推出的，使任何网页都成为社交图中的丰富对象。例如，这在Facebook上用于允许任何网页具有与Facebook上的任何其他对象相同的功能。
 
 可以理解为，当你分享一个网页到 Facebook 中时，即使它不是 Facebook 自己的网页，也可以有足够的信息像展示预览 Facebook 自己的网页具有更丰富的信息。
 
