@@ -45,8 +45,20 @@
   }
   
   b, strong {
-    color: #111 !important;
+    position: relative;
   }
+  
+  b::after, strong::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    background: linear-gradient(0.2turn,#ff2818, #ad0d01 70%, white);
+    border-radius: 5px;
+  }
+  
   
   p a::after {
     content: '🌀';
