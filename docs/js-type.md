@@ -152,7 +152,31 @@ Object 是 JavaScript 中最复杂的类型，也是 JavaScript 的核心机制�
 
 在 JavaScript 中，对象的定义是**属性的集合**。属性分为数据属性和访问器属性，二者都是 key-value 结构，key 可以是字符串或者 Symbol 类型。
 
+上面提到的几个基本类型，都有个对应的内置对象，分别是：
 
+- Number
+- String
+- Boolean
+- Symbol
+
+所以，3 和 new Number(3) 是完全不同的两个值，一个是 Number 类型，一个是 Number 对象类型。
+
+Number、String 和 Boolean 三个函数，既可以跟 new 搭配当作构造器，初始化一个对象，也可以直接调用，表示强制类型转换。
+
+Symbol 函数则不能使用 new 初始化，直接调用 Symbol 函数会返回一个 Symbol 类型的值。
+
+JavaScript 在语言设计中弱化了对象和基本类型之间的关系，比如我们可以直接在基本类型上使用相应对象的方法：
+
+```js
+console.log('123'.length) // 3
+```
+
+甚至我们在相应原型上添加方法，也可以直接应用到基本类型上。这是因为运算符提供了一个装箱操作，它会根据基本类型构造一个临时对象，让我们可以在基本类型上调用对应对象的方法。
+
+```js
+(123).toString() // '123'
+123.toString() // Uncaught SyntaxError: Invalid or unexpected token
+```
 
 ## 类型转换
 
