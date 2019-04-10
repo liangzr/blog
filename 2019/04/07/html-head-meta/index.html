@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1g1u47z6xjwj30w407gq5c.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1g1u48pgncgj30y006eac4.jpg">
-<meta property="og:updated_time" content="2019-04-09T00:54:07.578Z">
+<meta property="og:updated_time" content="2019-04-10T01:07:29.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML 的元信息标签">
 <meta name="twitter:description" content="一个 HTML 文档通常有一组标签来描述文档自身的信息，供搜索引擎或浏览器去读取以更好地渲染页面，这就是元信息标签。 元信息标签的结构一般来说，元信息标签都会放在 HTML 的 head 标签之内，其中又包括 base、meta 和 title 等具体的元信息，当然也包括和 script 和 style 相关的 script 和 link 等标签，下面我就逐一看下它们的使用场景。 headhead">
@@ -501,7 +501,7 @@
 </code></pre>
 <p><img style="max-width: 500px; " src="https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg"></p>
 <p>可以看到，网站的图标和 img 标签内的图片，都变成了百度的图标，a 链接复制出来也是 <code>http://baidu.com/favicon.ico</code></p>
-<p>🛑<strong>在实际使用中，并不建议使用 base 标签，它改变了全局相对链接的地址，容易在跟 JavaScript 配合时出现问题</strong></p>
+<p><strong>在实际使用中，并不建议使用 base 标签，它改变了全局相对链接的地址，容易在跟 JavaScript 配合时出现问题</strong></p>
 <h3 id="title"><a href="#title" class="headerlink" title="title"></a>title</h3><p>title 标签作为文档的元信息，用来简单的概括文档的主题，显示在浏览器的头部或者标签上。title 标签内只允许普通文本，放入标签会被忽略。</p>
 <h3 id="meta"><a href="#meta" class="headerlink" title="meta"></a>meta</h3><p>meta 标签是一组键值对，作为其它元标签的补充，表示通用的文档的元信息</p>
 <p>在 head 中可以有任意多个 mete 标签，一般的 mete 标签由 name 和 content 两个属性来定义。name 表示元信息的名，content 用来表示元信息的值。</p>
@@ -617,7 +617,7 @@
 &lt;meta name=&quot;twitter:image&quot; content=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1g1u1cdr77mj30om0f6aec.jpg&quot;&gt;
 </code></pre>
 <p>可以看到有两种标签我们没有见过，分别是 <code>name=&quot;twitter:x&quot;</code> 和 <code>property=&quot;og:x&quot;</code>，下面就分别看下这两个是什么用途</p>
-<p>(<a href="ogp.me">Open Graph协议</a>是由 Facebook 推出的，使任何网页都成为社交图中的丰富对象。例如，这在Facebook上用于允许任何网页具有与Facebook上的任何其他对象相同的功能。</p>
+<p><a href="ogp.me">Open Graph协议</a>是由 Facebook 推出的，使任何网页都成为社交图中的丰富对象。例如，这在Facebook上用于允许任何网页具有与Facebook上的任何其他对象相同的功能。</p>
 <p>可以理解为，当你分享一个网页到 Facebook 中时，即使它不是 Facebook 自己的网页，也可以有足够的信息像展示预览 Facebook 自己的网页具有更丰富的信息。</p>
 <p>同理 twitter 也推出了自己的<a href="https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started.html" target="_blank" rel="noopener">卡片优化协议</a>，提升了 Twitter 上的整体卡片体验，每种卡片类型都支持并需要一组特定的属性。</p>
 <h3 id="其它-meta-功能"><a href="#其它-meta-功能" class="headerlink" title="其它 meta 功能"></a>其它 meta 功能</h3><ul>

@@ -1313,7 +1313,18 @@ pre .javascript .function {
 }
 .posts-expand .post-body b,
 .posts-expand .post-body strong {
-  color: #111 !important;
+  position: relative;
+}
+.posts-expand .post-body b::after,
+.posts-expand .post-body strong::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  background: linear-gradient(0.2turn, #ff2818, #ad0d01 70%, #fff);
+  border-radius: 5px;
 }
 .posts-expand .post-body p a::after {
   content: '🌀';
@@ -1899,7 +1910,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cce7ff;
+  background: #ffc924;
 }
 .links-of-blogroll {
   font-size: 13px;
