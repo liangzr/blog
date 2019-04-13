@@ -103,25 +103,24 @@
 <link rel="stylesheet" href="/css/lib/prism.css">
 
 
-  <meta name="description" content="本文转载并翻译于 Dan Abramov 的博客 overreacted.io   React Hooks 是当下社区的热门，但我却想从 class 组件的一些有趣实现讲起！ 理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。  我写过不计其数的 super(props) : class Checkbox extends React.Compon">
-<meta name="keywords" content="react">
+  <meta name="description" content="身边人的认同，等于自身价值吗？ 最近陷入了深度的自我怀疑。一直以来，我都对自己的能力非常有自信，虽然远没到自负，但内心也是自傲的。我会觉得自己比身边的人要强，而且即使现在我不如别人，不远的将来也会超过他们，将他们甩在身后。 在成长过程上，我绝对算不上一帆风顺，甚至是充满波折的。但在这波折之中的一个稳定的变化就是，我一直在超越曾经的对手或假想敌。我一直不是像某些人从小成绩优异，最多只是在班里名列前茅">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「译」Why Do We Write super(props)?">
-<meta property="og:url" content="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/index.html">
+<meta property="og:title" content="什么是自身的价值">
+<meta property="og:url" content="https://blog.liangzr.tech/2019/04/13/self-doubt/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
-<meta property="og:description" content="本文转载并翻译于 Dan Abramov 的博客 overreacted.io   React Hooks 是当下社区的热门，但我却想从 class 组件的一些有趣实现讲起！ 理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。  我写过不计其数的 super(props) : class Checkbox extends React.Compon">
+<meta property="og:description" content="身边人的认同，等于自身价值吗？ 最近陷入了深度的自我怀疑。一直以来，我都对自己的能力非常有自信，虽然远没到自负，但内心也是自傲的。我会觉得自己比身边的人要强，而且即使现在我不如别人，不远的将来也会超过他们，将他们甩在身后。 在成长过程上，我绝对算不上一帆风顺，甚至是充满波折的。但在这波折之中的一个稳定的变化就是，我一直在超越曾经的对手或假想敌。我一直不是像某些人从小成绩优异，最多只是在班里名列前茅">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-14T06:48:19.903Z">
+<meta property="og:updated_time" content="2019-04-13T16:01:00.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「译」Why Do We Write super(props)?">
-<meta name="twitter:description" content="本文转载并翻译于 Dan Abramov 的博客 overreacted.io   React Hooks 是当下社区的热门，但我却想从 class 组件的一些有趣实现讲起！ 理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。  我写过不计其数的 super(props) : class Checkbox extends React.Compon">
+<meta name="twitter:title" content="什么是自身的价值">
+<meta name="twitter:description" content="身边人的认同，等于自身价值吗？ 最近陷入了深度的自我怀疑。一直以来，我都对自己的能力非常有自信，虽然远没到自负，但内心也是自傲的。我会觉得自己比身边的人要强，而且即使现在我不如别人，不远的将来也会超过他们，将他们甩在身后。 在成长过程上，我绝对算不上一帆风顺，甚至是充满波折的。但在这波折之中的一个稳定的变化就是，我一直在超越曾经的对手或假想敌。我一直不是像某些人从小成绩优异，最多只是在班里名列前茅">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/">
+  <link rel="canonical" href="https://blog.liangzr.tech/2019/04/13/self-doubt/">
 
 
 
@@ -131,7 +130,7 @@
   };
 </script>
 
-  <title>「译」Why Do We Write super(props)? | OVERLOADING 🔥</title>
+  <title>什么是自身的价值 | OVERLOADING 🔥</title>
   
 
 
@@ -356,7 +355,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/13/self-doubt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jory Liang">
@@ -373,7 +372,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">「译」Why Do We Write super(props)?
+          <h2 class="post-title" itemprop="name headline">什么是自身的价值
 
               
             
@@ -397,7 +396,7 @@
                 
               
 
-              <time title="Created: 2018-11-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-30T00:00:00+08:00">2018-11-30</time>
+              <time title="Created: 2019-04-13 22:26:10" itemprop="dateCreated datePublished" datetime="2019-04-13T22:26:10+08:00">2019-04-13</time>
             
 
             
@@ -413,14 +412,7 @@
               </span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/" itemprop="url" rel="index"><span itemprop="name">translated</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/writing/" itemprop="url" rel="index"><span itemprop="name">writing</span></a></span>
 
                 
                 
@@ -455,140 +447,30 @@
       
 
       
-        <blockquote>
-<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">overreacted.io</a> </p>
+        <p>身边人的认同，等于自身价值吗？</p>
+<p>最近陷入了深度的自我怀疑。一直以来，我都对自己的能力非常有自信，虽然远没到自负，但内心也是自傲的。我会觉得自己比身边的人要强，而且即使现在我不如别人，不远的将来也会超过他们，将他们甩在身后。</p>
+<p>在成长过程上，我绝对算不上一帆风顺，甚至是充满波折的。但在这波折之中的一个稳定的变化就是，<strong>我一直在超越曾经的对手或假想敌</strong>。我一直不是像某些人从小成绩优异，最多只是在班里名列前茅，但也很少是最前面几个。小学时一直有个稳定的「对手」，他一直在年级稳坐第一，从一年级到五年级。后来我们一起跳级到了不同的初中，后来得知他开始早恋逃课去网吧，第一个假想敌自爆了。后来在中学时，我的成绩也只在重点高中及格线上，班级里有不少人比我强，甚至我在 100 多名游离的时候，有几个动不动就是年级前十让我很是钦佩。后来考高中，我果然是勉强过线，跟这些假想敌一起上了高中，但到了高中之后，第一个月考就把这些敌人远远地甩在了身后，当然这跟我上了高中后痛定思痛地苦学一个月脱不了关系。</p>
+<p>在高中的时候，因为文理分科，一直以来我的数理化优势体现了出来，成绩比以前好了许多。同时因为对一些文学名著感兴趣，语文也从全校（1300多人）1000 多名上升到了全市前 50，英语也在几年努力下达到了一般水平。即使这样，我也没有像某些人狂刷题，而是有条不紊地总结题型和经验。每过一个月就有一次的月考对别人来说是煎熬，对我来说却像放假一样，因为可以不用上课，考试提前完成还可以睡觉。这个时候我就已经觉得我的学习方式跟别人完全不同，我从不死读书，而是擅长总结规律，这也可能是理科爱好者的思维习惯。最后的高考成绩出来，虽然我的理综没有平时高，最擅长的数学也考的一般（对我来说就是考砸了），但总的来说发挥算一般，没有失常就是好事。即使这样，最后的成绩依然把一些高中的假想敌甩在了身后。</p>
+<p>上了大学后，渐渐地偏离了学术的道路，一直以来我也不是死读书的，喜欢动手实践，这也是理科乐趣的来源。从大一就参加了科协的社团，在大二参加了一个学长牵头的小组织——蠡湖电子实验室。这是一个学生自发组织，也申请（占用）了学院创新基地几间实验室，并且在内部组队参加各种比赛以及平日交流的小团体。要说特点就是物以类聚人以群分，这个小团体里面的很多人都是喜欢动手实践的，从此基本就泡在实验室有两年，也偏离了纯学术的道路，而以前我是认为自己一定会走上科研之路的。几年下来，参加了不少比赛和项目，积累了很多实战经验。虽然跟实验室的优秀同学比起来只能说一般，但跟班级的同学比起来，确实是大神级别的存在。我甚至觉得班级里的同学不学无术，对实践的掌握甚至不如我的十分之一，这绝不夸张，这让我对所谓 211 学校的学术氛围挺失望，还好我在一个很厉害的团体中。</p>
+<p>其实叙述了这么长的成长经历，这才引出我想讨论的点。从学习时代的「学神」，到大学之后的「大神」，甚至在后面参与到工作中时，<strong>身边人总能在短短地相处中觉得我是个「大神」</strong>。不管身处在什么环境中，总是能很快地让同学、朋友觉得我是个很厉害的人，而在家人亲戚眼里，也是一个有主见、能处理问题的人。</p>
+<p><strong>其实我很清楚这是为什么</strong>，上面讲这么一段，绝不是为了吹嘘自己（接下来才是吹嘘自己，作者注），这是别人的印象。而从我自己的角度理解，我觉得相比一般人，我是一个很有探索欲和钻研精神的，遇到一些问题经常是孜孜不倦的找到解决方案，加上本就对身边事物的好奇心，长此以来养成了一种 geek 思维。别人觉得我是「大神」，可能是在生活、工作、行为或习惯各种方面的 geek 气息让他们认同。打字一般的人可能服气我的打字速度和可以考古的五笔，电脑用的生疏的可能佩服看起来颇有点眼花缭乱的全键盘+Vim操作。聊起天来我也总知道一些一般人没去探究过的生活上的通识。但尤其是工作之后，这种身边人的认同让我并没有那么舒适，因为我清楚自己的实力是深是浅。</p>
+<p>说白了，身边人对我的认同，来源于我这个人散发出的各种习惯也好，性格魅力也好，博识也好，但这跟技术又有多大关系呢？我越来越感到警觉。每次再有人叫我大神，我都会赶紧提醒自己认清自己的位置，千万不能让别人麻痹自己。</p>
+<p>但不管怎么说，身边的人总是能很认同我，我不知道这能不能算作自己的价值，至于结论，还要配合下文来看。</p>
+<hr>
+<p>说完了自己的成长经历以及生活中别人对我的看法，再说说自己。</p>
+<p>一直以来我也确实是很自信，也在做着超越别人的事，虽然后来我总结之后发现，我并没有太超速发展，而我的那些假想敌在掉队。一直以来我做到的是保持自己的竞争力，而我的假想敌却在一轮轮淘汰中一个个掉队了。后来因为考研和转行的风波，我也一定程度上掉队了，但我还是相信自己的能力，我觉得我能很快回到正轨。但现在有点怀疑自己了。</p>
+<p>我们先来看个例子。假如一件事情正常的工作量是五天，我只需要花半天就可以完成，而一个普通人需要四天。但最后的结果是普通人可以在第四天提前一天完成，而我可能会到第六天上午延期完成。任务拖到后面，可能从质量上来讲我有信心比别人的好，或者至少是用心的，但没达到我自己的标准。最后这种结果会让我觉得，我用半天时间完成了别人四天的工作量，虽然我延期了，但是我比别人强。</p>
+<p><strong>这或许是错觉</strong>？假如我不拖延的话，我就真的能在第一天的上午做完吗。又或者我只做半天，是不是根本忍受不了踏踏实实的工作四天，我的注意力就只能集中这么多，而最后的效率是被逼出来的，我真的很怀疑自己的能力到底如何。还有我以前经常晚上觉得精力旺盛，第二天还能起很早，一天都精神。但最近两天在看书学习，并且看书居多，十二点多还在坚持看，结果困的不行，看着看着就能睡着，床上一趴就睡着了，第二天六点起不来还得睡到七点半。</p>
+<p>所以我的精力真的像之前感受的那样旺盛吗？在真正的高强度学习下，我也需要长时间的睡眠来恢复。六天才做完一个需求，别人四天搞定，<strong>从结果上来看还不如一般人</strong>。</p>
+<hr>
+<p>其实最后这两段结合起来，就非常地矛盾，我到底是强如大牛，还是菜而不自知。其实我现在主观上倾向于后者（本来我就是一个非常“擅长”自责的人），至少我觉得我的能力需要得到证明，否则我真的很难再有信心说我比别人强在哪里。</p>
+<p>我这样想有点悲观，但越是在找工作的时候，越是觉得，即使你再有能力，身边的人如何认同你，你又怎么样才能在五分钟，或者一两个小时内，让一个陌生人做到同样程度的认同？碰到一个相谈甚欢的知己吗，这怕是有点难。按照最一般的套路，还是看产出，你的产出或者成果就代表了你的能力。</p>
+<p>但乐观点想，为什么我可以有清晰的思路很快地找到问题的解决方案，为什么在遇到一个问题时我比别人更容易去探索这个问题的本质是什么。又或者在代码质量和架构的设计中，我都有信心不输别人。也许六天完成就只是懒或者拖延的毛病而已，也许睡七个半小时还是比别人要强，而长时间阅读需要习惯。就让我夸夸自己吧，我需要一点自信心。即使是现在，我依然觉得不管我最后去了哪家公司，也绝对不是拖油瓶，我有自信在一个团队中，半年内达到团队中的人实力的前 1/3，这也是为什么我想去更优秀的团队，这对我自己的提升也像是乘上了银河列车。</p>
+<p>我依然能看到内心深处还有那份自傲，但现在这份骄傲蒙了尘，深深地藏在了自卑的情绪之下。不是一句话一篇文章或者什么事情就能让它回来，<strong>我需要沉淀，需要有产出去证明自己</strong>。</p>
+<p>二〇一九年四月十三晚</p>
+<blockquote>
+<p>三天后就要去 b 站面试，谨以此文献给正在成长的自己，我需要多点自信 (゜-゜)つロ 干杯~</p>
 </blockquote>
-<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
-<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
-<hr>
-<p>我写过不计其数的 <code>super(props)</code> :</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: true };
-  }
-  // ...
-}
-</code></pre>
-<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  state = { isOn: true };
-  // ...
-}
-</code></pre>
-<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
-<a id="more"></a>
-<p>但是现在让我们回到这个例子，只使用 ES2015 的特性：</p>
-<pre><code class="language-js">lass Checkbox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: true };
-  }
-  // ...
-}
-</code></pre>
-<p>为什么我们要调用 <code>super</code>？可以省去吗？如果我们不得不调用它，不传 <code>props</code> 会怎么样？除了 <code>props</code> 还需要传递别的参数吗？我们来看一下这个问题。</p>
-<hr>
-<p>在 JavaScript 中, <code>super</code> 指的是父类的 constructor（在我们的例子中，它指的就是 React.Component）</p>
-<p>要注意的是，在 constructor 中，你只能在调用父类的 constructor 之后才能使用 <code>this</code>，JavaScript 不会让你这样做：</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  constructor(props) {
-    // 🔴 Can’t use `this` yet
-    super(props);
-    // ✅ Now it’s okay though
-    this.state = { isOn: true };
-  }
-  // ...
-}
-</code></pre>
-<p>有一个很好的理由说明为什么 JavaScript 强制你在使用 <code>this</code> 之前要执行父类的 constructor，参考下面这个类结构：</p>
-<pre><code class="language-js">class Person {
-  constructor(name) {
-    this.name = name;
-  }
-}
-
-class PolitePerson extends Person {
-  constructor(name) {
-    this.greetColleagues(); // 🔴 This is disallowed, read below why
-    super(name);
-  }
-  greetColleagues() {
-    alert(&#39;Good morning folks!&#39;);
-  }
-}
-</code></pre>
-<p>想象一下，如果你在调用 <code>super</code> 之前就调用了 <code>this</code>，一个月之后，我们可能修改了 <code>greetColleagues</code> 方法：</p>
-<pre><code class="language-js">greetColleagues() {
-  alert(&#39;Good morning folks!&#39;);
-  alert(&#39;My name is &#39; + this.name + &#39;, nice to meet you!&#39;);
-}
-</code></pre>
-<p>但我们忘记了 <code>this.greetColleagues()</code> 是在 <code>super()</code> 之前调用的，这个时候 <code>this.name</code> 还没有被定义！所以像这样的代码就很不好维护。</p>
-<p>为了避开这个陷阱，<strong>JavaScript 强制你如果想要在 constructor 中使用 <code>this</code>，则必须先调用 <code>super</code></strong>，让父类先处理完该做的事情！这个限制也适用于使用类来定义 React 组件：</p>
-<pre><code class="language-js">constructor(props) {
-  super(props);
-  // ✅ Okay to use `this` now
-  this.state = { isOn: true };
-}
-</code></pre>
-<p>现在我们就只剩下另外一个问题，为什么要传递 <code>props</code> 参数？</p>
-<hr>
-<p>你可能认为向 <code>super</code> 传递 <code>props</code> 是有必要的，以便 <code>React.Component</code> 的 constructor 可以初始化 <code>this.props</code>：</p>
-<pre><code class="language-js">// Inside React
-class Component {
-  constructor(props) {
-    this.props = props;
-    // ...
-  }
-}
-</code></pre>
-<p>事实也差不多，准确地说，这是<a href="https://github.com/facebook/react/blob/1d25aa5787d4e19704c049c3cfa985d3b5190e0d/packages/react/src/ReactBaseClasses.js#L22" target="_blank" rel="noopener">它的过程</a></p>
-<p>但不知道为什么，即使你没有把 <code>props</code> 参数传递给 <code>super()</code>，你还是可以在 <code>render</code> 和其它方法中访问 <code>this.props</code>。（不信的话可以试试看）</p>
-<p>所以它内部是如何运作的？事实上，React 会在你调用 constructor 之后重新赋值 <code>props</code>:</p>
-<pre><code class="language-js">// Inside React
-const instance = new YourComponent(props);
-instance.props = props;
-</code></pre>
-<p>所以即使你忘了把 <code>props</code> 传递给 <code>super()</code>，React 也会在之后正确的赋值，这就是原因。</p>
-<p>当 React 支持 class 的时候，并不只是简单的添加了 ES6 的特性，它的目标是尽可能广泛抽象地支持 class。因为不能确定 ClojureScript、CoffeeScript、ES6、Fable、Scala.js、TypeScript 或其它的方式是如何定义一个组件的，所以 React 故意地不关心 <code>super()</code> 方法有没有被调用——尽管这是 ES6 class 规定的</p>
-<p>所以，这是不是就意味着，你可以只写 <code>super()</code> 而不用 <code>super(props)</code> 了？</p>
-<p><strong>恐怕并不是这样，因为它依然令人困惑。</strong> 当然，React 会在 constructor 之后重新赋值 <code>this.props</code>，但是在 constructor 内部调用了 <code>super</code> 之后，<code>this.props</code> 依然是 <code>undefined</code>：</p>
-<pre><code class="language-js">// Inside React
-class Component {
-  constructor(props) {
-    this.props = props;
-    // ...
-  }
-}
-
-// Inside your code
-class Button extends React.Component {
-  constructor(props) {
-    super(); // 😬 We forgot to pass props
-    console.log(props);      // ✅ {}
-    console.log(this.props); // 😬 undefined 
-  }
-  // ...
-}
-</code></pre>
-<p>如果是在 constructor 中调用的某些方法中遇到了这种问题，就更难定位了。<strong>这就是为什么要强调要坚持<code>super(props)</code>，即使没有严格限制</strong>：</p>
-<pre><code class="language-js">class Button extends React.Component {
-  constructor(props) {
-    super(props); // ✅ We passed props
-    console.log(props);      // ✅ {}
-    console.log(this.props); // ✅ {}
-  }
-  // ...
-}
-</code></pre>
-<p>这样可以保证 <code>this.props</code> 在 constructor 执行完之前就正确赋值。</p>
-<hr>
-<p>还有最后一个 React 用户可能会困惑的问题。</p>
-<p>你可能注意到了，当你使用 Context API 的时候（无论是旧的 <code>contextTypes</code> 或者在 React 16.6 中新添加的 <code>contextType</code> API），<code>context</code> 是 constructor 的第二个参数。</p>
-<p>所以为什么我们不写成 <code>super(props, context)</code>？确实可以这样写，但是 context 用的相对比较少，所以也不容易碰到这个陷阱。</p>
-<p>如果使用 class fields proposal 的话，这个陷阱就不复存在了。不需要特别地写一个 constructor，所以的变量都可以自动传递。这样也可以在 <code>state = {}</code> 中直接引用 <code>this.props</code> 或 <code>this.context</code> 了。</p>
-<p>当然，使用 React Hooks 的话，我们甚至不需要使用 <code>super</code> 或 <code>this</code>，但这是以后的事儿了。</p>
 
       
     </div>
@@ -623,7 +505,7 @@ class Button extends React.Component {
   <li class="post-copyright-link">
     <strong>Post link: </strong>
     
-    <a href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/" title="「译」Why Do We Write super(props)?">https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/</a>
+    <a href="https://blog.liangzr.tech/2019/04/13/self-doubt/" title="什么是自身的价值">https://blog.liangzr.tech/2019/04/13/self-doubt/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -634,12 +516,6 @@ class Button extends React.Component {
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/react/" rel="tag"># react</a>
-          
-        </div>
-      
 
       
       
@@ -649,8 +525,8 @@ class Button extends React.Component {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/29/optimizing-react-app-with-immutable-data/" rel="next" title="用 Immutable 数据来优化 React 应用">
-                <i class="fa fa-chevron-left"></i> 用 Immutable 数据来优化 React 应用
+              <a href="/2019/04/08/js-type/" rel="next" title="JavaScript 的类型">
+                <i class="fa fa-chevron-left"></i> JavaScript 的类型
               </a>
             
           </div>
@@ -658,10 +534,6 @@ class Button extends React.Component {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/01/2018/" rel="prev" title="Bye 2018, Hi 2019">
-                Bye 2018, Hi 2019 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1064,9 +936,9 @@ class Button extends React.Component {
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/";
-    this.page.identifier = "2018/11/30/fork__why-do-we-write-super-props/";
-    this.page.title = '「译」Why Do We Write super(props)?';
+    this.page.url = "https://blog.liangzr.tech/2019/04/13/self-doubt/";
+    this.page.identifier = "2019/04/13/self-doubt/";
+    this.page.title = '什么是自身的价值';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
