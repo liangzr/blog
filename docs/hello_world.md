@@ -1,5 +1,5 @@
 ---
-title: Hello World 
+title: Hello World（嵌入式版）
 categories:
   - writing
 date: 2016-08-21 00:45:11
