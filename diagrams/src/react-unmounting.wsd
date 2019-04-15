@@ -1,0 +1,31 @@
+@startuml react-unmounting
+
+start
+
+#82F49C:componentWillUnmount;
+:组件实例进行unmount操作;
+note right
+  卸载组件
+  _renderedComponent
+  _instance
+end note
+
+:重置相关参数、更新队列、更新状态;
+note right
+  _pendingStateQueue
+  _pendingREplaceState
+  _pendingCallbacks
+  _pendingElement
+  _context
+  _rootNodeID
+  _topLevelWrapper
+end note
+
+:清除公共类;
+
+
+
+end
+
+
+@enduml

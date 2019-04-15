@@ -1,0 +1,32 @@
+@startuml react-set-state-pitfall
+
+state updateComponent {
+  state "componentWillUpdate" as cwu
+  state "shouldComponentUpdate" as scu 
+  state "componentWillReceiveProps" as cwrp
+  state "componentDidUpdate" as  cdu
+  cwrp --> scu
+  scu --> cwu
+  cwu --> cdu
+  cwrp --> setState : 合并 state
+  cwu --> setState : 无限循环
+  scu --> setState : 无限循环
+  cdu --> setState : 更新队列为空，触发二次 setState
+}
+
+state setState {
+  state enqueueSetState {
+    enqueueSetState: 初始化并压入更新队列
+
+    state enqueueUpdate
+    enqueueUpdate --> puin
+  }   
+}
+
+state "performUpdateIfNecessary" as puin {
+  puin: 更新队列 _pendingStateQueue 不为空
+}
+
+puin --> updateComponent
+ 
+@enduml

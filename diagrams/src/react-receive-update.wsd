@@ -1,0 +1,80 @@
+@startuml react-receive-update
+
+|updateComponent更新组件|
+start
+
+:初始化缓存属性;
+note right
+  nextContext, nextProps
+end note
+
+if (context改变) then (yes) 
+  :更新处理context;
+  note left
+    只保留被 contextTypes
+    声明的 context
+  end note
+else (no)
+  :更新context缓存;
+endif
+
+:更新props;
+
+if (
+  如果context或element改变 
+  &&
+  有componentWillReceiveProps
+) then (yes) 
+  #82F49C:componentWillReceiveProps;
+
+endif
+
+:合并state;
+note left
+  此时不会多次render
+end note
+
+#82F49C:shouldUpdate: forceUpdate || shouldUpdateComponent;
+
+if (shouldUpdate) then (no) 
+  :将状态属性更新到实例上;
+  note left
+    state
+    props
+    context
+  end note
+else (yes)
+  |#FAEBD7|performComponentUpdate执行更新|
+  if (存在componentDidUpdate) then (yes) 
+    :缓存当前状态属性;    
+  endif
+
+  if (无状态组件) then (no) 
+    :创建Component实例;    
+  endif
+
+  #82F49C:componentWillUpdate;
+  :将状态属性更新到实例上;
+
+  |_updateRenderedComponent执行渲染更新|
+  
+  if (需要更新) then (yes) 
+    :继续更新组件;    
+    ' note left
+    '   调用 ReactReconciler
+    '   .receiveComponent
+    ' end note
+  else (no)
+    #82F49C:递归render;
+  endif
+  
+  |#FAEBD7|performComponentUpdate执行更新|
+  #82F49C:componentDidUpdate;
+  
+endif
+
+|updateComponent更新组件|
+
+end
+
+@enduml

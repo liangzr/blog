@@ -1,0 +1,69 @@
+@startuml react-lifestyle
+
+start
+
+floating note left
+ 🔴不可 setState 
+ ✅可以 setState
+ 🌀合并 setState
+end note
+
+partition MOUTING {
+  #82F49C:🔴getDefaultProps;
+  floating note right
+    只在初始化组件元素时调用
+    所以只执行一次
+  end note
+  
+  #82F49C:🔴getIntialState;
+
+  #82F49C:🌀componentWillMount;
+  floating note right
+    初始化 state 等操作
+    建议都在 constructor 中做处理
+  end note
+
+  #82F49C:🔴render;
+  #82F49C:✅componentDidMount;
+  floating note right
+    有些例如获取 DOM 元素的位置等操作只有在
+    渲染之后才能得到，可以在这里做处理
+  end note
+}
+
+partition RECEIVE-PROPS {
+  #82F49C:🌀componentWillReceiveProps;
+  floating note right
+    可以用来处理props改变时，更新state
+  end note
+
+  #82F49C:🔴shouleComponentUpdate;
+  floating note right
+    返回 true 或 false 来决定组件是否要重新渲染
+    但不管是否重新渲染，属性状态都会更新
+  end note
+
+  #82F49C:🔴componentWillUpdate;
+  floating note right
+    在更新之前对组件的状态做保存
+  end note
+
+  #82F49C:🔴render;
+  #82F49C:✅componentDidUpdate;
+  floating note right
+    类似 componentDidMount
+  end note
+}
+
+partition UNMOUNTING {
+  #82F49C:🔴componentWillUnmount;
+  floating note right
+    可以在这个方法中进行取消事件监听等操作
+    避免内存泄漏
+  end note
+}
+
+
+end
+
+@enduml

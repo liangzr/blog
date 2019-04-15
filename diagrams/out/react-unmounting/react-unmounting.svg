@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="380px" preserveAspectRatio="none" style="width:418px;height:380px;" version="1.1" viewBox="0 0 418 380" width="418px" zoomAndPan="magnify"><defs><filter height="300%" id="fdlnnql8odl12" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="116" cy="20" fill="#000000" filter="url(#fdlnnql8odl12)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#82F49C" filter="url(#fdlnnql8odl12)" height="33.9688" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="168" x="32" y="50"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="148" x="42" y="71.1387">componentWillUnmount</text><path d="M222,93.9688 L222,117.668 L202,121.668 L222,125.668 L222,149.3672 A0,0 0 0 0 222,149.3672 L383,149.3672 A0,0 0 0 0 383,149.3672 L383,103.9688 L373,93.9688 L222,93.9688 A0,0 0 0 0 222,93.9688 " fill="#FBFB77" filter="url(#fdlnnql8odl12)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M373,93.9688 L373,103.9688 L383,103.9688 L373,93.9688 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="52" x="228" y="111.0356">卸载组件</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="140" x="228" y="126.1685">_renderedComponent</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="61" x="228" y="141.3013">_instance</text><rect fill="#FEFECE" filter="url(#fdlnnql8odl12)" height="33.9688" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="172" x="30" y="104.6836"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="152" x="40" y="125.8223">组件实例进行unmount操作</text><path d="M242,159.3672 L242,213.332 L222,217.332 L242,221.332 L242,275.2969 A0,0 0 0 0 242,275.2969 L406,275.2969 A0,0 0 0 0 406,275.2969 L406,169.3672 L396,159.3672 L242,159.3672 A0,0 0 0 0 242,159.3672 " fill="#FBFB77" filter="url(#fdlnnql8odl12)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M396,159.3672 L396,169.3672 L406,169.3672 L396,159.3672 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="135" x="248" y="176.4341">_pendingStateQueue</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="143" x="248" y="191.5669">_pendingREplaceState</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="118" x="248" y="206.6997">_pendingCallbacks</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="111" x="248" y="221.8325">_pendingElement</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="55" x="248" y="236.9653">_context</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="80" x="248" y="252.0981">_rootNodeID</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="114" x="248" y="267.231">_topLevelWrapper</text><rect fill="#FEFECE" filter="url(#fdlnnql8odl12)" height="33.9688" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="212" x="10" y="200.3477"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="192" x="20" y="221.4863">重置相关参数、更新队列、更新状态</text><rect fill="#FEFECE" filter="url(#fdlnnql8odl12)" height="33.9688" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="76" y="295.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="86" y="316.4355">清除公共类</text><ellipse cx="116" cy="359.2656" fill="#FFFFFF" filter="url(#fdlnnql8odl12)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 2.5;" x1="109.8128" x2="122.1872" y1="353.0784" y2="365.4528"/><line style="stroke: #000000; stroke-width: 2.5;" x1="122.1872" x2="109.8128" y1="353.0784" y2="365.4528"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="116" x2="116" y1="30" y2="50"/><polygon fill="#A80036" points="112,40,116,50,120,40,116,44" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="116" x2="116" y1="83.9688" y2="104.6836"/><polygon fill="#A80036" points="112,94.6836,116,104.6836,120,94.6836,116,98.6836" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="116" x2="116" y1="138.6523" y2="200.3477"/><polygon fill="#A80036" points="112,190.3477,116,200.3477,120,190.3477,116,194.3477" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="116" x2="116" y1="234.3164" y2="295.2969"/><polygon fill="#A80036" points="112,285.2969,116,295.2969,120,285.2969,116,289.2969" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="116" x2="116" y1="329.2656" y2="349.2656"/><polygon fill="#A80036" points="112,339.2656,116,349.2656,120,339.2656,116,343.2656" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+start
+
+#82F49C:componentWillUnmount;
+:组件实例进行unmount操作;
+note right
+  卸载组件
+  _renderedComponent
+  _instance
+end note
+
+:重置相关参数、更新队列、更新状态;
+note right
+  _pendingStateQueue
+  _pendingREplaceState
+  _pendingCallbacks
+  _pendingElement
+  _context
+  _rootNodeID
+  _topLevelWrapper
+end note
+
+:清除公共类;
+
+
+
+end
+@enduml
+
+PlantUML version 1.2019.04(Fri Mar 29 15:44:36 UTC 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 1.8.0_212-8u212-b01-1~deb9u1-b01
+Operating System: Linux
+OS Version: 3.10.0-957.1.3.el7.x86_64
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

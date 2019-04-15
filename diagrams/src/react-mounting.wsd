@@ -1,0 +1,63 @@
+@startuml react-mounting
+
+|mountComponent挂载组件|
+start
+
+:初始化props和context;
+:执行构造函数获得实例;
+
+if (无状态组件OK) then (yes) 
+  :渲染无状态组件;
+  note left
+    无状态组件没有状态更新队列
+    只专注于渲染
+  end note
+endif
+
+:重新初始化类属性;
+
+note right
+  为类抽象兜底，即使用户
+  没有正确地调用 super()
+end note
+
+:初始化state;
+:初始化更新队列;
+note right
+  _pendingStateQueue = null
+  _pendingReplaceState = false
+  _pendingForceUpdate = false
+end note
+
+|#FAEBD7|performIntialMount执行挂载|
+
+#82F49C:componentWillMount;
+
+if (更新队列不为空) then (yes) 
+  :合并state;    
+  note left
+    此时不会多次render
+  end note
+
+endif
+
+if (无状态组件) then (no) 
+  :创建Component实例;    
+endif
+
+#82F49C:递归render;
+note right
+  调用 ReactReconciler.mountComponent
+  递归地渲染子组件，子组件渲染成功后，父组件
+  才渲染完成
+end note
+
+|mountComponent挂载组件|
+
+#82F49C:componentDidMount;
+
+
+end
+
+
+@enduml
