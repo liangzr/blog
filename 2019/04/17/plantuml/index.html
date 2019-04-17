@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg?v=7.0.1" color="#222">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="/css/lib/prism.css">
+
+
+  <meta name="description" content="相信不少人都尝试过不少画图工具，但要么是扩展性不强，要么支持的类型单一，有些在线的画图工具还要收费，而且一些框框线线拖来拖去，还要调整大小、字体、线条和位置各种繁琐的操作，回过头来你才发现，你不就是为了梳理内容才要画图吗，怎么就不能专注于内容呢？ 画图工具对比下面我先介绍几个我尝试过的画图工具，以及使用体验：    工具 支持类型 操作性 外观 导出格式 价格     ProcessOn 流程图、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PlantUML 简介">
+<meta property="og:url" content="https://blog.liangzr.tech/2019/04/17/plantuml/index.html">
+<meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="相信不少人都尝试过不少画图工具，但要么是扩展性不强，要么支持的类型单一，有些在线的画图工具还要收费，而且一些框框线线拖来拖去，还要调整大小、字体、线条和位置各种繁琐的操作，回过头来你才发现，你不就是为了梳理内容才要画图吗，怎么就不能专注于内容呢？ 画图工具对比下面我先介绍几个我尝试过的画图工具，以及使用体验：    工具 支持类型 操作性 外观 导出格式 价格     ProcessOn 流程图、">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://blog.liangzr.tech/diagrams/git-flow/git-flow.svg">
+<meta property="og:image" content="https://blog.liangzr.tech/diagrams/tcp/tcp-connect.svg">
+<meta property="og:image" content="https://blog.liangzr.tech/diagrams/react-lifestyle/react-lifestyle.svg">
+<meta property="og:image" content="https://blog.liangzr.tech/diagrams/react-mounting/react-mounting.svg">
+<meta property="og:image" content="https://blog.liangzr.tech/diagrams/fed-mind/javascript.svg">
+<meta property="og:updated_time" content="2019-04-17T05:11:02.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PlantUML 简介">
+<meta name="twitter:description" content="相信不少人都尝试过不少画图工具，但要么是扩展性不强，要么支持的类型单一，有些在线的画图工具还要收费，而且一些框框线线拖来拖去，还要调整大小、字体、线条和位置各种繁琐的操作，回过头来你才发现，你不就是为了梳理内容才要画图吗，怎么就不能专注于内容呢？ 画图工具对比下面我先介绍几个我尝试过的画图工具，以及使用体验：    工具 支持类型 操作性 外观 导出格式 价格     ProcessOn 流程图、">
+<meta name="twitter:image" content="https://blog.liangzr.tech/diagrams/git-flow/git-flow.svg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://blog.liangzr.tech/2019/04/17/plantuml/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PlantUML 简介 | OVERLOADING 🔥</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?822020422769969dec75820ad85d1b63";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OVERLOADING 🔥</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Keep and carry on</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-technologies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br>Technologies</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-writings">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/writings/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Writings</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-translateds">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/translated/" rel="section"><i class="menu-item-icon fa fa-fw fa-language"></i> <br>Translateds</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/17/plantuml/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jory Liang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OVERLOADING 🔥">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">PlantUML 简介
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-17 09:07:56" itemprop="dateCreated datePublished" datetime="2019-04-17T09:07:56+08:00">2019-04-17</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>相信不少人都尝试过不少画图工具，但要么是扩展性不强，要么支持的类型单一，有些在线的画图工具还要收费，而且一些框框线线拖来拖去，还要调整大小、字体、线条和位置各种繁琐的操作，回过头来你才发现，你不就是为了梳理内容才要画图吗，怎么就不能专注于内容呢？</p>
+<h2 id="画图工具对比"><a href="#画图工具对比" class="headerlink" title="画图工具对比"></a>画图工具对比</h2><p>下面我先介绍几个我尝试过的画图工具，以及使用体验：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">工具</th>
+<th style="text-align:left">支持类型</th>
+<th style="text-align:left">操作性</th>
+<th style="text-align:left">外观</th>
+<th style="text-align:left">导出格式</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ProcessOn</td>
+<td style="text-align:left">流程图、类图、思维导图、状态图等</td>
+<td style="text-align:left">一般/拖拽</td>
+<td style="text-align:left">一般、高度自定义</td>
+<td style="text-align:left">png/jpg/pdf/pos/svg</td>
+<td>免费保存 5 个图</td>
+</tr>
+<tr>
+<td style="text-align:left">MindNode/XMind</td>
+<td style="text-align:left">思维导图</td>
+<td style="text-align:left">简单/快捷键</td>
+<td style="text-align:left">优秀</td>
+<td style="text-align:left">png/pdf/text等</td>
+<td>免费</td>
+</tr>
+<tr>
+<td style="text-align:left">Markdown</td>
+<td style="text-align:left">时序图、流程图</td>
+<td style="text-align:left">简单/代码</td>
+<td style="text-align:left">一般、固定样式</td>
+<td style="text-align:left">无</td>
+<td>扩展语法，免费但有限支持</td>
+</tr>
+<tr>
+<td style="text-align:left">Keynote</td>
+<td style="text-align:left">任意</td>
+<td style="text-align:left">繁琐/拖拽</td>
+<td style="text-align:left">优秀、高度自定义</td>
+<td style="text-align:left">key</td>
+<td>免费，限定 macOS</td>
+</tr>
+<tr>
+<td style="text-align:left">PlantUML</td>
+<td style="text-align:left">时序图、用例图、类图、流程图、状态图、对思维导图等</td>
+<td style="text-align:left">简单/代码</td>
+<td style="text-align:left">一般但统一、有限自定义</td>
+<td style="text-align:left">png/svg/text</td>
+<td>开源 &amp; 免费</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p>对比已经列了出来，就拿我自己的使用经验来说，ProcessOn 之类的专门画流程图的工具，线条框框拖拽起来太繁琐，很难专注于内容，而且样式一般。XMind 和 MindNode 虽然不错但只能画思维导图，列在这里是因为思维导图也是很重要的一种图。Keynote 虽然可以画出挺不错的图，但因为它本来最多算个作画工具而不是作图工具，所以线框和箭头之类都要自己画出来备用，操作繁琐。</p>
+<p>Markdown 和 PlantUML 都是基于代码实时渲染绘图，对于一般人来说可能有点门槛，但对于程序员来说就不存在了。相比来说我比较喜欢这种方式，不用自己去拖拽线框的位置，逻辑顺序修改起来也非常方便。不过 Markdown 本身不支持作图，只有个别支持扩展语法的才能渲染出来，并且支持的类别也较法，语法也过于简单。所以接下来我们就要重点讲一下 PlantUML 和它的常规用法啦～</p>
+<h2 id="PlantUML-简介"><a href="#PlantUML-简介" class="headerlink" title="PlantUML 简介"></a>PlantUML 简介</h2><p><a href="http://plantuml.com/zh/" target="_blank" rel="noopener">PlantUML</a> 是一个<a href="https://github.com/plantuml/plantuml" target="_blank" rel="noopener">开源项目</a>，支持从文本（代码）快速绘制 UML 图。</p>
+<blockquote>
+<p>UML-Unified Model Language 统一建模语言，又称标准建模语言。是用来对软件密集系统进行可视化建模的一种语言。</p>
+</blockquote>
+<p>目前已经支持的 UML 图：</p>
+<ul>
+<li><strong>时序图</strong></li>
+<li>用例图</li>
+<li>类图</li>
+<li><strong>活动图</strong>（流程图）</li>
+<li>组件图</li>
+<li>状态图</li>
+<li>对象图</li>
+<li>部署图 </li>
+<li>定时图 </li>
+</ul>
+<p>非 UML 图：</p>
+<ul>
+<li>线框图形界面</li>
+<li>架构图</li>
+<li>规范和描述语言 (SDL)</li>
+<li>Ditaa 图</li>
+<li>甘特图 </li>
+<li><strong>思维导图</strong></li>
+<li>工作分解结构图</li>
+<li>以 AsciiMath 或 JLaTeXMath 符号的数学公式</li>
+</ul>
+<h2 id="常用图绘制"><a href="#常用图绘制" class="headerlink" title="常用图绘制"></a>常用图绘制</h2><h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p>时序图可以很直观地看到一个有序地操作流程</p>
+<p>git-flow 流程图：</p>
+<p><img src="/diagrams/git-flow/git-flow.svg" alt></p>
+<p>下面我们来跟着一个 TCP 握手的时序图来学习它的一般用法</p>
+<pre><code class="language-diagram">@startuml tcp-connect
+
+header overloading
+footer copyright liangzr
+
+title TCP 握手协议
+
+actor client 
+
+participant server order 2
+participant client order 1
+
+autonumber
+client -&gt; server : SYN
+note left
+  客户端向服务端发送连接请求报文段，
+  该报文段包含自身的数据通讯初始序号
+end note
+
+server -&gt; client : SYN + ACK
+note right
+  服务端收到连接请求报文段后，如果同
+  意连接，刚会发送一个应答，该应答中
+  也会包含自身的数据通讯初始序号
+end note
+
+client -&gt; server : ACK
+note left
+  客户端收到连接同意的应答后，还要向
+  服务端发送一个确认报文
+end note
+
+@enduml
+</code></pre>
+<p><img src="/diagrams/tcp/tcp-connect.svg" alt></p>
+<p><code>@startuml</code> 和 <code>@enduml</code> 用来表示大多数情况下 UML 图的开始与结束。</p>
+<p><strong><code>角色A -&gt; 角色B : 过程</code> 这种语法表示了角色之间的过程信息</strong></p>
+<p><code>actor client</code> 定义了 client 的角色：</p>
+<ul>
+<li>actor</li>
+<li>boundary</li>
+<li>control</li>
+<li>entity</li>
+<li>database</li>
+<li>collections</li>
+</ul>
+<p>一共六种角色可以选择，也可以不指定角色</p>
+<p><code>participant server order 2</code> 可以指定角色的排列顺序，数字小的排在左边</p>
+<p><code>header</code>、<code>footer</code> 和 <code>title</code> 可以定义一些页面信息, <code>note</code> 可以给节点添加注释</p>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p>流程图是最常用的图之一，可以直观形象地描述一个流程的详细过程</p>
+<p>先来看一个 React 生命周期的简单流程图：</p>
+<p><img src="/diagrams/react-lifestyle/react-lifestyle.svg" alt></p>
+<pre><code class="language-diagram">@startuml react-mounting
+
+|mountComponent挂载组件|
+start
+
+:初始化props和context;
+:执行构造函数获得实例;
+
+if (无状态组件OK) then (yes) 
+  :渲染无状态组件;
+  note left
+    无状态组件没有状态更新队列
+    只专注于渲染
+  end note
+endif
+
+:重新初始化类属性;
+
+note right
+  为类抽象兜底，即使用户
+  没有正确地调用 super()
+end note
+
+:初始化state;
+:初始化更新队列;
+note right
+  _pendingStateQueue = null
+  _pendingReplaceState = false
+  _pendingForceUpdate = false
+end note
+
+|#FAEBD7|performIntialMount执行挂载|
+
+#82F49C:componentWillMount;
+
+if (更新队列不为空) then (yes) 
+  :合并state;    
+  note left
+    此时不会多次render
+  end note
+
+endif
+
+if (无状态组件) then (no) 
+  :创建Component实例;    
+endif
+
+#82F49C:递归render;
+note right
+  调用 ReactReconciler.mountComponent
+  递归地渲染子组件，子组件渲染成功后，父组件
+  才渲染完成
+end note
+
+|mountComponent挂载组件|
+
+#82F49C:componentDidMount;
+
+end
+
+@enduml
+</code></pre>
+<p><img src="/diagrams/react-mounting/react-mounting.svg" alt></p>
+<p>在流程图中，<strong><code>:过程;</code> 代表一个流程节点</strong></p>
+<p>在 <code>#82F49C:过程;</code> 前面加颜色可以修改节点的默认背景色</p>
+<p><code>|泳道A|</code> 语法可以创建一个泳道，需要注意的是，泳道的切换都需要主动声明</p>
+<p><code>if</code> 逻辑判断语义化很好理解，不再赘述</p>
+<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p>思维导图虽然我还是更喜欢用 MindNode 来写，但是 PlantUML 生成的 svg 也许更适合放在文章中保存</p>
+<p>它的语法也非常简单，我们直接来看个例子：</p>
+<pre><code class="language-diagram">@startmindmap
+title JavaScript 结构
+
+* JavaScript
+** 运行时
+*** 数据结构
+**** 类型
+***** 7 种语言类型
+***** 7 种规范类型
+**** 实例（内置对象）
+*** 执行过程
+**** 事件循环
+**** 微任务执行
+**** 函数执行
+**** 语句执行
+** 文法
+*** 词法
+*** 语法
+** 语义
+
+@endmindmap
+</code></pre>
+<p><img src="/diagrams/fed-mind/javascript.svg" alt>)</p>
+<h2 id="插件支持"><a href="#插件支持" class="headerlink" title="插件支持"></a>插件支持</h2><p>PlantUML 的官方列举了很多在使用它的工具和网站，在这里我们以方便使用为目的，向大家介绍一个 VSCode 的 PlantUML 插件。</p>
+<p>在 VSCode 市场或者软件内，搜索 <a href="https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml" target="_blank" rel="noopener"><code>PlantUML</code> 插件 / jebbs</a>，安装后需要在全局或者工作区配置参数：</p>
+<p><code>.vscode/settings.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;plantuml.diagramsRoot&quot;: &quot;diagrams&quot;,
+  &quot;plantuml.exportOutDir&quot;: &quot;hexo/source/diagrams&quot;
+}
+</code></pre>
+<p><code>plantuml.diagramsRoot</code> 代表放源文件的地方，而 <code>plantuml.exportOutDir</code> 则是输出渲染后的图片的地方</p>
+<p><code>/diagrams</code> 目录结构:</p>
+<pre><code class="language-console">├── git-flow.wsd
+├── react-lifestyle.wsd
+├── react-mounting.wsd
+├── react-receive-update.wsd
+├── react-set-state-pitfall.wsd
+├── react-unmounting.wsd
+└── tcp.wsd
+</code></pre>
+<p><code>/hexo/source/diagrams</code> 目录结构：</p>
+<pre><code class="language-console">├── git-flow
+│   └── git-flow.svg
+├── react-lifestyle
+│   └── react-lifestyle.svg
+├── react-mounting
+│   └── react-mounting.svg
+├── react-receive-update
+│   └── react-receive-update.svg
+├── react-set-state-pitfall
+│   └── react-set-state-pitfall.svg
+├── react-unmounting
+│   └── react-unmounting.svg
+└── tcp
+    ├── tcp-connect.svg
+    └── tcp-intro.svg
+</code></pre>
+<p>按照插件官方的说明，如果需要在本地渲染，还需要指定<br>配置完还不能马上使用，把 plantuml 代码渲染到图形，你还需要一个渲染器。</p>
+<p>有两种办法，一是使用本地渲染，但是需要安装以下两个依赖：</p>
+<ul>
+<li>Java : 运行 PlantUML</li>
+<li>Graphviz : PlnatUML 需要用它来计算位置信息</li>
+</ul>
+<p>另一个办法是使用服务器渲染，建议在 VSCode 的全局配置中添加如下修改：</p>
+<pre><code class="language-json">{
+  &quot;plantuml.server&quot;: &quot;http://server_host:port&quot;,
+  &quot;plantuml.render&quot;: &quot;PlantUMLServer&quot;
+}
+</code></pre>
+<p><code>plantuml.server</code> 这一项替换成你自己的渲染服务器，如果还没有，你可以<a href="#搭建私服">搭建一个</a></p>
+<h3 id="使用渲染服务的优缺点"><a href="#使用渲染服务的优缺点" class="headerlink" title="使用渲染服务的优缺点"></a>使用渲染服务的优缺点</h3><p>优点：</p>
+<ul>
+<li>15 倍的导出速度和更快的预览速度</li>
+<li>不需要设置本地变量</li>
+<li>不需要设置并发量</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不能渲染特别大的图</li>
+<li>不能渲染有 <code>!include</code> 的图</li>
+<li>只支持 svg, png, txt 格式</li>
+<li>一些自定义 plantuml 版本的选项将失效</li>
+</ul>
+<h2 id="搭建私服"><a href="#搭建私服" class="headerlink" title="搭建私服"></a>搭建私服</h2><p>不管怎么说，从稳定性和渲染效率上来说，我都倾向于搭建一个自己的渲染服务，而官方也提供了现成的 Docker 镜像可以一键启用（关于 Docker 如何使用不在本文章讨论范围内）</p>
+<p>获取镜像：</p>
+<pre><code class="language-shell">docker pull plantuml/plantuml-server:jetty
+</code></pre>
+<p>启动服务：</p>
+<pre><code class="language-shell">docker run -d -p 8001:8080 plantuml/plantuml-server:jetty
+</code></pre>
+<p>使用 -p 参数将服务默认的 8080 端口转发到对应宿主机的端口上即可</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2019/04/17/plantuml/" title="PlantUML 简介">https://blog.liangzr.tech/2019/04/17/plantuml/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/13/self-doubt/" rel="next" title="什么是自身的价值">
+                <i class="fa fa-chevron-left"></i> 什么是自身的价值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4" alt="Jory Liang">
+            
+              <p class="site-author-name" itemprop="name">Jory Liang</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/liangzr" title="GitHub &rarr; https://github.com/liangzr" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:liangzr@outlook.com" title="E-Mail &rarr; mailto:liangzr@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://instagram.com/jory.liang" title="Instagram &rarr; https://instagram.com/jory.liang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/liangzr" title="Telegram &rarr; https://t.me/liangzr" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Recommendations
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.xczhang.tech/" title="http://www.xczhang.tech/" rel="noopener" target="_blank">小葱青青</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zfl9.com/" title="https://www.zfl9.com/" rel="noopener" target="_blank">Otokaze</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#画图工具对比"><span class="nav-number">1.</span> <span class="nav-text">画图工具对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PlantUML-简介"><span class="nav-number">2.</span> <span class="nav-text">PlantUML 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用图绘制"><span class="nav-number">3.</span> <span class="nav-text">常用图绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时序图"><span class="nav-number">3.1.</span> <span class="nav-text">时序图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程图"><span class="nav-number">3.2.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思维导图"><span class="nav-number">3.3.</span> <span class="nav-text">思维导图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件支持"><span class="nav-number">4.</span> <span class="nav-text">插件支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用渲染服务的优缺点"><span class="nav-number">4.1.</span> <span class="nav-text">使用渲染服务的优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建私服"><span class="nav-number">5.</span> <span class="nav-text">搭建私服</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jory Liang</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/lib/prism.js" async></script>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.liangzr.tech/2019/04/17/plantuml/";
+    this.page.identifier = "2019/04/17/plantuml/";
+    this.page.title = 'PlantUML 简介';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://liangzr.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
