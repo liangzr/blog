@@ -1,0 +1,41 @@
+@startuml tcp-intro
+actor client 
+
+participant server order 2
+participant client order 1
+
+@enduml
+
+@startuml tcp-connect
+
+header overloading
+footer copyright liangzr
+
+title TCP 握手协议
+
+actor client 
+
+participant server order 2
+participant client order 1
+
+autonumber
+client -> server : SYN
+note left
+  客户端向服务端发送连接请求报文段，
+  该报文段包含自身的数据通讯初始序号
+end note
+
+server -> client : SYN + ACK
+note right
+  服务端收到连接请求报文段后，如果同
+  意连接，刚会发送一个应答，该应答中
+  也会包含自身的数据通讯初始序号
+end note
+
+client -> server : ACK
+note left
+  客户端收到连接同意的应答后，还要向
+  服务端发送一个确认报文
+end note
+
+@enduml

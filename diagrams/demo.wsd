@@ -1,0 +1,26 @@
+@startuml git-flow
+participant master order 0
+participant develop order 1
+participant feature order 2
+participant release order 3
+participant hotfix order -1
+
+autonumber
+develop -> feature : 新分支
+feature -> feature : 功能点
+feature -> develop : 合并到开发分支
+develop -> release : 预发布
+release -> release : bug 修复
+
+autonumber 6 0
+release -> master : 发布合并
+release -> develop : 发布合并
+
+autonumber 
+master -> hotfix : 处理线上 bug
+hotfix -> hotfix : bug 修复
+
+autonumber 3 0
+hotfix -> master : 发布合并
+hotfix -> develop : 发布合并
+@enduml
