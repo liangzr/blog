@@ -239,7 +239,7 @@ title JavaScript 结构
 @endmindmap
 ```
 
-![](/diagrams/fed-mind/javascript.svg))
+![](/diagrams/fed-mind/javascript.svg)
 
 
 
