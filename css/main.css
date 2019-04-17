@@ -1365,7 +1365,7 @@ pre .javascript .function {
   content: "#";
   color: #42b983;
   position: absolute;
-  left: -0.7em;
+  left: -1em;
   margin-top: -0.05em;
   padding-right: 0.5em;
   font-size: 1em;
@@ -1901,7 +1901,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #12540d;
+  background: #6ff;
 }
 .links-of-blogroll {
   font-size: 13px;
