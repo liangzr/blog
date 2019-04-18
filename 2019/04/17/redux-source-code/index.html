@@ -103,21 +103,24 @@
 <link rel="stylesheet" href="/css/lib/prism.css">
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Translateds">
-<meta property="og:url" content="https://blog.liangzr.tech/translated/index.html">
+  <meta name="description" content="Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。 本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考官方的解释 源码结构Redux 源码的目录结构如下： src ├── applyMiddleware.js ├── bindActionCreat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux 源码分析">
+<meta property="og:url" content="https://blog.liangzr.tech/2019/04/17/redux-source-code/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。 本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考官方的解释 源码结构Redux 源码的目录结构如下： src ├── applyMiddleware.js ├── bindActionCreat">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-14T06:09:11.847Z">
+<meta property="og:updated_time" content="2019-04-18T05:05:21.434Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Translateds">
+<meta name="twitter:title" content="Redux 源码分析">
+<meta name="twitter:description" content="Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。 本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考官方的解释 源码结构Redux 源码的目录结构如下： src ├── applyMiddleware.js ├── bindActionCreat">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.liangzr.tech/translated/">
+  <link rel="canonical" href="https://blog.liangzr.tech/2019/04/17/redux-source-code/">
 
 
 
@@ -127,7 +130,7 @@
   };
 </script>
 
-  <title>Translateds | OVERLOADING 🔥</title>
+  <title>Redux 源码分析 | OVERLOADING 🔥</title>
   
 
 
@@ -261,7 +264,7 @@
         
         
           
-          <li class="menu-item menu-item-translateds menu-item-active">
+          <li class="menu-item menu-item-translateds">
 
     
     
@@ -332,63 +335,12 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    <header class="post-header">
-
-<h2 class="post-title" itemprop="name headline">Translateds
-
-</h2>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
     
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-          
 
   
 
@@ -403,7 +355,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/17/redux-source-code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jory Liang">
@@ -420,10 +372,8 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/30/fork__why-do-we-write-super-props/" class="post-title-link" itemprop="url">「译」Why Do We Write super(props)?</a>
+          <h2 class="post-title" itemprop="name headline">Redux 源码分析
+
               
             
           </h2>
@@ -446,35 +396,12 @@
                 
               
 
-              <time title="Created: 2018-11-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-30T00:00:00+08:00">2018-11-30</time>
+              <time title="Created: 2019-04-17 14:46:53" itemprop="dateCreated datePublished" datetime="2019-04-17T14:46:53+08:00">2019-04-17</time>
             
 
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/" itemprop="url" rel="index"><span itemprop="name">translated</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -504,39 +431,311 @@
       
 
       
-        
-          <blockquote>
-<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">overreacted.io</a> </p>
-</blockquote>
-<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
-<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
-<hr>
-<p>我写过不计其数的 <code>super(props)</code> :</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: true };
+        <p>Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。</p>
+<p>本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考<a href="https://facebook.github.io/flux/" target="_blank" rel="noopener">官方的解释</a></p>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><p>Redux 源码的目录结构如下：</p>
+<pre><code>src
+├── applyMiddleware.js
+├── bindActionCreators.js
+├── combineReducers.js
+├── compose.js
+├── createStore.js
+├── index.js
+└── utils
+    ├── actionTypes.js
+    ├── isPlainObject.js
+    └── warning.js
+</code></pre><a id="more"></a>
+<p>可以看到 Redux 的源码还是非常简单的，入口文件则导出了关键函数：</p>
+<p><code>index.js</code>：</p>
+<pre><code class="language-js">...
+
+export {
+  createStore,
+  combineReducers,
+  bindActionCreators,
+  applyMiddleware,
+  compose,
+  __DO_NOT_USE__ActionTypes
+}
+</code></pre>
+<p>最关键的 <code>createStore</code> 就是我们用来用来创建 store 的，而 <code>combineReducers</code> 和 <code>bindActionCreators</code> 则是一些辅助方法，<code>applyMiddleware</code> 和 <code>compose</code> 则和中间件有关。</p>
+<p>下面我们依次从创建 store、辅助方法、中间件三个方面了解下 Redux 的设计。</p>
+<h2 id="createStore"><a href="#createStore" class="headerlink" title="createStore"></a>createStore</h2><p>先不关注 <code>createStore</code> 中其它函数，以及一些校验的方法，我们先来看看它本身都做了些什么：</p>
+<pre><code class="language-js">export default function createStore(reducer, preloadedState, enhancer) {
+  let currentReducer = reducer          // 初始化 reducer
+  let currentState = preloadedState     // 初始化状态
+  let currentListeners = []             // 初始化监听器为空数组
+  let nextListeners = currentListeners  // 缓存当前监听器数组
+  let isDispatching = false             // 初始化是否正在 dispatch 为 false
+
+  function ensureCanMutateNextListeners() {}
+  function getState() {}
+  function subscribe(listener) {}
+  function dispatch(action) {}
+  function replaceReducer(nextReducer) {}
+  function observable() {}
+
+  dispatch({ type: ActionTypes.INIT })
+
+  return {
+    dispatch,
+    subscribe,
+    getState,
+    replaceReducer，
+    [$$observable]: observable,
   }
-  // ...
 }
 </code></pre>
-<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  state = { isOn: true };
-  // ...
+<p>可以看到，<code>createStore</code> 定义了一堆局部变量来保存状态，而这些状态在内部的方法中可以访问到，这些方法又被返回了出来，由此因为闭包的原因，这些函数内的变量也得以保存。</p>
+<p>在声明了一系列方法后，<code>createStore</code> 最后 dispatch 了一个初始化的 action，随后返回了这些方法。</p>
+<p><code>actionTypes.js</code>: </p>
+<pre><code class="language-js">const randomString = () =&gt;
+  Math.random()
+    .toString(36)
+    .substring(7)
+    .split(&#39;&#39;)
+    .join(&#39;.&#39;)
+
+const ActionTypes = {
+  INIT: `@@redux/INIT${randomString()}`,
+  REPLACE: `@@redux/REPLACE${randomString()}`,
+  PROBE_UNKNOWN_ACTION: () =&gt; `@@redux/PROBE_UNKNOWN_ACTION${randomString()}`
+}
+
+export default ActionType
+</code></pre>
+<p><code>randomString</code> 生成了一个随机的字符串，<code>Number.prototype.toString</code> 可以把数字转换成 2-36 进制的字符串，36 进制度则用 0-9、a-z 来表示，如此一来它产生的就是类似 <code>&#39;p.w.1.s.r.h&#39;</code> 这样的字符串。</p>
+<p>另外可以注意到，INIT 和 REPLACE 是在模块加载的时候就已经生成了随机字符串，而 PROBE_UNKNOWN_ACTION 则会在调用的时候才调用 <code>randomString</code> 方法。</p>
+<h3 id="getState"><a href="#getState" class="headerlink" title="getState"></a>getState</h3><pre><code class="language-js"> function getState() {
+    if (isDispatching) {
+      throw new Error(
+        &#39;You may not call store.getState() while the reducer is executing. &#39; +
+          &#39;The reducer has already received the state as an argument. &#39; +
+          &#39;Pass it down from the top reducer instead of reading it from the store.&#39;
+      )
+    }
+
+    return currentState
+  }
+</code></pre>
+<p><code>getState</code> 方法的逻辑非常简单，它直接返回了函数变量 <code>currentState</code>，即当前的的整个 store 树。</p>
+<p>但要注意的是，<code>isDispatching</code> 为 <code>true</code> 的时候，则会抛出一个错误，这个问题我们先留着待会看。</p>
+<h3 id="subscribe"><a href="#subscribe" class="headerlink" title="subscribe"></a>subscribe</h3><pre><code class="language-js">function subscribe(listener) {
+    if (isDispatching) {
+      throw new Error(
+        &#39;You may not call store.subscribe() while the reducer is executing. &#39; +
+          &#39;If you would like to be notified after the store has been updated, subscribe from a &#39; +
+          &#39;component and invoke store.getState() in the callback to access the latest state. &#39; +
+          &#39;See https://redux.js.org/api-reference/store#subscribe(listener) for more details.&#39;
+      )
+    }
+
+    let isSubscribed = true
+
+    ensureCanMutateNextListeners()
+    nextListeners.push(listener)
+
+    return function unsubscribe() {
+      if (!isSubscribed) {
+        return
+      }
+
+      if (isDispatching) {
+        throw new Error(
+          &#39;You may not unsubscribe from a store listener while the reducer is executing. &#39; +
+            &#39;See https://redux.js.org/api-reference/store#subscribe(listener) for more details.&#39;
+        )
+      }
+
+      isSubscribed = false
+
+      ensureCanMutateNextListeners()
+      const index = nextListeners.indexOf(listener)
+      nextListeners.splice(index, 1)
+    }
+  }
+</code></pre>
+<p><code>subscribe</code> 方法将传递进来的监听器，push 到了 <code>nextListeners</code> 数组中，定义了内部变量 <code>isSubscribed</code> 为 <code>true</code>，并且返回了 <code>unsubscribe</code> 方法。</p>
+<p><code>unsubscribe</code> 方法则检查了 <code>isSubscribed</code> 变量，并且将其置为 <code>false</code>，这样做可以防止 <code>unsubscribe</code> 被多次调用，然后又从 <code>nextListener</code> 数组中删掉了这个监听器。</p>
+<p>整个的逻辑非常简单，<strong>将一个监听器方法加入或移除监听器列表</strong>。</p>
+<p><code>ensureCanMutateNextListeners</code> 方法这里暂时不管它，后面我们会提到。</p>
+<h3 id="dispatch"><a href="#dispatch" class="headerlink" title="dispatch"></a>dispatch</h3><pre><code class="language-js">function dispatch(action) {
+  if (!isPlainObject(action)) {
+    throw new Error(
+      &#39;Actions must be plain objects. &#39; +
+        &#39;Use custom middleware for async actions.&#39;
+    )
+  }
+
+  if (typeof action.type === &#39;undefined&#39;) {
+    throw new Error(
+      &#39;Actions may not have an undefined &quot;type&quot; property. &#39; +
+        &#39;Have you misspelled a constant?&#39;
+    )
+  }
+
+  if (isDispatching) {
+    throw new Error(&#39;Reducers may not dispatch actions.&#39;)
+  }
+
+  try {
+    isDispatching = true
+    currentState = currentReducer(currentState, action)
+  } finally {
+    isDispatching = false
+  }
+
+  const listeners = (currentListeners = nextListeners)
+  for (let i = 0; i &lt; listeners.length; i++) {
+    const listener = listeners[i]
+    listener()
+  }
+
+  return action
 }
 </code></pre>
-<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/30/fork__why-do-we-write-super-props/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+<p><code>dispatch</code> 方法是整个 Redux 的核心，不过它的过程也很简单。</p>
+<p>首先它将 <code>isDispatching</code> 置于 <code>true</code>，然后调用了 <code>currentReducer</code> 方法，传入了 <code>currentState</code> 和 <code>action</code>，又返回了 <code>currentState</code>。也就是用当前的状态和 action，计算出了一次的状态。在 <code>try</code> 代码块执行完后，则会把 <code>isDispatching</code> 重置为 <code>false</code>。</p>
+<blockquote>
+<p>这里的 try…finally 并没有 catch 代码块，所以并不会吃掉 Error</p>
+</blockquote>
+<p>在这里终于明白上文中多次出现的 <code>isDispatching</code> 的具体含义，就是在计算新的 state 的过程中，也就是执行 reducer 方法时，不允许 <code>getState</code>、 <code>subscribe</code>、<code>unsubscribe</code> 以及 <code>dispatch</code>。</p>
+<p>在 dispatch 方法的最后，遍历了监听器数组并且逐个执行，然后返回了 action 对象。</p>
+<p>可以看到，dispatch 方法其实非常简单，它主要的内容就是<strong>计算新 store 并且在执行完成后，执行监听器方法</strong>。但对于 action 需要注意的是，首先它必须是一个常规对象，其次根据 Flux 的规范，<strong>action 也必须有 type 属性。</strong></p>
+<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><p>还有一些其它的方法作为功能上的补充，这些简单介绍下它们</p>
+<h4 id="replaceReducer"><a href="#replaceReducer" class="headerlink" title="replaceReducer"></a>replaceReducer</h4><pre><code class="language-js">function replaceReducer(nextReducer) {
+  if (typeof nextReducer !== &#39;function&#39;) {
+    throw new Error(&#39;Expected the nextReducer to be a function.&#39;)
+  }
+
+  currentReducer = nextReducer
+
+  // This action has a similiar effect to ActionTypes.INIT.
+  // Any reducers that existed in both the new and old rootReducer
+  // will receive the previous state. This effectively populates
+  // the new state tree with any relevant data from the old one.
+  dispatch({ type: ActionTypes.REPLACE })
+}
+</code></pre>
+<p>这个方法可以把当前的 reducer 整个替换掉，它的主要应用场景在于动态地加载 reducer，比如如果你想地你的应用启用代码分割时。</p>
+<h4 id="ensureCanMutateNextListeners"><a href="#ensureCanMutateNextListeners" class="headerlink" title="ensureCanMutateNextListeners"></a>ensureCanMutateNextListeners</h4><pre><code class="language-js">function ensureCanMutateNextListeners() {
+  if (nextListeners === currentListeners) {
+    nextListeners = currentListeners.slice()
+  }
+}
+</code></pre>
+<p>通过 slice 方法遍历了 <code>currentListeners</code> 数组，并且缓存到 <code>nextListeners</code> 中。</p>
+<h2 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h2><p>reducer 的定义是一个函数，这个函数接受一个旧的 state 和一个 action 对象，并且返回一个新对象。</p>
+<p>我们可以在 reducer 内通过 <code>swtich...case</code> 语法，通过判断 <code>aciton.type</code> 来分别执行不同的 mutate 方法，最后返回一个新的 state。但如果一个应用中所有的 mutation 都写到一个 <code>switch...case</code> 里，这个 reducer 方法就容易变得难以维护。</p>
+<p>redux 库为我们提供了一个 <code>combineReducers</code> 方法，帮助我们把许多 reducer 合并成一个总的 reducer，然后再传递给 <code>createStore</code> 方法去初始化 store。</p>
+<p>我们先来简单地看下这个方法做了什么处理：</p>
+<pre><code class="language-js">export default function combineReducers(reducers) {
+  /*
+   * 第一部分: 过滤掉非函数的 reducer, 把结果放入 finanlReducers 中
+   */
+  const reducerKeys = Object.keys(reducers)          
+  const finalReducers = {}
+  for (let i = 0; i &lt; reducerKeys.length; i++) {   
+    const key = reducerKeys[i]
+
+    if (typeof reducers[key] === &#39;function&#39;) {
+      finalReducers[key] = reducers[key]
+    }
+  }
+  const finalReducerKeys = Object.keys(finalReducers)
+
+  /*
+   *  第二部分：判断 reducers 是否合法
+   */
+
+  let shapeAssertionError
+  try {
+    assertReducerShape(finalReducers)
+  } catch (e) {
+    shapeAssertionError = e
+  }
+
+
+  /*
+   *  第三部分：返回合并后的 reducer 方法
+   */
+  return function combination(state = {}, action) {
+    if (shapeAssertionError) {
+      throw shapeAssertionError
+    }
+
+    let hasChanged = false
+    const nextState = {}
+    for (let i = 0; i &lt; finalReducerKeys.length; i++) {
+      const key = finalReducerKeys[i]
+      const reducer = finalReducers[key]
+      const previousStateForKey = state[key]
+      const nextStateForKey = reducer(previousStateForKey, action)
+      if (typeof nextStateForKey === &#39;undefined&#39;) {
+        const errorMessage = getUndefinedStateErrorMessage(key, action)
+        throw new Error(errorMessage)
+      }
+      nextState[key] = nextStateForKey
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey
+    }
+    return hasChanged ? nextState : state
+  }
+}
+</code></pre>
+<p>这个函数大体上可以分为三部分。先是过滤掉了 reducers 中非函数的部分，然后对 reducer 做了个校验，最后返回了合并后的 reducer 方法。第一和第二部分较为简单不再赘述，主要来看下第三部分。</p>
+<p>第二部分中校验失败时抛出的错误被 catch 并保存到 <code>shapeAssertionError</code> 中了，这样在创建 store 的时候就不会抛错，直到执行（任意） reducer 的时候才抛出错误。由于 createStore 方法的末尾 dispatch 了一个 INIT action，所以它也会在初始化的时候报错。</p>
+<p>第三部分主要做了一个简单的遍历操作，把 reducers 中的每个 reducer 及其对应的 state 拿出来，加上传递进来的 action 对象，计算出了新的 state 并缓存起来。这里需要注意的是，combination 方法定义了一个 <code>hasChanged</code> 标志，如果这些 reducers 中没有任何一个计算后的 state 的引用发生改变，则返回旧的 state。在这里<strong>对各个 reducer 对应的新旧 state 应用了浅比较</strong>，这意味着你只修改 reducer 对应的 state 内部的属性，store 是不会发生改变的。</p>
+<h2 id="bindActionCreators"><a href="#bindActionCreators" class="headerlink" title="bindActionCreators"></a>bindActionCreators</h2><p>这是 redux 库提供的一个易用的辅助方法，帮助我们简化 dispatch 和 actionCreators 的交互，可以方法地直接调用方法达到 dispatch action 的目的。</p>
+<p>看下源码：</p>
+<pre><code class="language-js">export default function bindActionCreators(actionCreators, dispatch) {
+  if (typeof actionCreators === &#39;function&#39;) {
+    return bindActionCreator(actionCreators, dispatch)
+  }
+
+  if (typeof actionCreators !== &#39;object&#39; || actionCreators === null) {
+    throw new Error(
+      `bindActionCreators expected an object or a function, instead received ${
+        actionCreators === null ? &#39;null&#39; : typeof actionCreators
+      }. ` +
+        `Did you write &quot;import ActionCreators from&quot; instead of &quot;import * as ActionCreators from&quot;?`
+    )
+  }
+
+  const boundActionCreators = {}
+  for (const key in actionCreators) {
+    const actionCreator = actionCreators[key]
+    if (typeof actionCreator === &#39;function&#39;) {
+      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch)
+    }
+  }
+  return boundActionCreators
+}
+
+function bindActionCreator(actionCreator, dispatch) {
+  return function() {
+    return dispatch(actionCreator.apply(this, arguments))
+  }
+}
+</code></pre>
+<p>它的逻辑非常简单，一个 actionCreator 可能是这样的：</p>
+<pre><code class="language-js">const toggleLoading = () =&gt; ({
+  type: &#39;TOGGLE_LOADING&#39;
+})
+</code></pre>
+<p>而一个 actionCreators 则是像下面这样：</p>
+<pre><code class="language-js">const actions = {
+  toggleLoading() {
+    return {
+      type: &#39;TOGGLE_LOADING&#39;
+    }
+  } 
+}
+</code></pre>
+<p>所以 bindActionCreators 的效果则是接受一个 actionCreators 和 dispatch 方法，将它封装成一个对象，调用的时候可以直接把参数传给 actionCreators 并且把产生的 action 传递给 dispatch 来更新状态。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>如此一来 Redux 的基本功能我们也都了解的差不多了，它的实现可以说非常简洁，主要的设计思想围绕着 reducer 和 dispatch。</p>
+<p>另外 Redux 还提供了中间件的功能，可以辅助我们在传递 action 的时候做处理，由于跟主逻辑无关，我们放到另外一篇文章来讲。</p>
+
       
     </div>
 
@@ -554,17 +753,57 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2019/04/17/redux-source-code/" title="Redux 源码分析">https://blog.liangzr.tech/2019/04/17/redux-source-code/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/17/plantuml/" rel="next" title="PlantUML 简介">
+                <i class="fa fa-chevron-left"></i> PlantUML 简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -574,47 +813,22 @@
   </article>
 
 
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-
-
-
-    
-    
-    
   </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -634,8 +848,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -836,6 +1059,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码结构"><span class="nav-number">1.</span> <span class="nav-text">源码结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#createStore"><span class="nav-number">2.</span> <span class="nav-text">createStore</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getState"><span class="nav-number">2.1.</span> <span class="nav-text">getState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subscribe"><span class="nav-number">2.2.</span> <span class="nav-text">subscribe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dispatch"><span class="nav-number">2.3.</span> <span class="nav-text">dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other"><span class="nav-number">2.4.</span> <span class="nav-text">other</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#replaceReducer"><span class="nav-number">2.4.1.</span> <span class="nav-text">replaceReducer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ensureCanMutateNextListeners"><span class="nav-number">2.4.2.</span> <span class="nav-text">ensureCanMutateNextListeners</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#combineReducers"><span class="nav-number">3.</span> <span class="nav-text">combineReducers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bindActionCreators"><span class="nav-number">4.</span> <span class="nav-text">bindActionCreators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -986,9 +1226,46 @@
   
   
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.liangzr.tech/2019/04/17/redux-source-code/";
+    this.page.identifier = "2019/04/17/redux-source-code/";
+    this.page.title = 'Redux 源码分析';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://liangzr.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
 
 
 
+
+
+  
 
 
   
