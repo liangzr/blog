@@ -103,20 +103,24 @@
 <link rel="stylesheet" href="/css/lib/prism.css">
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="OVERLOADING 🔥">
-<meta property="og:url" content="https://blog.liangzr.tech/archives/2018/index.html">
+  <meta name="description" content="Middleware 是 Redux 提供的一个增强功能，利用函数式编程的柯里化和组合特性，实现了一个和 koa 类似的洋葱结构的中间件。 初始化我们再回到 createStore 方法的最开始，有这么一段代码 export default function createStore(reducer, preloadedState, enhancer) {   if (     (typeof pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux 中间件">
+<meta property="og:url" content="https://blog.liangzr.tech/2019/04/18/redux-middleware/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="Middleware 是 Redux 提供的一个增强功能，利用函数式编程的柯里化和组合特性，实现了一个和 koa 类似的洋葱结构的中间件。 初始化我们再回到 createStore 方法的最开始，有这么一段代码 export default function createStore(reducer, preloadedState, enhancer) {   if (     (typeof pr">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-18T09:01:09.510Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OVERLOADING 🔥">
+<meta name="twitter:title" content="Redux 中间件">
+<meta name="twitter:description" content="Middleware 是 Redux 提供的一个增强功能，利用函数式编程的柯里化和组合特性，实现了一个和 koa 类似的洋葱结构的中间件。 初始化我们再回到 createStore 方法的最开始，有这么一段代码 export default function createStore(reducer, preloadedState, enhancer) {   if (     (typeof pr">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.liangzr.tech/archives/2018/">
+  <link rel="canonical" href="https://blog.liangzr.tech/2019/04/18/redux-middleware/">
 
 
 
@@ -126,7 +130,7 @@
   };
 </script>
 
-  <title>Archives | OVERLOADING 🔥</title>
+  <title>Redux 中间件 | OVERLOADING 🔥</title>
   
 
 
@@ -184,7 +188,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -331,133 +335,349 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 23 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/18/redux-middleware/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jory Liang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OVERLOADING 🔥">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2018/11/30/fork__why-do-we-write-super-props/" itemprop="url">
-            
-              <span itemprop="name">「译」Why Do We Write super(props)?</span>
-            
-          </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">Redux 中间件
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-30T00:00:00+08:00" content="2018-11-30">
-          11-30
-        </time>
-      </div>
+              
+            
+          </h2>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-18 13:01:38" itemprop="dateCreated datePublished" datetime="2019-04-18T13:01:38+08:00">2019-04-18</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2018/05/29/optimizing-react-app-with-immutable-data/" itemprop="url">
-            
-              <span itemprop="name">用 Immutable 数据来优化 React 应用</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-05-29T00:00:00+08:00" content="2018-05-29">
-          05-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>Middleware 是 Redux 提供的一个增强功能，利用函数式编程的柯里化和组合特性，实现了一个和 koa 类似的洋葱结构的中间件。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>我们再回到 <code>createStore</code> 方法的最开始，有这么一段代码</p>
+<pre><code class="language-js">export default function createStore(reducer, preloadedState, enhancer) {
+  if (
+    (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;function&#39;) ||
+    (typeof enhancer === &#39;function&#39; &amp;&amp; typeof arguments[3] === &#39;function&#39;)
+  ) {
+    throw new Error(
+      &#39;It looks like you are passing several store enhancers to &#39; +
+        &#39;createStore(). This is not supported. Instead, compose them &#39; +
+        &#39;together to a single function.&#39;
+    )
+  }
+
+  if (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;undefined&#39;) {
+    enhancer = preloadedState
+    preloadedState = undefined
+  }
+
+  if (typeof enhancer !== &#39;undefined&#39;) {
+    if (typeof enhancer !== &#39;function&#39;) {
+      throw new Error(&#39;Expected the enhancer to be a function.&#39;)
+    }
+
+    return enhancer(createStore)(reducer, preloadedState)
+  }
+
+  // 主逻辑
+  ...
+}
+</code></pre>
+<p>它先是判断了如果第二个参数和第三个参数都为函数，或者第三个参数和第四个参数都为函数，则会警告只允许有一个 enhancer，实际上也只允许 applyMiddleware 的返回。</p>
+<p>同时，如果第二个参数是 function 并且第三个参数是 undefined 时，第二个参数则为真正的 enhancer。这意味着 preloadedState 参数可以被省略，当它被省略的时候，值初始化为 undefined。</p>
+<p>如果 enhancer 校验通过，则会调用它，并且把 <code>createStore</code> 本身作为参数，并且返回 enhancer 的结果。</p>
+<a id="more"></a>
+<h2 id="applyMiddleware"><a href="#applyMiddleware" class="headerlink" title="applyMiddleware"></a>applyMiddleware</h2><p>其实目前在 redux 中，唯一的 enhancer 就是 applyMiddleware 函数的返回，所以关键还在于这个函数。</p>
+<p>applyMiddleware 主体：</p>
+<pre><code class="language-js">export default function applyMiddleware(...middlewares) {
+  return createStore =&gt; (...args) =&gt; {
+    const store = createStore(...args)
+    let dispatch = () =&gt; {
+      throw new Error(
+        &#39;Dispatching while constructing your middleware is not allowed. &#39; +
+          &#39;Other middleware would not be applied to this dispatch.&#39;
+      )
+    }
+
+    const middlewareAPI = {
+      getState: store.getState,
+      dispatch: (...args) =&gt; dispatch(...args)
+    }
+    const chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))
+    dispatch = compose(...chain)(store.dispatch)
+
+    return {
+      ...store,
+      dispatch
+    }
+  }
+}
+</code></pre>
+<p>可以看到，它先是通过 <code>createStore</code> 创建了 store 实例，然后禁止在重新赋值之前使用 <code>dispatch</code> 方法。</p>
+<pre><code class="language-js">const middlewareAPI = {
+  getState: store.getState,
+  dispatch: (...args) =&gt; dispatch(...args)
+}
+</code></pre>
+<p>随后定义了 middleware 的两个默认传参，一个是 store 中的 <code>getState</code> 方法，一个是封装的 <code>dispatch</code>。</p>
+<pre><code class="language-js">const chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))
+</code></pre>
+<p>这一步遍历了每个中间件，把上一步的两个参数传进入后执行，并把执行后的结果以数组的形式赋给了 <code>chain</code>，所以 chain 其实是一个初始化过的中间件的数组。</p>
+<pre><code class="language-js">dispatch = compose(...chain)(store.dispatch)
+</code></pre>
+<p>这一步可以看到，通过一个 <code>compose</code> 方法，返回了一个函数，并且把 <code>store.dispatch</code> 传参进去，返回了一个新的 dispatch。</p>
+<pre><code class="language-js">return {
+  ...store,
+  dispatch
+}
+</code></pre>
+<p>最后把新的 <code>dispatch</code> 替换第一步生成的，和 store 合并到一起并返回。</p>
+<p>总的来说， <code>applyMiddleware</code> 的效果就是对 <code>dispatch</code> 做了处理，而具体的处理逻辑都做了什么呢？还要看 <code>compose</code> 方法。</p>
+<h2 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h2><p>compose 是函数式编程中常见的一个方法，常用来搭配柯里化（currying）来对原数据进行一系列处理。</p>
+<p>在函数式编程的概念里，函数是一等公民。而在这个场景中，它处理的对象正是 <code>dispatch</code> 函数，</p>
+<p>源码：</p>
+<pre><code class="language-js">export default function compose(...funcs) {
+  if (funcs.length === 0) {
+    return arg =&gt; arg
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0]
+  }
+
+  return funcs.reduce((a, b) =&gt; (...args) =&gt; a(b(...args)))
+}
+</code></pre>
+<p>看似非常简单，但理解起来不是特别容易，如果对 compose 和 currying 陌生的话。前两个都是边界处理，如果没有参数，则返回一个<strong>返回自身</strong>的函数。如果只有一个参数，则返回此参数。</p>
+<p>最关键的是最后一行，使用了一个 <code>reduce</code> 方法，让它可以依次处理 <code>funcs</code> 中的所有函数，并把后一个执行的结果，做为参数传递给前一个函数。</p>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p>只是说可能有点拗口，我们来看个例子，假如有个 <code>funcs</code>：</p>
+<pre><code class="language-js">const funcs = [a, b, c, d, e]   // 有五项，每项都是函数
+compose(funcs) // (...args) =&gt; a(b(c(d(e(...args)))))
+</code></pre>
+<p>所以上方返回的 dispatch 其实是：</p>
+<pre><code class="language-js">dispatch = compose(...funcs)(store.dispatch) // a(b(c(d(e(store.dispatch)))))
+</code></pre>
+<p>可以看到，它正是被中间件函数层层包裹之后处理得出的结果，即新的 dispatch。</p>
+<p>那再来看一个典型的中间件应该是什么样的：</p>
+<pre><code class="language-js">const reduxLogger = ({ getState, dispatch }) =&gt; next =&gt; action =&gt; {
+  console.log(action)
+  return next(action)
+}
+</code></pre>
+<p>一连串的箭头函数让人看的头皮发麻，不过我们知道，中间件在放进 <code>compose</code> 执行之前，先做了一步预处理，传递了两个 api 进去，所以简化一下真正被 <code>compose</code> 执行的中间件应该是这样的：</p>
+<pre><code class="language-js">let getState, dispatch // 闭包的变量
+
+const reduxLoggerHander = next =&gt; action =&gt; {
+  console.log(action)
+  return next(action)
+}
+</code></pre>
+<p>我们上方提到，后一个函数执行的结果，可以当作参数传递给前一个，所以假如 <code>reduxLogger</code> 在最后一个，则它执行完的结果应该是：</p>
+<pre><code class="language-js">let getState, dispatch // 闭包的变量
+
+const dispatchWithLogger = action =&gt; {
+  console.log(action)
+  return store.dispatch(action)
+}
+</code></pre>
+<p>走到这一步，拨开云雾见天明，这个中间件已经不再神秘了。经过 <code>componse</code> 处理后，它就是一个新的拥有日志功能的 dispatch，而它内部正是调用了 <code>createStore</code> 中原生的 <code>store.dispatch</code> 方法。</p>
+<p>你可能会想，既然只是一层封装，重新写个方法不就好了，为什么要埋的这么深？这是因为，通过 <code>compose</code> 可以不只处理一个中间件，还可以直接应用一个中间件数组，并且让它们之间递归调用。</p>
+<p>我们再回到 <code>dispatchWithLogger</code> 方法，它是最内层的执行结果，按照我们前面的分析，它将作为参数传递给下一个中间件。假如是一个 <code>Hello</code> 中间件，最终返回的应该是 <code>dispatchWithLoggerAndHello</code>。以此类推，最终我们就可以得到一个被中间件层层处理后的全新 <code>dispatch</code>。</p>
+<p>还有一个问题是，我们刚刚讲了，中间件数组的最后一个方法先执行，返回一个全新的 <code>dispatch</code>，那执行顺序就是从最后一个到第一个吗？并不是，中间件函数返回的只是一个处理后的 dispatch 方法，而这个方法只有被上一级调用的时候，才会执行被修改后的 dispatch 的内容。</p>
+<p>所以，<strong>第一个中间件包裹在最外层，也是第一个执行的。</strong></p>
+<p>类似于下面这种结构：</p>
+<pre><code class="language-js">action =&gt; {
+  // a
+  (actionB =&gt; {
+    // b
+    (actionC =&gt; {
+      // c
+      (actionD =&gt; {
+        // d
+        store.dispatch(actionD)
+        // d
+      })(actionC)
+      // c
+    })(actionB)
+    // b
+  })(action)
+  // a
+}
+</code></pre>
+<p>当然，因为很多中间件都返回了上一个 <code>dispatch</code> 方法的结果，所以不存在上图中的下半部分。</p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2019/04/18/redux-middleware/" title="Redux 中间件">https://blog.liangzr.tech/2019/04/18/redux-middleware/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/17/redux-source-code/" rel="next" title="Redux 源码分析">
+                <i class="fa fa-chevron-left"></i> Redux 源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -477,8 +697,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -679,6 +908,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applyMiddleware"><span class="nav-number">2.</span> <span class="nav-text">applyMiddleware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compose"><span class="nav-number">3.</span> <span class="nav-text">compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行过程"><span class="nav-number">4.</span> <span class="nav-text">执行过程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -809,6 +1055,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -825,9 +1075,46 @@
   
   
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.liangzr.tech/2019/04/18/redux-middleware/";
+    this.page.identifier = "2019/04/18/redux-middleware/";
+    this.page.title = 'Redux 中间件';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://liangzr.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
 
 
 
+
+
+  
 
 
   

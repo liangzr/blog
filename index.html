@@ -352,6 +352,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/18/redux-middleware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jory Liang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OVERLOADING 🔥">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/18/redux-middleware/" class="post-title-link" itemprop="url">Redux 中间件</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-18 13:01:38" itemprop="dateCreated datePublished" datetime="2019-04-18T13:01:38+08:00">2019-04-18</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Middleware 是 Redux 提供的一个增强功能，利用函数式编程的柯里化和组合特性，实现了一个和 koa 类似的洋葱结构的中间件。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>我们再回到 <code>createStore</code> 方法的最开始，有这么一段代码</p>
+<pre><code class="language-js">export default function createStore(reducer, preloadedState, enhancer) {
+  if (
+    (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;function&#39;) ||
+    (typeof enhancer === &#39;function&#39; &amp;&amp; typeof arguments[3] === &#39;function&#39;)
+  ) {
+    throw new Error(
+      &#39;It looks like you are passing several store enhancers to &#39; +
+        &#39;createStore(). This is not supported. Instead, compose them &#39; +
+        &#39;together to a single function.&#39;
+    )
+  }
+
+  if (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;undefined&#39;) {
+    enhancer = preloadedState
+    preloadedState = undefined
+  }
+
+  if (typeof enhancer !== &#39;undefined&#39;) {
+    if (typeof enhancer !== &#39;function&#39;) {
+      throw new Error(&#39;Expected the enhancer to be a function.&#39;)
+    }
+
+    return enhancer(createStore)(reducer, preloadedState)
+  }
+
+  // 主逻辑
+  ...
+}
+</code></pre>
+<p>它先是判断了如果第二个参数和第三个参数都为函数，或者第三个参数和第四个参数都为函数，则会警告只允许有一个 enhancer，实际上也只允许 applyMiddleware 的返回。</p>
+<p>同时，如果第二个参数是 function 并且第三个参数是 undefined 时，第二个参数则为真正的 enhancer。这意味着 preloadedState 参数可以被省略，当它被省略的时候，值初始化为 undefined。</p>
+<p>如果 enhancer 校验通过，则会调用它，并且把 <code>createStore</code> 本身作为参数，并且返回 enhancer 的结果。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/18/redux-middleware/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/17/redux-source-code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1887,193 +2063,6 @@ Reflect.ownKeys(obj)                      // [&quot;2&quot;, &quot;7&quot;, &quo
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/30/fork__why-do-we-write-super-props/" class="post-title-link" itemprop="url">「译」Why Do We Write super(props)?</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-11-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-30T00:00:00+08:00">2018-11-30</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/" itemprop="url" rel="index"><span itemprop="name">translated</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">overreacted.io</a> </p>
-</blockquote>
-<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
-<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
-<hr>
-<p>我写过不计其数的 <code>super(props)</code> :</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: true };
-  }
-  // ...
-}
-</code></pre>
-<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
-<pre><code class="language-js">class Checkbox extends React.Component {
-  state = { isOn: true };
-  // ...
-}
-</code></pre>
-<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/30/fork__why-do-we-write-super-props/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2122,7 +2111,7 @@ Reflect.ownKeys(obj)                      // [&quot;2&quot;, &quot;7&quot;, &quo
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

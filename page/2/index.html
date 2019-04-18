@@ -352,6 +352,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/11/30/fork__why-do-we-write-super-props/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jory Liang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OVERLOADING 🔥">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/30/fork__why-do-we-write-super-props/" class="post-title-link" itemprop="url">「译」Why Do We Write super(props)?</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-11-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-30T00:00:00+08:00">2018-11-30</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/" itemprop="url" rel="index"><span itemprop="name">translated</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/translated/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>本文转载并翻译于 <a href="https://twitter.com/dan_abramov" target="_blank" rel="noopener">Dan Abramov</a> 的博客 <a href="https://overreacted.io/why-do-we-write-super-props/" target="_blank" rel="noopener">overreacted.io</a> </p>
+</blockquote>
+<p><a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener">React Hooks</a> 是当下社区的热门，但我却想从 <em>class</em> 组件的一些有趣实现讲起！</p>
+<p>理解这些内容对你如何运用 React 来说并不重要，但如果你喜欢探寻事物动作的原理的话，就很有趣了。</p>
+<hr>
+<p>我写过不计其数的 <code>super(props)</code> :</p>
+<pre><code class="language-js">class Checkbox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOn: true };
+  }
+  // ...
+}
+</code></pre>
+<p>当然，使用 <a href="https://github.com/tc39/proposal-class-fields" target="_blank" rel="noopener">class fields proposal</a> 可以让我省去这种写法：</p>
+<pre><code class="language-js">class Checkbox extends React.Component {
+  state = { isOn: true };
+  // ...
+}
+</code></pre>
+<p>React 从 0.13 增加对普通 class 的支持开始，就计划要使用这种语法。现在这种定义 <code>constructor</code> 然后调用 <code>super(props)</code> 的做法只是 <code>class field</code> 来临之前的一种替代方案。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/11/30/fork__why-do-we-write-super-props/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2018/05/29/optimizing-react-app-with-immutable-data/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1834,179 +2021,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2016/02/06/adb-connect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jory Liang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OVERLOADING 🔥">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/02/06/adb-connect/" class="post-title-link" itemprop="url">尝试ADB连接</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-02-06 16:54:04" itemprop="dateCreated datePublished" datetime="2016-02-06T16:54:04+08:00">2016-02-06</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>很早就会各种刷机，用各种工具，但始终没正式的接触过ADB（Android Debug Bridge），最近才熟悉了下它。首先是连接方式：USB和Wi-Fi</p>
-<h3 id="USB连接"><a href="#USB连接" class="headerlink" title="USB连接"></a>USB连接</h3><p>首先是显示当前连接的设备</p>
-<pre><code class="language-sh">adb devices
-</code></pre>
-<p>如果有设备通过USB成功连接，会显示如下：</p>
-<pre><code class="language-sh">List of devices attached
-0123456789ABCDEF    device
-</code></pre>
-<p>左边的是设备的名字，右边的device代表设备的状态，目前见到过的状态</p>
-<pre><code class="language-sh">device            - 设备通过USB连接成功
-offline           - 设备的adb usb服务没有启动
-no permissions    - 需要通过root权限重启adb server
-unauthorized      - Android4.4之后，需要在设备上对计算机授权才可调试
-</code></pre>
-<p>如果出现了上面的no permissions的状态，在teminal进入root用户，或者前面加sudo</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/02/06/adb-connect/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2055,7 +2069,7 @@ unauthorized      - Android4.4之后，需要在设备上对计算机授权才�
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
