@@ -103,20 +103,27 @@
 <link rel="stylesheet" href="/css/lib/prism.css">
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="OVERLOADING 🔥">
-<meta property="og:url" content="https://blog.liangzr.tech/tags/root/index.html">
+  <meta name="description" content="以前我一直不理解，为什么说 redux-thunk 是用来处理异步 action 的，没有它就不能处理异步 action 吗？ 答案是可以的。 实际上，只要你能拿到 dispatch 方法，你可以在任何时候 dispatch 一个 action 对象。dispatch 方法是一个同步操作，它传递了 action 并且更新了 store，可以参考前面的文章《Redux 源码分析》。 这样我就更不明白">
+<meta name="keywords" content="source code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么要使用 redux-thunk">
+<meta property="og:url" content="https://blog.liangzr.tech/2019/04/18/redux-thunk-source-code/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
+<meta property="og:description" content="以前我一直不理解，为什么说 redux-thunk 是用来处理异步 action 的，没有它就不能处理异步 action 吗？ 答案是可以的。 实际上，只要你能拿到 dispatch 方法，你可以在任何时候 dispatch 一个 action 对象。dispatch 方法是一个同步操作，它传递了 action 并且更新了 store，可以参考前面的文章《Redux 源码分析》。 这样我就更不明白">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://blog.liangzr.tech/diagrams/redux-thunk/dispatch.svg">
+<meta property="og:updated_time" content="2019-04-18T10:12:20.270Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OVERLOADING 🔥">
+<meta name="twitter:title" content="为什么要使用 redux-thunk">
+<meta name="twitter:description" content="以前我一直不理解，为什么说 redux-thunk 是用来处理异步 action 的，没有它就不能处理异步 action 吗？ 答案是可以的。 实际上，只要你能拿到 dispatch 方法，你可以在任何时候 dispatch 一个 action 对象。dispatch 方法是一个同步操作，它传递了 action 并且更新了 store，可以参考前面的文章《Redux 源码分析》。 这样我就更不明白">
+<meta name="twitter:image" content="https://blog.liangzr.tech/diagrams/redux-thunk/dispatch.svg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.liangzr.tech/tags/root/">
+  <link rel="canonical" href="https://blog.liangzr.tech/2019/04/18/redux-thunk-source-code/">
 
 
 
@@ -126,7 +133,7 @@
   };
 </script>
 
-  <title>Tags: root | OVERLOADING 🔥</title>
+  <title>为什么要使用 redux-thunk | OVERLOADING 🔥</title>
   
 
 
@@ -184,7 +191,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -331,77 +338,306 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>root<small>Tags</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liangzr.tech/2019/04/18/redux-thunk-source-code/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jory Liang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/3992942?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OVERLOADING 🔥">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2016/03/15/root-primary/" itemprop="url">
-            
-              <span itemprop="name">Android Root原理学习（初级）</span>
-            
-          </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">为什么要使用 redux-thunk
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-03-15T11:05:04+08:00" content="2016-03-15">
-          03-15
-        </time>
-      </div>
+              
+            
+          </h2>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-18 13:09:06" itemprop="dateCreated datePublished" datetime="2019-04-18T13:09:06+08:00">2019-04-18</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/redux/" itemprop="url" rel="index"><span itemprop="name">redux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以前我一直不理解，为什么说 <code>redux-thunk</code> 是用来处理异步 action 的，没有它就不能处理异步 action 吗？</p>
+<p>答案是可以的。</p>
+<p>实际上，只要你能拿到 dispatch 方法，你可以在任何时候 dispatch 一个 action 对象。dispatch 方法是一个同步操作，它传递了 action 并且更新了 store，可以参考前面的文章<a href="https://blog.liangzr.tech/2019/04/17/redux-source-code/">《Redux 源码分析》</a>。</p>
+<p>这样我就更不明白了，既然这样，<code>redux-thunk</code> 究竟做了什么？</p>
+<a id="more"></a>
+<h2 id="redux-thunk-源码"><a href="#redux-thunk-源码" class="headerlink" title="redux-thunk 源码"></a>redux-thunk 源码</h2><p><code>redux-thunk</code> 是一个标准的 Redux 中间件，源码也十分简单：</p>
+<pre><code class="language-js">function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) =&gt; next =&gt; action =&gt; {
+    if (typeof action === &#39;function&#39;) {
+      return action(dispatch, getState, extraArgument);
+    }
+
+    return next(action);
+  };
+}
+
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+export default thunk;
+</code></pre>
+<p>默认情况下，<code>redux-thunk</code> 返回的是一个标准的 Redux 中间件，它暴露了一个方法让你自己创建一个带参数的 thunk 中间件，我们先忽略这部分：</p>
+<pre><code class="language-js">const thunk =  ({ dispatch, getState }) =&gt; next =&gt; action =&gt; {
+  if (typeof action === &#39;function&#39;) {
+    return action(dispatch, getState, extraArgument);
+  }
+
+  return next(action);
+};
+</code></pre>
+<p>通过<a href="https://blog.liangzr.tech/2019/04/18/redux-middleware/">《Redux 中间件》</a> 一文我们得知。第一个箭头前面的 <code>dispatch</code> 和 <code>getState</code> 做为 <strong>middlewareAPI</strong> 传递进来，初始化中间件的。</p>
+<p>下面的 <code>return next(action)</code> 也是调用了上层中间件返回的 <code>dispatch</code> 方法，所以关键在于这个判断：</p>
+<pre><code class="language-js">if (typeof action === &#39;function&#39;) {
+  return action(dispatch, getState, extraArgument);
+}
+</code></pre>
+<p>如果 action 是一个函数，则调用 action，并把初始化中间件时的两个参数，以及额外的参数，传递给了 action 函数。</p>
+<p>源码就这些内容，想要彻底理解，还是要跟着例子来看。</p>
+<h2 id="异步-Action"><a href="#异步-Action" class="headerlink" title="异步 Action"></a>异步 Action</h2><p>假如我们有个 action 是这样的：</p>
+<pre><code class="language-js">const fetchUserAvatar = name =&gt; ({getState, dispatch}) =&gt; {
+  fetch(`https://api.github.com/users/${name}`)
+    .then(res =&gt; res.json())
+    .then(({ avatar_url }) =&gt; {
+      dispatch({
+        type: &#39;UPDATE_USER_AVATAR&#39;,
+        payload: avatar_url,
+      })
+    })
+}
+</code></pre>
+<p>然后我们 dispatch 这个 action:</p>
+<pre><code class="language-js">dispatch(fetchUserAvatar(&#39;liangzr&#39;))
+</code></pre>
+<p>因为 action 是一个方法，<code>redux-thunk</code> 就把相应的参数传给了 <code>fetchUserAvatar</code>，而 api 在返回后也成功 dispatch 了 action。</p>
+<p>但是到这里，我起初有个疑惑，如果 <code>redux-thunk</code> 没有调用 <code>next</code> 方法，也就是下层生成的 dispatch 方法的话，后面不就不会经过中间件了吗？</p>
+<h2 id="到底是哪个-dispatch"><a href="#到底是哪个-dispatch" class="headerlink" title="到底是哪个 dispatch"></a>到底是哪个 dispatch</h2><p>这个问题就又要回到 <code>applyMiddleware</code> 方法内了：</p>
+<pre><code class="language-js">let dispatch = () =&gt; {}
+
+const middlewareAPI = {
+  getState: store.getState,
+  dispatch: (...args) =&gt; dispatch(...args)
+}
+const chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))
+dispatch = compose(...chain)(store.dispatch)
+</code></pre>
+<p>可以看到，<code>dispatch</code> 变量在一开始就声明了，并且 <code>middlewareAPI</code> 的 dispatch 属性的方法中，通过闭包持有它的引用。最后 <code>dispatch</code> 变量又被赋值了 <code>compose</code> 处理后的最终 dispatch 方法。</p>
+<p>也就是说，<code>middlewareAPI</code> 中的 dispatch 方法，最终会调用被层层中间件处理后的 dispatch。</p>
+<p>那 <code>dispatch(fetchUserAvatar(&#39;liangzr&#39;))</code> 的执行过程应该是：</p>
+<p><img src="/diagrams/redux-thunk/dispatch.svg" alt></p>
+<p>可以看到 <code>redux-thunk</code> 其实执行了两次，第二次才真正地处理了中间件。并且由此也可以看出，因为我们上次说过，第一个中间件会被第一个执行，而 <code>redux-thunk</code> 也必须第一个执行，所以在使用的时候，始终要把它放到中间件的第一位。</p>
+<h2 id="为何不用-store-dispatch"><a href="#为何不用-store-dispatch" class="headerlink" title="为何不用 store.dispatch"></a>为何不用 store.dispatch</h2><p>首先，如果从外部引用 <code>store.dispatch</code> 的话，有两个问题：</p>
+<ol>
+<li><strong>它强制了 store 必须是一个单例</strong>：这对服务端渲染很不友好，因为对于不同的用户或者说请求，它都应该有个独立的 store</li>
+<li><strong>不易于测试</strong>：因为使用了外部引用的 store，你没办法方便地 mock 一个 store 用来测试，也不能控制 store 的状态</li>
+</ol>
+<p>其次，使用 <code>redux-thunk</code> 中间件，赋予了 redux 来 dispatch 异步 action 的能力，你不用担心 dispatch 的 action 到底是同步还是异步的，通过 thunk 中间件，异步 action 自然可以惰性处理。</p>
+<p>Redux 的作者 Dan Abramov 曾对这个问题进行过多次释疑，可以参考下面两个链接：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559" target="_blank" rel="noopener">How to dispatch a Redux action with a timeout?</a></li>
+<li><a href="https://stackoverflow.com/questions/34570758/why-do-we-need-middleware-for-async-flow-in-redux/34599594#34599594" target="_blank" rel="noopener">Why do we need middleware for async flow in Redux?</a></li>
+</ul>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Jory Liang</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://blog.liangzr.tech/2019/04/18/redux-thunk-source-code/" title="为什么要使用 redux-thunk">https://blog.liangzr.tech/2019/04/18/redux-thunk-source-code/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/source-code/" rel="tag"># source code</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/redux-middleware/" rel="next" title="Redux 中间件">
+                <i class="fa fa-chevron-left"></i> Redux 中间件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -421,8 +657,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -627,6 +872,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redux-thunk-源码"><span class="nav-number">1.</span> <span class="nav-text">redux-thunk 源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步-Action"><span class="nav-number">2.</span> <span class="nav-text">异步 Action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#到底是哪个-dispatch"><span class="nav-number">3.</span> <span class="nav-text">到底是哪个 dispatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为何不用-store-dispatch"><span class="nav-number">4.</span> <span class="nav-text">为何不用 store.dispatch</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -757,6 +1019,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -773,9 +1039,46 @@
   
   
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.liangzr.tech/2019/04/18/redux-thunk-source-code/";
+    this.page.identifier = "2019/04/18/redux-thunk-source-code/";
+    this.page.title = '为什么要使用 redux-thunk';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://liangzr.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
 
 
 
+
+
+  
 
 
   

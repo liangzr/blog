@@ -104,13 +104,14 @@
 
 
   <meta name="description" content="Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。 本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考官方的解释 源码结构Redux 源码的目录结构如下： src ├── applyMiddleware.js ├── bindActionCreat">
+<meta name="keywords" content="source code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux 源码分析">
 <meta property="og:url" content="https://blog.liangzr.tech/2019/04/17/redux-source-code/index.html">
 <meta property="og:site_name" content="OVERLOADING 🔥">
 <meta property="og:description" content="Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。 本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考官方的解释 源码结构Redux 源码的目录结构如下： src ├── applyMiddleware.js ├── bindActionCreat">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T05:05:21.434Z">
+<meta property="og:updated_time" content="2019-04-18T10:12:27.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux 源码分析">
 <meta name="twitter:description" content="Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。 本篇主要分析 Redux 的源码结构，对 Flux 架构的思想不再赘述，可以参考官方的解释 源码结构Redux 源码的目录结构如下： src ├── applyMiddleware.js ├── bindActionCreat">
@@ -402,6 +403,29 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/redux/" itemprop="url" rel="index"><span itemprop="name">redux</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -780,6 +804,12 @@ function bindActionCreator(actionCreator, dispatch) {
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/source-code/" rel="tag"># source code</a>
+          
+        </div>
+      
 
       
       
@@ -879,7 +909,7 @@ function bindActionCreator(actionCreator, dispatch) {
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -926,7 +956,9 @@ function bindActionCreator(actionCreator, dispatch) {
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -969,7 +1001,9 @@ function bindActionCreator(actionCreator, dispatch) {
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
