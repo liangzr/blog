@@ -1,0 +1,40 @@
+@startuml dispatch
+
+|同步处理|
+start
+
+#82F49C:dispatch(fetchUserAvatar('liangzr'));
+
+partition redux-thunk {
+  :typeof action === 'function';
+  note right
+    true
+  end note
+}
+
+|异步请求|
+:返回结果;
+#82F49C:dispatch({type:'UPDATE_USER_AVATAR'});
+|同步处理|
+
+
+
+
+|同步处理|
+partition redux-thunk {
+  :typeof action === 'function';
+  note right
+    false
+  end note
+}
+
+
+partition redux-logger {
+  :打印日志;
+}
+
+:更新state;
+
+end
+
+@enduml
