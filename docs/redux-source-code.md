@@ -2,6 +2,10 @@
 title: Redux 源码分析
 date: 2019-04-17 14:46:53
 tags:
+  - source code
+categories: 
+  - javascript
+  - redux
 ---
 
 Redux 起源于一个实验，作者 Dan Abramov 本想通过 Flux 思想解决他的热重载和时间旅行的问题，如今它已经是 React 技术栈中状态管理方案的不二之选。

@@ -2,6 +2,10 @@
 title: 为什么要使用 redux-thunk
 date: 2019-04-18 13:09:06
 tags:
+  - source code
+categories: 
+  - javascript
+  - redux
 ---
 
 以前我一直不理解，为什么说 `redux-thunk` 是用来处理异步 action 的，没有它就不能处理异步 action 吗？

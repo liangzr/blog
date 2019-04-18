@@ -2,6 +2,10 @@
 title: Redux 中间件
 date: 2019-04-18 13:01:38
 tags:
+  - source code
+categories: 
+  - javascript
+  - redux
 ---
 
 Middleware 是 Redux 提供的一个增强功能，利用函数式编程的柯里化和组合特性，实现了一个和 koa 类似的洋葱结构的中间件。
