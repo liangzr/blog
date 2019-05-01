@@ -1,0 +1,14 @@
+@startuml set-state
+
+start
+
+#82F49C:this.setState(newState);
+if (isBatchingUpdates) then (处在更新流中)
+  :当前变更组件存入 dirtyComponent 中; 
+  end
+else (不处在更新流中)
+  :遍历 dirtyComponent 更新;
+  end
+endif
+
+@enduml
