@@ -154,11 +154,11 @@ keywords 和 decription 是最常见的两个 meta 标签，用来标识一个�
 
 百度搜索 IT 之家：
 
-![](https://ws1.sinaimg.cn/large/006tNc79gy1g1u47z6xjwj30w407gq5c.jpg)
+![](https://wx2.sinaimg.cn/large/006tNc79gy1g1u47z6xjwj30w407gq5c.jpg)
 
 Google 搜索 IT 之家：
 
-![](https://ws1.sinaimg.cn/large/006tNc79gy1g1u48pgncgj30y006eac4.jpg)
+![](https://wx2.sinaimg.cn/large/006tNc79gy1g1u48pgncgj30y006eac4.jpg)
 
 可以看到搜索引擎对网站的描述信息都来自 meta 里的 description。（🐷百度还把中文逗号转换成了英文逗号）
 

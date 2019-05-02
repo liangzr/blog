@@ -152,7 +152,7 @@ console.log(JSON.stringify(JSON.parse(o)));
 
 Output:
 
-![](https://ws1.sinaimg.cn/large/006tKfTcgy1frt9x393n1j30gf054t94.jpg)
+![](https://wx2.sinaimg.cn/large/006tKfTcgy1frt9x393n1j30gf054t94.jpg)
 
 #### lodash.cloneDeep
 
