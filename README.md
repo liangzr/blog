@@ -1,20 +1,17 @@
 博客 & 北端
 ===
-本博客主要分享前端相关知识体系，但不限于此。
+分享生活、奇趣和技术
 
-> 主要技术分享在 [issues](https://github.com/liangzr/blog/issues) 中更新方便讨论，其余内容在 [hexo 站](https://blog.liangzr.tech) 中更新
+> 过去我曾效仿很多优秀博主，想打造一个“有积累”的技术博客，再定个每周一文的 flag，最后往往无疾而终。这是否意味着我缺乏沉淀知识的能力？不，这只能说明我并不擅长写文章，除此之外，我依然热爱写代码，兴奋起来可以废寝忘食。我们不必盯着“优秀案例”的影子来苛求自己，每个人都有自己的路，努力去发掘自己擅长的能力，把时间花在自己热爱的领域，沉浸其中享受成长。
 
-TODO
----
-目前打算写几个系列及日常分享，均在 [issues](https://github.com/liangzr/blog/issues) 中更新
+## 分享
 
-- 日常分享
-- 深入 React 系列
-- Node 系列
+- [GitHub Issues](https://github.com/liangzr/blog/issues)： 有探讨性的专业技术分享
+- [独立 Blog](#)：玩转技术-生活向（翻新中）
+- 微信公众号: 奇思、见闻与生活
 
-关注
----
-如果希望第一时间获得更新通知，点击 repo 上方的 watch 即可，不必 star
+  <img src="assets/wechat.jpg" width=300>
+
 
 License
 ---
